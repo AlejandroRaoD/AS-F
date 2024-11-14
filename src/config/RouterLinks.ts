@@ -1,9 +1,14 @@
+type IdParam = string | string[] | undefined;
+
+const oneString = (str?: IdParam): string =>
+	str ? (str instanceof Array ? str[0] : str) : "";
+
 const RouterLinks = {
 	nucleos: {
 		all: "/nucleos",
-		one: (id: string) => `/nucleos/${id}`,
-		create: "",
-		update: "",
+		create: "/nucleos/nuevo",
+		one: (id: IdParam) => `/nucleos/${oneString(id)}`,
+		edit: (id: IdParam) => `/nucleos/${oneString(id)}/editar`,
 	},
 };
 

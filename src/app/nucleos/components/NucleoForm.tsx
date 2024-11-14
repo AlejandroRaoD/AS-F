@@ -1,33 +1,41 @@
+"use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+
 import { nucleoAttributes } from "@/types";
 import Input from "@/app/common/components/Input";
 import useNucleo from "../hooks/useNucleo";
 import Button from "@/app/common/components/Button";
+import RouterLinks from "@/config/RouterLinks";
 
 interface props {
 	data?: nucleoAttributes;
+	redirect?: string;
 }
 
 const NucleoForm = (props: props) => {
-	const { data } = props;
-
-	const { createNucleo } = useNucleo();
+	const { data, redirect } = props;
+	const router = useRouter();
 	const [isSubmiting, setIsSubmiting] = useState(false);
+	const { createNucleo, updateNucleo, deleteNucleo } = useNucleo();
 
 	const formik = useFormik({
 		initialValues: data || { name: "" },
 		validationSchema: yup.object({
 			name: yup.string().min(3, "debe tener minimo 3 letras"),
 		}),
-		onSubmit: async (data: Pick<nucleoAttributes, "name">) => {
+		onSubmit: async (formData: Pick<nucleoAttributes, "name">) => {
 			if (isSubmiting) return;
 
 			setIsSubmiting(true);
 
 			try {
-				await createNucleo(data);
+				if (data) await updateNucleo(data._id, formData);
+				else await createNucleo(formData);
+
+				if (redirect) router.push(redirect);
 			} catch (error) {
 				console.log(error);
 			}
@@ -35,6 +43,15 @@ const NucleoForm = (props: props) => {
 		},
 	});
 
+	const handleDeleteButton = () => {
+		if (!data) return;
+		try {
+			deleteNucleo(data._id);
+			router.push(RouterLinks.nucleos.all);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Input
@@ -44,7 +61,13 @@ const NucleoForm = (props: props) => {
 				error={formik.errors.name}
 			/>
 
-			<Button> Guardar</Button>
+			<Button type="submit"> Guardar</Button>
+
+			{data && (
+				<Button type="button" onClick={handleDeleteButton}>
+					Eliminar
+				</Button>
+			)}
 		</form>
 	);
 };

@@ -1,16 +1,17 @@
 "use client";
 import React, { useEffect } from "react";
+import Link from "next/link";
 import useNucleo from "./hooks/useNucleo";
 import PageTemplate from "../common/components/PageTemplate";
 import Title from "../common/components/Title";
 import { NucleoItem } from "./components/NucleoItem";
-import NucleoForm from "./components/NucleoForm";
+import RouterLinks from "@/config/RouterLinks";
 
 const Page = () => {
 	const { nucleos, getNucleos } = useNucleo();
 
 	useEffect(() => {
-		getNucleos();
+		getNucleos({ limit: 20 });
 	}, []);
 
 	return (
@@ -19,15 +20,11 @@ const Page = () => {
 				<>
 					<Title>nucleos </Title>
 
+					<Link href={RouterLinks.nucleos.create}>Crear</Link>
+
 					{nucleos.map((n) => (
 						<NucleoItem key={n._id} data={n} />
 					))}
-
-					<hr />
-
-					<Title>nucleos</Title>
-
-					<NucleoForm />
 				</>
 			</PageTemplate>
 		</>

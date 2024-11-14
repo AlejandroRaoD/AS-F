@@ -1,10 +1,9 @@
 import { nucleoAttributes } from "@/types";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { QueryNucleoDto } from "../dto/query-nucleo.dto";
 
-// ?name=&skip=0&limit=10
-
-const url = "http://localhost:5000/api/nucleo";
+const url = "http://192.168.0.117:5000/api/nucleo";
 
 interface props {
 	id?: string | string[];
@@ -29,33 +28,38 @@ const useNucleo = (props?: props) => {
 		if (typeof props.id == "string") getNucleo(props.id);
 	}, [props]);
 
-	const getNucleos = async () => {
+	const getNucleos = async (query?: QueryNucleoDto) => {
 		const {
 			data: { data },
-		} = await axios.get(url);
+		} = await axios.get(url, { params: query });
 
 		setNucleos(data);
 	};
 
 	const createNucleo = async (formData: Pick<nucleoAttributes, "name">) => {
-		const {
-			data: { data },
-		} = await axios.post(url, formData);
-
-		setNucleos((value) => [data, ...value]);
+		await axios.post(url, formData);
 	};
 
-	const updateNucleo = async (formData: Pick<nucleoAttributes, "name">) => {
-		// const {
-		// 	data: { data },
-		// } =
-
-		await axios.put(url, formData);
-
-		// setNucleos((value) => [data, ...value]);
+	const updateNucleo = async (
+		nucleoId: string,
+		formData: Pick<nucleoAttributes, "name">
+	) => {
+		await axios.put(`${url}/${nucleoId}`, formData);
 	};
 
-	return { nucleo, nucleos, getNucleo, getNucleos, createNucleo, updateNucleo };
+	const deleteNucleo = async (nucleoId: string) => {
+		await axios.delete(`${url}/${nucleoId}`);
+	};
+
+	return {
+		nucleo,
+		nucleos,
+		getNucleo,
+		getNucleos,
+		createNucleo,
+		updateNucleo,
+		deleteNucleo,
+	};
 };
 
 export default useNucleo;
