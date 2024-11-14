@@ -5,7 +5,11 @@ import RouterLinks from "@/config/RouterLinks";
 export default function Home() {
 	return (
 		<>
-			<PageTemplate pageTitle="pagina principaaaal">
+			<PageTemplate
+				navBarProps={{
+					navTitle: "pagina principaaaal",
+				}}
+			>
 				<Link href={RouterLinks.nucleos.all}>nucleos</Link>
 			</PageTemplate>
 		</>

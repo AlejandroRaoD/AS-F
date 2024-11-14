@@ -4,6 +4,7 @@ const oneString = (str?: IdParam): string =>
 	str ? (str instanceof Array ? str[0] : str) : "";
 
 const RouterLinks = {
+	dashboard: "/",
 	nucleos: {
 		all: "/nucleos",
 		create: "/nucleos/nuevo",

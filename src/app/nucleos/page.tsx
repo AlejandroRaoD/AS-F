@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import useNucleo from "./hooks/useNucleo";
 import PageTemplate from "../common/components/PageTemplate";
-import Title from "../common/components/Title";
 import { NucleoItem } from "./components/NucleoItem";
 import RouterLinks from "@/config/RouterLinks";
 
@@ -16,10 +15,13 @@ const Page = () => {
 
 	return (
 		<>
-			<PageTemplate pageTitle="Nucleos">
+			<PageTemplate
+				navBarProps={{
+					navTitle: "Nucleos",
+					hrefBackButton: RouterLinks.dashboard,
+				}}
+			>
 				<>
-					<Title>nucleos </Title>
-
 					<Link href={RouterLinks.nucleos.create}>Crear</Link>
 
 					{nucleos.map((n) => (

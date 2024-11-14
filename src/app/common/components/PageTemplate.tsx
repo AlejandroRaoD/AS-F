@@ -1,25 +1,16 @@
 import React, { ReactNode } from "react";
+import NavBar, { NavBarProps } from "./NavBar";
 
 interface props {
 	children?: ReactNode;
-	pageTitle: ReactNode;
+	navBarProps: NavBarProps;
 }
 const PageTemplate = (props: props) => {
-	const { children, pageTitle } = props;
+	const { children, navBarProps } = props;
 
 	return (
 		<div className="h-screen grid grid-rows-[4rem_1fr]">
-			<nav className="flex  justify-between items-center">
-				<div className="flex">
-					<button>icon button</button>
-					<div>{pageTitle}</div>
-				</div>
-				<div>
-					<button>A</button>
-					<button>A</button>
-					<button>A</button>
-				</div>
-			</nav>
+			<NavBar {...navBarProps} />
 
 			<div className="overflow-y-auto">{children}</div>
 		</div>

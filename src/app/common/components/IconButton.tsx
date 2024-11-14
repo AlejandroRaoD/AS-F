@@ -1,17 +1,17 @@
 import React from "react";
 import { SkeletonButton, SkeletonButtonProps } from "./SkeletonButton";
 
-export const Button = (props: SkeletonButtonProps) => {
+export const IconButton = (props: SkeletonButtonProps) => {
 	const { children, className, ...buttonProps } = props;
 
 	return (
 		<SkeletonButton
 			{...buttonProps}
-			className={`py-2 px-5 rounded bg-slate-400 ${className} `}
+			className={`mx-2 p-2 rounded-full hover:bg-cyan-100 ${className}`}
 		>
 			{children}
 		</SkeletonButton>
 	);
 };
 
-export default Button;
+export default IconButton;

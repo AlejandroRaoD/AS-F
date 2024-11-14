@@ -6,7 +6,12 @@ import RouterLinks from "@/config/RouterLinks";
 const Page = () => {
 	return (
 		<>
-			<PageTemplate pageTitle="Crear Nucleo">
+			<PageTemplate
+				navBarProps={{
+					navTitle: "Registrar Nucleo",
+					hrefBackButton: RouterLinks.nucleos.all,
+				}}
+			>
 				<NucleoForm redirect={RouterLinks.nucleos.all} />
 			</PageTemplate>
 		</>
