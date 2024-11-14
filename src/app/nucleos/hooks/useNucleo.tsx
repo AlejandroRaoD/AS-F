@@ -2,8 +2,9 @@ import { nucleoAttributes } from "@/types";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { QueryNucleoDto } from "../dto/query-nucleo.dto";
+import { API_SERVER_URL } from "@/config";
 
-const url = "http://192.168.0.117:5000/api/nucleo";
+const url = `${API_SERVER_URL}/nucleo`;
 
 interface props {
 	id?: string | string[];

@@ -11,6 +11,8 @@ export default function Home() {
 				}}
 			>
 				<Link href={RouterLinks.nucleos.all}>nucleos</Link>
+				<br />
+				<Link href={RouterLinks.sedes.all}>Sedes</Link>
 			</PageTemplate>
 		</>
 	);

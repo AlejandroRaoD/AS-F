@@ -11,6 +11,12 @@ const RouterLinks = {
 		one: (id: IdParam) => `/nucleos/${oneString(id)}`,
 		edit: (id: IdParam) => `/nucleos/${oneString(id)}/editar`,
 	},
+	sedes: {
+		all: "/sedes",
+		create: "/sedes/nuevo",
+		one: (id: IdParam) => `/sedes/${oneString(id)}`,
+		edit: (id: IdParam) => `/sedes/${oneString(id)}/editar`,
+	},
 };
 
 export default RouterLinks;

@@ -57,7 +57,7 @@ const NucleoForm = (props: props) => {
 			<Input
 				labelTitle="Nombre de nucleo"
 				name="name"
-								onChange={formik.handleChange}
+				onChange={formik.handleChange}
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>
