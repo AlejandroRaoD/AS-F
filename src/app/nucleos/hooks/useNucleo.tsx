@@ -15,7 +15,6 @@ const useNucleo = (props?: props) => {
 	const [nucleos, setNucleos] = useState<nucleoAttributes[]>([]);
 
 	const getNucleo = async (id: string) => {
-
 		if (nucleo) return;
 
 		const {
@@ -46,7 +45,17 @@ const useNucleo = (props?: props) => {
 		setNucleos((value) => [data, ...value]);
 	};
 
-	return { nucleo, nucleos, getNucleo, getNucleos, createNucleo };
+	const updateNucleo = async (formData: Pick<nucleoAttributes, "name">) => {
+		// const {
+		// 	data: { data },
+		// } =
+
+		await axios.put(url, formData);
+
+		// setNucleos((value) => [data, ...value]);
+	};
+
+	return { nucleo, nucleos, getNucleo, getNucleos, createNucleo, updateNucleo };
 };
 
 export default useNucleo;
