@@ -9,6 +9,7 @@ import Input from "@/app/common/components/Input";
 import useNucleo from "../hooks/useNucleo";
 import Button from "@/app/common/components/Button";
 import RouterLinks from "@/config/RouterLinks";
+import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
 
 interface props {
 	data?: nucleoAttributes;
@@ -37,7 +38,7 @@ const NucleoForm = (props: props) => {
 
 				if (redirect) router.push(redirect);
 			} catch (error) {
-				console.log(error);
+				axiosErrorHandle(error);
 			}
 			setIsSubmiting(false);
 		},
@@ -62,13 +63,9 @@ const NucleoForm = (props: props) => {
 				error={formik.errors.name}
 			/>
 
-			<Button type="submit"> Guardar</Button>
+			<Button type="submit">Guardar</Button>
 
-			{data && (
-				<Button type="button" onClick={handleDeleteButton}>
-					Eliminar
-				</Button>
-			)}
+			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
 		</form>
 	);
 };

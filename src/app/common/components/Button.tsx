@@ -7,7 +7,7 @@ export const Button = (props: SkeletonButtonProps) => {
 	return (
 		<SkeletonButton
 			{...buttonProps}
-			className={`py-2 px-5 rounded bg-slate-400 ${className} `}
+			className={`py-2 px-5 rounded bg-red-400 ${className} `}
 		>
 			{children}
 		</SkeletonButton>

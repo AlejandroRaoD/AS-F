@@ -11,6 +11,8 @@ import Button from "@/app/common/components/Button";
 import RouterLinks from "@/config/RouterLinks";
 import Select from "@/app/common/components/Select";
 import useNucleo from "@/app/nucleos/hooks/useNucleo";
+import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
+import InputTagArray from "@/app/common/components/InputTagArray";
 
 interface props {
 	data?: sedeAttributes;
@@ -24,27 +26,35 @@ const SedeForm = (props: props) => {
 	const { nucleos, getNucleos } = useNucleo();
 	const { createSede, updateSede, deleteSede } = useSede();
 
+	const [phoneNumberArr, setPhoneNumberArr] = useState<string[]>([]);
+	const changePhoneArr = (arr: string[]) => setPhoneNumberArr(arr);
+
 	useEffect(() => {
 		getNucleos();
 	}, []);
+
+	useEffect(() => {
+		changePhoneArr(data.phone_number);
+	}, [data]);
 
 	const formik = useFormik({
 		initialValues: data || {
 			name: "",
 			address: "",
-			phone_number: [""],
+			phone_number: [],
 			nucleoId: "",
 		},
 		validationSchema: yup.object({
 			name: yup.string().min(3, "debe tener minimo 3 letras"),
 			address: yup.string().min(3, "debe tener minimo 3 letras"),
-			phone_number: yup.string().min(10, "debe tener minimo 10 numeros"),
+			phone_number: yup.array(),
 			nucleoId: yup.string(),
 		}),
 		onSubmit: async (formData: CreateSedeDto) => {
 			if (isSubmiting) return;
-
 			setIsSubmiting(true);
+
+			formData.phone_number = phoneNumberArr;
 
 			try {
 				if (data) await updateSede(data._id, formData);
@@ -52,7 +62,7 @@ const SedeForm = (props: props) => {
 
 				if (redirect) router.push(redirect);
 			} catch (error) {
-				console.log(error);
+				axiosErrorHandle(error);
 			}
 			setIsSubmiting(false);
 		},
@@ -62,11 +72,12 @@ const SedeForm = (props: props) => {
 		if (!data) return;
 		try {
 			deleteSede(data._id);
-			router.push(RouterLinks.nucleos.all);
+			router.push(RouterLinks.sedes.all);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Input
@@ -85,13 +96,12 @@ const SedeForm = (props: props) => {
 				error={formik.errors.address}
 			/>
 
-			<Input
+			<InputTagArray
 				labelTitle="Telefono"
 				name="phone_number"
 				type="number"
-				onChange={formik.handleChange}
-				value={formik.values.phone_number}
-				error={formik.errors.phone_number}
+				dataList={phoneNumberArr}
+				changeArray={changePhoneArr}
 			/>
 
 			<Select
@@ -105,11 +115,7 @@ const SedeForm = (props: props) => {
 
 			<Button type="submit"> Guardar</Button>
 
-			{data && (
-				<Button type="button" onClick={handleDeleteButton}>
-					Eliminar
-				</Button>
-			)}
+			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
 		</form>
 	);
 };

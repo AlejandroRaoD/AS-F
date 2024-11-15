@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
+type VarianButton = "primary" | "error" | "warning";
+
 export interface SkeletonButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 	href?: string;
+	variant?: VarianButton;
 }
 
 // * este es un componente logico no hay que ponerle estilos en este archivo
@@ -16,7 +19,7 @@ export const SkeletonButton = (props: SkeletonButtonProps) => {
 			{children}
 		</Link>
 	) : (
-		<button className={className} {...buttonProps}>
+		<button type="button" className={className} {...buttonProps}>
 			{children}
 		</button>
 	);

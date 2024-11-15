@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import PageTemplate from "./common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";

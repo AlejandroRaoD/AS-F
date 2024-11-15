@@ -31,10 +31,12 @@ const Page = () => {
 				{sede && (
 					<>
 						<Title>{sede.name}</Title>
-						<Title>{sede.phone_number}</Title>
+						{sede.phone_number.map((a) => (
+							<Title key={a}>{a}</Title>
+						))}
 						<Title>{sede.address}</Title>
 						<Title>{sede.nucleoId}</Title>
-						</>
+					</>
 				)}
 			</PageTemplate>
 		</>
