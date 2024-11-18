@@ -34,7 +34,7 @@ const SedeForm = (props: props) => {
 	}, []);
 
 	useEffect(() => {
-		changePhoneArr(data.phone_number);
+		if (data) changePhoneArr(data.phone_number);
 	}, [data]);
 
 	const formik = useFormik({
