@@ -21,21 +21,27 @@ const Page = () => {
 				hrefBackButton: RouterLinks.dashboard,
 			}}
 		>
-			<div className="p-6 bg-gray-100 min-h-screen">
-				{/* Botón para crear una nueva sede */}
-				<div className="flex justify-end mb-6">
+			<div className="p-6 bg-gray-50 min-h-screen">
+				{/* Encabezado y botón */}
+				<div className="flex items-center justify-between mb-6">
+					<h1 className="text-2xl font-semibold text-gray-800">Listado de Sedes</h1>
 					<Link
 						href={RouterLinks.sedes.create}
-						className="inline-block px-6 py-3 bg-green-500 text-white font-medium rounded-lg shadow-md hover:bg-green-600 transition"
+						className="px-5 py-2 bg-green-500 text-white text-sm font-medium rounded-md shadow hover:bg-green-600 transition"
 					>
 						+ Crear Sede
 					</Link>
 				</div>
 
 				{/* Lista de sedes */}
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 					{sedes.map((sede) => (
-						<SedeItem key={sede._id} data={sede} />
+						<div
+							key={sede._id}
+							className="border border-gray-300 bg-white rounded-md shadow-md hover:shadow-lg p-4 transition"
+						>
+							<SedeItem data={sede} />
+						</div>
 					))}
 				</div>
 
