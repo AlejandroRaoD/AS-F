@@ -1,0 +1,66 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-circle {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .home-button {
+    padding: 8px 16px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .home-button:hover {
+    background-color: #2563eb;
+  }
+  
+  .navbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .center-image {
+    max-width: 120px;
+    max-height: 40px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-button,
+  .help-button {
+    background-color: #e5e7eb;
+    padding: 8px 16px;
+    margin-left: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .profile-button:hover,
+  .help-button:hover {
+    background-color: #d1d5db;
+  }
+  
