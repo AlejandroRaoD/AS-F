@@ -9,7 +9,6 @@ import { SedeItem } from "./components/SedeItem";
 const Page = () => {
 	const { sedes, getSedes } = useSede();
 
-	// Cargar los datos al iniciar la página
 	useEffect(() => {
 		getSedes({ limit: 20 });
 	}, []);

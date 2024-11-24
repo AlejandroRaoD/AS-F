@@ -9,7 +9,7 @@ import RouterLinks from "@/config/RouterLinks";
 const Page = () => {
 	const { programas, getProgramas } = useProgramas();
 
-	// Cargar los datos al iniciar la página
+	
 	useEffect(() => {
 		getProgramas({ limit: 20 });
 	}, []);
@@ -22,11 +22,11 @@ const Page = () => {
 			}}
 		>
 			<div className="p-6 bg-gray-50 min-h-screen">
-				{/* Sección del título y botón */}
+				{}
 				<div className="flex items-center justify-between mb-6">
 					<h1 className="text-2xl font-semibold text-gray-800">Listado de Programas</h1>
 					<Link
-						href={RouterLinks.programas.create} // Asegúrate de definir esta ruta en RouterLinks
+						href={RouterLinks.programas.create} 
 						className="px-5 py-2 bg-green-500 text-white text-sm font-medium rounded-md shadow hover:bg-green-600 transition"
 					>
 						+ Crear Programa

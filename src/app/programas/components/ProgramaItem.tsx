@@ -6,7 +6,7 @@ type ProgramaProps = {
     };
 };
 
-// Componente que recibe un objeto 'data' de tipo ProgramaProps y lo muestra
+// Componente recibe objeto 'data' de tipo ProgramaProps y lo muestra
 export const ProgramaItem = ({ data }: ProgramaProps) => {
     return (
         <div>
