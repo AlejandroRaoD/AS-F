@@ -16,7 +16,7 @@ const PageTemplate = (props: props) => {
 			<div className="h-screen grid grid-rows-[4rem_1fr] ml-52 bg-gray-100">
 				<NavBar {...navBarProps} />
 
-				<div className="overflow-y-auto">{children}</div>
+				<div className="overflow-y-auto p-4">{children}</div>
 
 				<Toaster />
 			</div>
