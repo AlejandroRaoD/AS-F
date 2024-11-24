@@ -29,6 +29,12 @@ const RouterLinks = {
 		one: (id: IdParam) => `/estudiantes/${oneString(id)}`,
 		edit: (id: IdParam) => `/estudiantes/${oneString(id)}/editar`,
 	},
+	representante: {
+		all: "/representantes",
+		create: "/representantes/nuevo",
+		one: (id: IdParam) => `/representantes/${oneString(id)}`,
+		edit: (id: IdParam) => `/representantes/${oneString(id)}/editar`,
+	},
 	bienes: {
 		all: "/bienes",
 		create: "/bienes/nuevo",

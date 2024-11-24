@@ -1,19 +1,9 @@
-export enum nucleoStatus {
-	active = "a",
-	inArchive = "ar",
-	delete = "d",
-}
+import { Gender, Nationality, StudentStatus, nucleoStatus } from "./app/common/interfaces/enums";
 
 export interface nucleoAttributes {
 	_id: string;
 	name: string;
 	status: nucleoStatus;
-}
-
-export enum sedeStatus {
-	active = "a",
-	inArchive = "ar",
-	delete = "d",
 }
 
 export interface sedeAttributes {

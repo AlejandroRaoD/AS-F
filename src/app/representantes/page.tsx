@@ -4,20 +4,20 @@ import { useEffect } from "react";
 import RouterLinks from "@/config/RouterLinks";
 import PageTemplate from "../common/components/PageTemplate";
 import Link from "next/link";
-import useStudent from "./hooks/useStudent";
-import { StudentItem } from "./components/StudentItem";
+import useRepresentative from "./hooks/useRepresentative";
+import { RepresentativeItem } from "./components/RepresentativeItem";
 
 export default function EstudiantesPage() {
-	const { students, getStudents } = useStudent();
+	const { representatives, getRepresentatives } = useRepresentative();
 
 	useEffect(() => {
-		getStudents({ limit: 20 });
+		getRepresentatives({ limit: 20 });
 	}, []);
 
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Estudiantes",
+				navTitle: "Representantes",
 				hrefBackButton: RouterLinks.dashboard,
 			}}
 		>
@@ -34,14 +34,14 @@ export default function EstudiantesPage() {
 
 			<>
 				<Link
-					href={RouterLinks.estudiantes.create}
+					href={RouterLinks.representante.create}
 					className="px-5 py-2 bg-green-500 text-white text-sm font-medium rounded-md shadow hover:bg-green-600 transition"
 				>
 					Crear
 				</Link>
 
-				{students.map((n) => (
-					<StudentItem key={n._id} data={n} />
+				{representatives.map((n) => (
+					<RepresentativeItem key={n._id} data={n} />
 				))}
 			</>
 		</PageTemplate>

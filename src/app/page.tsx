@@ -2,7 +2,6 @@
 import Link from "next/link";
 import PageTemplate from "./common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
-import NavBar from "./common/components/NavBar"; // Importa el Navbar
 
 export default function Home() {
   return (
@@ -28,6 +27,12 @@ export default function Home() {
                   className="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition"
                 >
                   Estudiantes
+                </Link>
+                <Link
+                  href={RouterLinks.representante.all}
+                  className="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition"
+                >
+                  Representantes
                 </Link>
                 <Link
                   href={RouterLinks.bienes.all}
