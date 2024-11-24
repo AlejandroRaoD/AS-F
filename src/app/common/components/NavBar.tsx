@@ -8,7 +8,6 @@ import LeftIcon from "./icons/LeftIcon";
 import Image from "next/image";
 
 import systemNavbarImage from "@/assets/imagenes/system-navbar.png";
-import imagotipoImage from "@/assets/imagenes/IMAGOTIPO.jpg";
 
 export interface NavBarProps {
 	navTitle: ReactNode;
@@ -28,20 +27,9 @@ const NavBar = (props: NavBarProps) => {
 	} = props; // Valor por defecto para que sea true
 
 	return (
-		<nav className="navbar bg-white shadow-md p-4 flex items-center justify-between">
+		<nav className="bg-white shadow-md p-4 flex items-center justify-between">
 			{/* Parte izquierda del navbar - imagen redonda como icono */}
-			<div className="navbar-left flex items-center">
-				<div className="logo-circle mr-4 flex-shrink-0">
-					<Image
-						src={imagotipoImage}
-						alt="Logo"
-						className="logo-image rounded-full"
-						width={48}
-						height={48}
-					/>
-				</div>
-
-				{}
+			<div className="flex items-center">
 				{hrefBackButton && (
 					<IconButton href={hrefBackButton}>
 						<LeftIcon />
@@ -51,8 +39,7 @@ const NavBar = (props: NavBarProps) => {
 				<div className="ml-2">{navTitle}</div>
 			</div>
 
-			{}
-			<div className="navbar-center flex justify-center w-full">
+			<div className="">
 				<Image
 					src={systemNavbarImage}
 					alt="Centered Image"
@@ -62,7 +49,6 @@ const NavBar = (props: NavBarProps) => {
 				/>
 			</div>
 
-			{}
 			<div className="navbar-right flex items-center">
 				{rightButtons ? (
 					rightButtons

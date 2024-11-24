@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <PageTemplate
       navBarProps={{
-        navTitle: "Abreu System",
+        navTitle: "Inicio",
       }}
     >
       <div className="flex flex-col min-h-screen bg-gray-100">
