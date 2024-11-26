@@ -40,6 +40,9 @@ const LeftPanel = () => {
 				<LeftPanelButtom href={RouterLinks.estudiantes.all}>
 					estudiantes
 				</LeftPanelButtom>
+				<LeftPanelButtom href={RouterLinks.representante.all}>
+					representantes
+				</LeftPanelButtom>
 				<LeftPanelButtom href={RouterLinks.nucleos.all}>
 					nucleos
 				</LeftPanelButtom>
