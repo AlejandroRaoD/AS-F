@@ -91,7 +91,7 @@ export default function EstudiantesPage() {
                   </p>
                   <p className="text-sm text-gray-600">
                     <span className="font-semibold">Teléfono:</span>{" "}
-                    {(student as any).phone ?? "No disponible"}
+                    {(student as any).phone_number[0] ?? "No disponible"}
                   </p>
                 </div>
                 <div className="mt-4 flex justify-between items-center">

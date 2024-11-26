@@ -26,6 +26,9 @@ const Select = (props: props) => {
 				id={name}
 				{...inputProps}
 			>
+				<option key={""} value={""}>
+					seleccione un valor
+				</option>
 				{dataList.map(({ title, value }) => (
 					<option key={value} value={value}>
 						{title}

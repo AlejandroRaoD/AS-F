@@ -48,7 +48,7 @@ const SedeForm = (props: props) => {
 			name: yup.string().min(3, "debe tener minimo 3 letras"),
 			address: yup.string().min(3, "debe tener minimo 3 letras"),
 			phone_number: yup.array(),
-			nucleoId: yup.string(),
+			nucleoId: yup.string().min(3),
 		}),
 		onSubmit: async (formData: CreateSedeDto) => {
 			if (isSubmiting) return;
@@ -89,7 +89,7 @@ const SedeForm = (props: props) => {
 			/>
 
 			<Input
-				labelTitle="direccionnnnn"
+				labelTitle="dirección "
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}
