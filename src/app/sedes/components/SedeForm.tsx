@@ -89,7 +89,7 @@ const SedeForm = (props: props) => {
 			/>
 
 			<Input
-				labelTitle="direccionnnnn"
+				labelTitle="dirección "
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}

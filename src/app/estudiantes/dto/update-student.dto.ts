@@ -1,4 +1,4 @@
-import { Gender, Nationality } from "@/types";
+import { Gender, Nationality } from "@/app/common/interfaces/enums";
 
 export interface UpdateStudentDto {
 	name: string;

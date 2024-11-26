@@ -148,7 +148,7 @@ const StudentForm = (props: props) => {
 				error={formik.errors.gender}
 			/>
 			<Input
-				labelTitle="direccion"
+				labelTitle="dirección"
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}
