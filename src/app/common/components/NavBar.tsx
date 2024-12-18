@@ -24,10 +24,10 @@ const NavBar = (props: NavBarProps) => {
 		rightButtons,
 		showProfileButton = true,
 		showHelpButton = true,
-	} = props; // Valor por defecto para que sea true
+	} = props;
 
 	return (
-		<nav className="bg-white shadow-md p-4 flex items-center justify-between">
+		<nav className="navbar p-4 flex items-center justify-between shadow-lg rounded-xl">
 			{/* Parte izquierda del navbar - imagen redonda como icono */}
 			<div className="flex items-center">
 				{hrefBackButton && (
@@ -36,19 +36,21 @@ const NavBar = (props: NavBarProps) => {
 					</IconButton>
 				)}
 
-				<div className="ml-2">{navTitle}</div>
+				<div className="ml-2 text-white font-semibold">{navTitle}</div>
 			</div>
 
-			<div className="">
+			{/* Imagen central */}
+			<div className="mx-4">
 				<Image
 					src={systemNavbarImage}
 					alt="Centered Image"
 					className="center-image mx-auto"
-					width={250}
-					height={80}
+					width={300}   // Aumenté el tamaño
+					height={100}  // Aumenté el tamaño
 				/>
 			</div>
 
+			{/* Parte derecha con los botones */}
 			<div className="navbar-right flex items-center">
 				{rightButtons ? (
 					rightButtons
@@ -57,7 +59,7 @@ const NavBar = (props: NavBarProps) => {
 						{/* Solo mostrar botón perfil si showProfileButton es verdadero */}
 						{showProfileButton && (
 							<Link href={RouterLinks.perfil.all}>
-								<button className="profile-button px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">
+								<button className="profile-button px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300 ease-in-out transform hover:scale-105">
 									Perfil
 								</button>
 							</Link>
@@ -66,7 +68,7 @@ const NavBar = (props: NavBarProps) => {
 						{/* Solo mostrar botón ayuda si showHelpButton es verdadero */}
 						{showHelpButton && (
 							<Link href={RouterLinks.help.all}>
-								<button className="help-button ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">
+								<button className="help-button ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300 ease-in-out transform hover:scale-105">
 									Ayuda
 								</button>
 							</Link>

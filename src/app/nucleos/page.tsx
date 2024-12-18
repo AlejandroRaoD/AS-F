@@ -9,7 +9,6 @@ import RouterLinks from "@/config/RouterLinks";
 const Page = () => {
   const { nucleos, getNucleos } = useNucleo();
 
- 
   useEffect(() => {
     getNucleos({ limit: 20 });
   }, []);
@@ -18,11 +17,11 @@ const Page = () => {
     <PageTemplate
       navBarProps={{
         navTitle: "Núcleos",
-        hrefBackButton: RouterLinks.dashboard, 
+        hrefBackButton: RouterLinks.dashboard,
       }}
     >
       <div className="p-6 bg-gray-50 min-h-screen">
-        {}
+        {/* Encabezado y botón */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">Listado de Núcleos</h1>
           <Link
@@ -34,14 +33,16 @@ const Page = () => {
         </div>
 
         {/* Lista de núcleos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {nucleos.map((n) => (
-            <div
+            <Link
               key={n._id}
-              className="border border-gray-300 bg-white rounded-md shadow-md hover:shadow-lg p-4 transition"
+              href={`/nucleos/${n._id}`} // Redirige a la página de detalles del núcleo
+              passHref
+              className="border border-gray-300 bg-white rounded-lg shadow-lg hover:shadow-xl p-6 transition-all transform hover:scale-105 hover:border-green-500 hover:bg-gray-50"
             >
               <NucleoItem data={n} />
-            </div>
+            </Link>
           ))}
         </div>
 

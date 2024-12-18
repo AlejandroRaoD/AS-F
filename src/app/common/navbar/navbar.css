@@ -1,66 +1,96 @@
 /* Navbar.css */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo-circle {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 48px;
-    height: 48px;
-  }
-  
-  .home-button {
-    padding: 8px 16px;
-    background-color: #3b82f6;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .home-button:hover {
-    background-color: #2563eb;
-  }
-  
-  .navbar-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .center-image {
-    max-width: 120px;
-    max-height: 40px;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-button,
-  .help-button {
-    background-color: #e5e7eb;
-    padding: 8px 16px;
-    margin-left: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .profile-button:hover,
-  .help-button:hover {
-    background-color: #d1d5db;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e40af; /* Azul sólido */
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-circle {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+}
+
+.home-button {
+  padding: 8px 16px;
+  background-color: #4b5563; /* Gris oscuro */
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #6b7280; /* Gris intermedio */
+  transform: scale(1.05);
+}
+
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.center-image {
+  max-width: 200px;  /* Ajustado para tamaño más grande */
+  max-height: 80px;  /* Ajustado para tamaño más grande */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.profile-button,
+.help-button {
+  background-color: #3b82f6; /* Azul */
+  padding: 8px 16px;
+  margin-left: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button:hover,
+.help-button:hover {
+  background-color: #2563eb; /* Azul más fuerte */
+  transform: scale(1.05);
+}
+
+.profile-button,
+.help-button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mejorar el texto del navbar */
+.navbar h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
+  color: #fff; /* Blanco para el texto */
+  font-weight: 600;
+}
+
+/* Estilo para las imágenes de los botones de perfil y ayuda */
+.profile-button img,
+.help-button img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  margin-right: 8px;
+}
