@@ -109,24 +109,6 @@ export default function Home() {
                 Programa
               </Link>
 
-              <Link
-                href="#"
-                className="block text-center px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition w-40"
-              >
-                Catedra
-              </Link>
-              <Link
-                href="#"
-                className="block text-center px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition w-40"
-              >
-                Cargos
-              </Link>
-              <Link
-                href="#"
-                className="block text-center px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition w-40"
-              >
-                Catedra
-              </Link>
             </div>
           </div>
         </div>

@@ -59,6 +59,7 @@ const RouterLinks = {
 		one: (id: IdParam) => `/help/${oneString(id)}`,
 		edit: (id: IdParam) => `/help/${oneString(id)}/editar`,
 	},
+		  
 };
 
 export default RouterLinks;
