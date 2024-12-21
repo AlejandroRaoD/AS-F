@@ -108,18 +108,30 @@ export default function Home() {
               >
                 Programa
               </Link>
-
+              <Link
+                href={RouterLinks.catedra.all}
+                className="block text-center px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition w-40"
+              >
+                Catedras
+              </Link>
+              <Link
+                href={RouterLinks.representante.all}
+                className="block text-center px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition w-40"
+              >
+                Representantes
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Estadísticas */}
         <Link
-          href="#"
-          className="fixed bottom-6 right-6 w-16 h-16 flex items-center justify-center bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 transition"
+          href={RouterLinks.estadisticas.all}
+          className="fixed bottom-6 right-6 w-16 h-16 flex items-center justify-center bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-full shadow-lg hover:scale-110 transform transition-all duration-200 z-20"
         >
           <span className="text-2xl font-bold">📊</span> {/* Icono */}
         </Link>
+
       </div>
     </PageTemplate>
   );

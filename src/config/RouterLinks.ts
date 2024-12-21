@@ -35,6 +35,12 @@ const RouterLinks = {
 		one: (id: IdParam) => `/representantes/${oneString(id)}`,
 		edit: (id: IdParam) => `/representantes/${oneString(id)}/editar`,
 	},
+	catedra: {
+		all: "/catedra",
+		create: "/catedra/nuevo",
+		one: (id: IdParam) => `/catedra/${oneString(id)}`,
+		edit: (id: IdParam) => `/catedra/${oneString(id)}/editar`,
+	},
 	bienes: {
 		all: "/bienes",
 		create: "/bienes/nuevo",
@@ -58,6 +64,12 @@ const RouterLinks = {
 		create: "/help",
 		one: (id: IdParam) => `/help/${oneString(id)}`,
 		edit: (id: IdParam) => `/help/${oneString(id)}/editar`,
+	},
+	estadisticas: {
+		all: "/estadisticas",
+		create: "/estadisticas",
+		one: (id: IdParam) => `/estadisticas/${oneString(id)}`,
+		edit: (id: IdParam) => `/estadisticas/${oneString(id)}/editar`,
 	},
 		  
 };
