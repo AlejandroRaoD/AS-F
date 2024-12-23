@@ -1,17 +1,19 @@
 "use client";
 
 import PageTemplate from "@/app/common/components/PageTemplate";
+import RouterLinks from "@/config/RouterLinks";
 
 export default function EstadisticasPage() {
   return (
     <PageTemplate
       navBarProps={{
         navTitle: "Estadísticas",
+        hrefBackButton: RouterLinks.dashboard, // Botón de volver atrás en el navbar
       }}
     >
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
         {/* Título */}
-        <h1 className="text-4xl font-bold text-gray-700 mb-8">Estadísticas Globales</h1>
+        <h1 className="text-4xl font-bold text-gray-700 mt-6 mb-8">Estadísticas Globales</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 w-full max-w-6xl">
           {/* Cuadro de Estadísticas 1 */}
