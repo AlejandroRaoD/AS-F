@@ -3,8 +3,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { QueryNucleoDto } from "../dto/query-nucleo.dto";
 import { API_SERVER_URL } from "@/config";
-
-const url = `${API_SERVER_URL}/nucleo`;
+import {
+	createNucleo_Request,
+	deleteNucleo_Request,
+	getNucleo_Request,
+	getNucleos_Request,
+	updateNucleo_Request,
+} from "../api/nucleo.api";
+import { CreateNucleoDto } from "../dto/create-nucleo.dto";
+import { UpdateNucleoDto } from "../dto/update-nucleo.dto";
 
 interface props {
 	id?: string | string[];
@@ -17,12 +24,11 @@ const useNucleo = (props?: props) => {
 	const getNucleo = async (id: string) => {
 		if (nucleo) return;
 
-		const {
-			data: { data },
-		} = await axios.get(`${url}/${id}`);
+		const { data } = await getNucleo_Request(id);
 
 		setNucleo(data);
 	};
+
 	useEffect(() => {
 		if (!props) return;
 
@@ -30,26 +36,21 @@ const useNucleo = (props?: props) => {
 	}, [props]);
 
 	const getNucleos = async (query?: QueryNucleoDto) => {
-		const {
-			data: { data },
-		} = await axios.get(url, { params: query });
+		const { data } = await getNucleos_Request(query);
 
 		setNucleos(data);
 	};
 
-	const createNucleo = async (formData: Pick<nucleoAttributes, "name">) => {
-		await axios.post(url, formData);
+	const createNucleo = async (formData: CreateNucleoDto) => {
+		await createNucleo_Request(formData);
 	};
 
-	const updateNucleo = async (
-		nucleoId: string,
-		formData: Pick<nucleoAttributes, "name">
-	) => {
-		await axios.put(`${url}/${nucleoId}`, formData);
+	const updateNucleo = async (nucleoId: string, formData: UpdateNucleoDto) => {
+		await updateNucleo_Request(nucleoId, formData);
 	};
 
 	const deleteNucleo = async (nucleoId: string) => {
-		await axios.delete(`${url}/${nucleoId}`);
+		await deleteNucleo_Request(nucleoId);
 	};
 
 	return {

@@ -1,5 +1,6 @@
 import { Gender, Nationality, StudentStatus, nucleoStatus } from "./app/common/interfaces/enums";
 
+
 export interface nucleoAttributes {
 	_id: string;
 	name: string;

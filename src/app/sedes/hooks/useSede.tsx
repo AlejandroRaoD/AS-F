@@ -1,10 +1,15 @@
 import { CreateSedeDto, sedeAttributes } from "@/types";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { API_SERVER_URL } from "@/config";
 import { QuerySedeDto } from "../dto/query-sede.dto";
-
-const url = `${API_SERVER_URL}/sede`;
+import {
+	createSede_Request,
+	deleteSede_Request,
+	getSede_Request,
+	getSedes_Request,
+	updateSede_Request,
+} from "../api/sede.api";
+import { UpdateSedeDto } from "../dto/update-sede.dto";
 
 interface props {
 	id?: string | string[];
@@ -17,9 +22,7 @@ const useSede = (props?: props) => {
 	const getSede = async (id: string) => {
 		if (sede) return;
 
-		const {
-			data: { data },
-		} = await axios.get(`${url}/${id}`);
+		const { data } = await getSede_Request(id);
 
 		setSede(data);
 	};
@@ -30,26 +33,21 @@ const useSede = (props?: props) => {
 	}, [props]);
 
 	const getSedes = async (query?: QuerySedeDto) => {
-		const {
-			data: { data },
-		} = await axios.get(url, { params: query });
+		const { data } = await getSedes_Request(query);
 
 		setSedes(data);
 	};
 
 	const createSede = async (formData: CreateSedeDto) => {
-		await axios.post(url, formData);
+		await createSede_Request(formData);
 	};
 
-	const updateSede = async (
-		sedeId: string,
-		formData: Pick<sedeAttributes, "name">
-	) => {
-		await axios.put(`${url}/${sedeId}`, formData);
+	const updateSede = async (sedeId: string, formData: UpdateSedeDto) => {
+		await updateSede_Request(sedeId, formData);
 	};
 
 	const deleteSede = async (sedeId: string) => {
-		await axios.delete(`${url}/${sedeId}`);
+		await deleteSede_Request(sedeId);
 	};
 
 	return {
