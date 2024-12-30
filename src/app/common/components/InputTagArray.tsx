@@ -33,6 +33,13 @@ const InputTagArray = (props: props) => {
 
 	const [inputValue, setInputValue] = useState("second");
 
+	const onInsert = () => {
+		if (dataList.includes(inputValue.trim())) return;
+
+		setInputValue("");
+		changeArray([...dataList, inputValue.trim()]);
+	};
+
 	const onDeleteItem = (item: string) => {
 		changeArray(dataList.filter((i) => i != item));
 	};
@@ -53,15 +60,13 @@ const InputTagArray = (props: props) => {
 				name={name}
 				id={name}
 				value={inputValue}
+				onBlur={onInsert}
 				onChange={({ target: { value } }) => setInputValue(value)}
 				onKeyDown={(event) => {
 					if (event.key == "Enter") {
 						event.preventDefault();
 
-						if (!dataList.includes(inputValue.trim())) {
-							setInputValue("");
-							changeArray([...dataList, inputValue.trim()]);
-						}
+						onInsert();
 					}
 				}}
 			/>

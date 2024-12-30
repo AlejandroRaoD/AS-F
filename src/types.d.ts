@@ -1,5 +1,9 @@
-import { Gender, Nationality, StudentStatus, nucleoStatus } from "./app/common/interfaces/enums";
-
+import {
+	Gender,
+	Nationality,
+	StudentStatus,
+	nucleoStatus,
+} from "./app/common/interfaces/enums";
 
 export interface nucleoAttributes {
 	_id: string;
@@ -16,9 +20,21 @@ export interface sedeAttributes {
 	status: string;
 }
 
-export interface CreateSedeDto {
-	name: string;
-	address: string;
-	phone_number: string[];
-	nucleoId: string;
+export interface studentRelationAttributes {
+	_id: string;
+	representativeId: string;
+	studentId: string;
+	familyBond: String;
+}
+
+
+
+
+
+export interface UserAttributes {
+	_id: string;
+	email: string;
+	password: string;
+	permissions: string[];
+	employeeId: string;
 }
