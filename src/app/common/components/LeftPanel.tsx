@@ -1,6 +1,6 @@
 'use client'; // Marca este archivo como un Client Component
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import imagotipoImage from "@/assets/imagenes/IMAGOTIPO.jpg";
 import Link from "next/link"; // Importamos el componente Link de Next.js
@@ -15,7 +15,7 @@ interface LeftPanelButtonProps {
 const LeftPanelButton = ({ label, icon, href }: LeftPanelButtonProps) => (
   href ? (
     <Link href={href} passHref>
-      <div className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer">
+      <div className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer">
         <span className="text-xl mr-1 transition-all duration-200 text-blue-600 group-hover:text-white">
           {icon}
         </span>
@@ -25,7 +25,7 @@ const LeftPanelButton = ({ label, icon, href }: LeftPanelButtonProps) => (
       </div>
     </Link>
   ) : (
-    <div className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer">
+    <div className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer">
       <span className="text-xl mr-1 transition-all duration-200 text-blue-600 group-hover:text-white">
         {icon}
       </span>
@@ -42,45 +42,56 @@ interface LeftPanelProps {
 }
 
 const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
-  // Leer el estado desde el localStorage, si existe, y usarlo como estado inicial
   const storedIsTablesOpen = typeof window !== 'undefined' ? localStorage.getItem("isTablesOpen") === "true" : false;
   const [isTablesOpen, setIsTablesOpen] = useState(storedIsTablesOpen);
 
-  // Función para cambiar el estado y guardarlo en localStorage
   const toggleTables = () => {
     const newState = !isTablesOpen;
     setIsTablesOpen(newState);
-    localStorage.setItem("isTablesOpen", newState.toString()); // Guardamos el estado en localStorage
+    localStorage.setItem("isTablesOpen", newState.toString());
   };
 
   return (
-    <div className={`fixed left-0 top-0 bottom-0 ${isPanelCollapsed ? 'w-20' : 'w-56'} bg-gradient-to-br from-gray-50 via-gray-100 to-white shadow-xl border-r border-gray-200 transition-all duration-300`}>
+    <div
+      className={`fixed left-0 top-0 bottom-0 ${isPanelCollapsed ? 'w-15' : 'w-56'} bg-gradient-to-br from-gray-50 via-gray-100 to-white shadow-xl border-r border-gray-200 transition-all duration-300`}
+      style={isPanelCollapsed ? {} : {
+        backgroundImage: "url('/images/pentagrama.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Botón para ocultar/desplegar el panel */}
       <button
-        className="absolute top-4 right-0 p-2 bg-blue-600 text-white rounded-l-md focus:outline-none"
+        className="absolute top-4 right-0 p-2 bg-blue-600 text-white rounded-l-md focus:outline-none flex items-center"
         onClick={togglePanel}
       >
-        {isPanelCollapsed ? '▶' : '◁'}
+        <span className="mr-1">{isPanelCollapsed ? '▶' : '◁'}</span>
+        {isPanelCollapsed && (
+          <Image
+            src={imagotipoImage}
+            alt="Logo"
+            className="rounded-full transition-transform duration-200 transform"
+            width={20}
+            height={20}
+          />
+        )}
       </button>
 
       {/* Header */}
       <div className="flex flex-col items-center px-6 py-6 border-b border-gray-100 space-y-4 group">
-        {/* Logo en el centro */}
         <div className="relative">
-          <Image
-            src={imagotipoImage}
-            alt="Logo"
-            className="rounded-full shadow-2xl transition-transform duration-200 transform group-hover:scale-110"
-            width={80}  // Tamaño del logo
-            height={80} // Tamaño del logo
-          />
-          {/* Sombra fuerte para el efecto flotante */}
+          {!isPanelCollapsed && (
+            <Image
+              src={imagotipoImage}
+              alt="Logo"
+              className="rounded-full shadow-2xl transition-transform duration-200 transform group-hover:scale-110"
+              width={80}
+              height={80}
+            />
+          )}
           <div className="absolute inset-0 bg-black opacity-50 rounded-full -z-10 blur-md"></div>
-          {/* Efecto de hover sobre el logo */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-0 group-hover:opacity-30 rounded-full"></div>
         </div>
-        
-        {/* Texto debajo del logo */}
         {!isPanelCollapsed && (
           <div className="text-center">
             <h1 className="text-xl font-extrabold text-gray-800 transition-all duration-200 group-hover:text-blue-600">
@@ -96,27 +107,16 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
       {/* Navigation Links */}
       {!isPanelCollapsed && (
         <nav className="flex flex-col mt-2 px-4 space-y-0.5">
-          {/* Inicio redirige a la página principal */}
           <LeftPanelButton label="Inicio" icon="🏠" href="/" />
-          
-          {/* Stylish Separator Above Estadísticas */}
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-
-          <LeftPanelButton label="Estadísticas" icon="📊" href={RouterLinks.estadisticas.all} /> {/* Ruta de Estadísticas */}
-
-          {/* Stylish Separator Below Estadísticas */}
+          <LeftPanelButton label="Estadísticas" icon="📊" href={RouterLinks.estadisticas.all} />
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-
           <LeftPanelButton label="Personal" icon="👩‍💼" href={RouterLinks.personal.all} />
           <LeftPanelButton label="Estudiantes" icon="🎓" href={RouterLinks.estudiantes.all} />
           <LeftPanelButton label="Bienes" icon="🏢" href={RouterLinks.bienes.all} />
-
-          {/* Nuevo Separador */}
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-
-          {/* Opción desplegable - Tablas */}
           <div
-            className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
+            className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
             onClick={toggleTables}
           >
             <span className="text-xl mr-1 transition-all duration-200 text-blue-600 group-hover:text-white">
@@ -131,8 +131,6 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
               ▼
             </span>
           </div>
-
-          {/* Botones desplegables */}
           {isTablesOpen && (
             <>
               <LeftPanelButton label="Núcleo" icon="🏫" href={RouterLinks.nucleos.all} />
@@ -142,19 +140,10 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
               <LeftPanelButton label="Representante" icon="👨‍👩‍👧" href={RouterLinks.representante.all} />
             </>
           )}
-
-          {/* Stylish Separator Below Tablas */}
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-
-          {/* Opción de Documentos - solo botón sin enlace */}
           <LeftPanelButton label="Documentos" icon="📄" href={undefined} />
         </nav>
       )}
-
-      {/* Imagen de fondo anclada al fondo */}
-      <div
-        className={`absolute bottom-4 left-0 w-full h-64 bg-[url('/images/pentagrama.png')] bg-no-repeat bg-cover bg-[center_right_10%] bg-[size:150%] transition-opacity duration-300 ${isPanelCollapsed ? 'opacity-0' : 'opacity-100'}`}
-      ></div>
     </div>
   );
 };
