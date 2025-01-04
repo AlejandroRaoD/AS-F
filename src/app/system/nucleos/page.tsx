@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import useNucleo from "./hooks/useNucleo";
 import PageTemplate from "../../common/components/PageTemplate";
@@ -8,10 +8,20 @@ import RouterLinks from "@/config/RouterLinks";
 
 const Page = () => {
   const { nucleos, getNucleos } = useNucleo();
+  const [search, setSearch] = useState("");
+  const [filteredNucleos, setFilteredNucleos] = useState([]);
 
   useEffect(() => {
     getNucleos({ limit: 20 });
   }, []);
+
+  useEffect(() => {
+    setFilteredNucleos(
+      nucleos.filter((nucleo) =>
+        nucleo.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, nucleos]);
 
   return (
     <PageTemplate
@@ -32,9 +42,20 @@ const Page = () => {
           </Link>
         </div>
 
+        {/* Filtros */}
+        <div className="flex flex-col space-y-4 mb-6">
+          <input
+            type="text"
+            placeholder="Buscar por nombre"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
         {/* Lista de núcleos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {nucleos.map((n) => (
+          {filteredNucleos.map((n) => (
             <Link
               key={n._id}
               href={`/nucleos/${n._id}`} // Redirige a la página de detalles del núcleo
@@ -47,7 +68,7 @@ const Page = () => {
         </div>
 
         {/* Mensaje si no hay núcleos */}
-        {nucleos.length === 0 && (
+        {filteredNucleos.length === 0 && (
           <p className="text-center text-gray-500 mt-10">
             No se encontraron núcleos. ¡Crea el primero!
           </p>

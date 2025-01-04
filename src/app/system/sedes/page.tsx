@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import PageTemplate from "../../common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
@@ -8,10 +8,20 @@ import { SedeItem } from "./components/SedeItem";
 
 const Page = () => {
   const { sedes, getSedes } = useSede();
+  const [search, setSearch] = useState("");
+  const [filteredSedes, setFilteredSedes] = useState([]);
 
   useEffect(() => {
     getSedes({ limit: 20 });
   }, []);
+
+  useEffect(() => {
+    setFilteredSedes(
+      sedes.filter((sede) =>
+        sede.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, sedes]);
 
   return (
     <PageTemplate
@@ -32,9 +42,20 @@ const Page = () => {
           </Link>
         </div>
 
+        {/* Filtro de búsqueda */}
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Buscar por nombre"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+          />
+        </div>
+
         {/* Lista de sedes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {sedes.map((sede) => (
+          {filteredSedes.map((sede) => (
             <Link
               key={sede._id}
               href={`/sedes/${sede._id}`} // Redirige a la página de detalles de la sede
@@ -47,7 +68,7 @@ const Page = () => {
         </div>
 
         {/* Mensaje si no hay sedes */}
-        {sedes.length === 0 && (
+        {filteredSedes.length === 0 && (
           <p className="text-center text-gray-500 mt-12 text-lg">
             No se encontraron sedes. ¡Crea la primera!
           </p>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import useProgramas from "./hook/useProgramas"; // Hook personalizado para manejar Programas
 import PageTemplate from "../../common/components/PageTemplate";
@@ -8,10 +8,32 @@ import RouterLinks from "@/config/RouterLinks";
 
 const Page = () => {
   const { programas, getProgramas } = useProgramas();
+  const [filters, setFilters] = useState({ name: "" });
+  const [filteredProgramas, setFilteredProgramas] = useState([]);
 
   useEffect(() => {
     getProgramas({ limit: 20 });
   }, []);
+
+  useEffect(() => {
+    // Solo aplica el filtro cuando los programas estén disponibles
+    if (programas.length > 0) {
+      const filteredData = programas.filter((programa) => {
+        // Asegúrate de que `programa.name` existe. Si es otro nombre, ajusta esta línea.
+        const nameMatch = programa.name
+          .toLowerCase()
+          .includes(filters.name.toLowerCase());
+        return nameMatch;
+      });
+
+      setFilteredProgramas(filteredData);
+    }
+  }, [filters, programas]); // Se vuelve a aplicar cuando se actualizan los filtros o los programas
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
 
   return (
     <PageTemplate
@@ -32,9 +54,21 @@ const Page = () => {
           </Link>
         </div>
 
+        {/* Filtros de búsqueda */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <input
+            type="text"
+            name="name"
+            placeholder="Buscar por nombre"
+            value={filters.name}
+            onChange={handleInputChange}
+            className="px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+          />
+        </div>
+
         {/* Lista de programas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programas.map((p) => (
+          {filteredProgramas.map((p) => (
             <Link
               key={p._id}
               href={`/programas/${p._id}`} // Redirige a la página de detalles del programa
@@ -47,9 +81,14 @@ const Page = () => {
         </div>
 
         {/* Mensaje si no hay programas */}
-        {programas.length === 0 && (
+        {filteredProgramas.length === 0 && programas.length > 0 && (
           <p className="text-center text-gray-500 mt-10">
             No se encontraron programas. ¡Crea el primero!
+          </p>
+        )}
+        {filteredProgramas.length === 0 && programas.length === 0 && (
+          <p className="text-center text-gray-500 mt-10">
+            Cargando programas...
           </p>
         )}
       </div>
