@@ -12,7 +12,6 @@ import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
 import InputTagArray from "@/app/common/components/InputTagArray";
 import Select from "@/app/common/components/Select";
 import { Gender, Nationality } from "@/app/common/interfaces/enums";
-import Datepicker from "react-tailwindcss-datepicker";
 import InputDate from "@/app/common/components/InputDate";
 import { representativeAttributes } from "../interfaces/representative.interface";
 

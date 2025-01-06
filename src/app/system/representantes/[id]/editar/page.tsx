@@ -4,8 +4,8 @@ import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
-import RepresentativeForm from "../../components/RepresentativeForm";
 import useRepresentative from "../../hooks/useRepresentative";
+import RepresentativeForm from "../../components/RepresentativeForm";
 
 const Page = () => {
 	const { id } = useParams();

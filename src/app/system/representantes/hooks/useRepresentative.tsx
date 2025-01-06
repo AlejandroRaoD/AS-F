@@ -1,12 +1,15 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { API_SERVER_URL } from "@/config";
 import { QueryRepresentativeDto } from "../dto/query-representative.dto";
 import { CreateRepresentativeDto } from "../dto/create-representative.dto";
 import { UpdateRepresentativeDto } from "../dto/update-representative.dto";
 import { representativeAttributes } from "../interfaces/representative.interface";
-
-const url = `${API_SERVER_URL}/representative`;
+import {
+	createRepresentative_Request,
+	deleteRepresentative_Request,
+	getRepresentative_Request,
+	getRepresentatives_Request,
+	updateRepresentative_Request,
+} from "../api/representativeApi";
 
 interface props {
 	id?: string | string[];
@@ -22,12 +25,11 @@ const useRepresentative = (props?: props) => {
 	const getRepresentative = async (id: string) => {
 		if (representative) return;
 
-		const {
-			data: { data },
-		} = await axios.get(`${url}/${id}`);
+		const { data } = await getRepresentative_Request(id);
 
 		setRepresentative(data);
 	};
+
 	useEffect(() => {
 		if (!props) return;
 
@@ -35,9 +37,7 @@ const useRepresentative = (props?: props) => {
 	}, [props]);
 
 	const getRepresentatives = async (query?: QueryRepresentativeDto) => {
-		const {
-			data: { data },
-		} = await axios.get(url, { params: query });
+		const { data } = await getRepresentatives_Request(query);
 
 		setRepresentatives(data);
 
@@ -45,18 +45,18 @@ const useRepresentative = (props?: props) => {
 	};
 
 	const createRepresentative = async (formData: CreateRepresentativeDto) => {
-		await axios.post(url, formData);
+		await createRepresentative_Request(formData);
 	};
 
 	const updateRepresentative = async (
 		representativeId: string,
 		formData: UpdateRepresentativeDto
 	) => {
-		await axios.put(`${url}/${representativeId}`, formData);
+		await updateRepresentative_Request(representativeId, formData);
 	};
 
 	const deleteRepresentative = async (representativeId: string) => {
-		await axios.delete(`${url}/${representativeId}`);
+		await deleteRepresentative_Request(representativeId);
 	};
 
 	return {

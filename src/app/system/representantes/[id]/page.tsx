@@ -2,7 +2,6 @@
 
 import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
-import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import IconButton from "@/app/common/components/IconButton";
