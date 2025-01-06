@@ -7,7 +7,7 @@ export const Button = (props: SkeletonButtonProps) => {
 	return (
 		<SkeletonButton
 			{...buttonProps}
-			className={`py-2 px-5 rounded bg-red-400 ${className} `}
+			className={`px-5 py-2 bg-green-500 text-white text-sm font-medium rounded-md shadow hover:bg-green-600 transition ${className} `}
 		>
 			{children}
 		</SkeletonButton>

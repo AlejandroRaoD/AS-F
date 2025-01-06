@@ -60,13 +60,6 @@ export const StudentItem = (props: props) => {
 				>
 					Ver detalles
 				</Link>
-
-				<button
-					className="px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-md hover:bg-red-600 transition"
-					onClick={haddleDelete}
-				>
-					Eliminar
-				</button>
 			</div>
 		</div>
 	);

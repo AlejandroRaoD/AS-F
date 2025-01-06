@@ -13,8 +13,11 @@ interface props {
 }
 
 const useRepresentative = (props?: props) => {
-	const [representative, setRepresentative] = useState<representativeAttributes>();
-	const [representatives, setRepresentatives] = useState<representativeAttributes[]>([]);
+	const [representative, setRepresentative] =
+		useState<representativeAttributes>();
+	const [representatives, setRepresentatives] = useState<
+		representativeAttributes[]
+	>([]);
 
 	const getRepresentative = async (id: string) => {
 		if (representative) return;
@@ -37,6 +40,8 @@ const useRepresentative = (props?: props) => {
 		} = await axios.get(url, { params: query });
 
 		setRepresentatives(data);
+
+		return data;
 	};
 
 	const createRepresentative = async (formData: CreateRepresentativeDto) => {
