@@ -16,6 +16,8 @@ interface props {
 	query?: QueryStudentRelationDto;
 }
 
+let queried = false;
+
 const useStudentRelation = (props?: props) => {
 	const [studentRelations, setStudentRelations] = useState<
 		studentRelationAllDataAttributes[]
@@ -30,10 +32,13 @@ const useStudentRelation = (props?: props) => {
 	useEffect(() => {
 		if (!props) return;
 
-		if (props.query) {
-			if (studentRelations.length) return;
-			getStudentRelations(props.query);
-		}
+		if (!props.query) return;
+
+		if (queried || studentRelations.length) return;
+
+		getStudentRelations(props.query);
+
+		queried = true;
 	}, [props]);
 
 	const createStudentRelation = async (formData: CreateStudentRelationDto) => {
@@ -47,13 +52,11 @@ const useStudentRelation = (props?: props) => {
 		await updateStudentRelation_Request(studentId, formData);
 	};
 
-	const deleteStudentRelation = async (studentId: string) => {
+	const deleteStudentRelation = async (id: string) => {
 		try {
-			await deleteStudentRelation_Request(studentId);
+			await deleteStudentRelation_Request(id);
 
-			setStudentRelations((items) =>
-				items.filter((item) => item._id != studentId)
-			);
+			setStudentRelations((items) => items.filter((item) => item._id != id));
 		} catch (error) {}
 	};
 

@@ -10,7 +10,6 @@ import useStudentRelation from "../hooks/useStudentRelation";
 import { CreateStudentRelationDto } from "../dto/create-student-relation.dto";
 import Title from "@/app/common/components/Title";
 import useRepresentative from "../../representantes/hooks/useRepresentative";
-import IconButton from "@/app/common/components/IconButton";
 
 interface props {
 	studentId: string;
@@ -42,6 +41,7 @@ const StudentRelationForm = (props: props) => {
 
 			try {
 				await createStudentRelation(formData);
+				window.location.reload();
 			} catch (error) {
 				axiosErrorHandle(error);
 			}
@@ -51,11 +51,10 @@ const StudentRelationForm = (props: props) => {
 	});
 
 	const [InputCI, setInputCI] = useState<string>("");
-
 	const onChangeCI = (str: string) => setInputCI(str);
 
-	const queryRepresentative = () => {
-		getRepresentatives({ CI: InputCI });
+	const queryRepresentative = async () => {
+		await getRepresentatives({ CI: InputCI });
 	};
 
 	return (
@@ -70,7 +69,7 @@ const StudentRelationForm = (props: props) => {
 					onChange={(e) => onChangeCI(e.target.value)}
 				/>
 
-				<IconButton onClick={queryRepresentative}>B</IconButton>
+				<Button onClick={queryRepresentative}>Buscar</Button>
 			</div>
 
 			<form onSubmit={formik.handleSubmit}>

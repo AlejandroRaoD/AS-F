@@ -25,7 +25,7 @@ const Page = () => {
 				}}
 			>
 				{studentRelations.map((a) => (
-					<StudentRelationItem key={a._id} data={a} />
+					<StudentRelationItem key={a._id} data={a} edit={true} />
 				))}
 
 				{studentRelations && (
