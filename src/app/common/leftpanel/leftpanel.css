@@ -1,0 +1,124 @@
+/* LeftPanel.css */
+
+/* Estilo base para el panel */
+.left-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom right, #f9fafb, #ffffff);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    z-index: 50;
+  }
+  
+  .left-panel.collapsed {
+    width: 60px;
+  }
+  
+  .left-panel.expanded {
+    width: 224px;
+  }
+  
+  .left-panel-header {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .left-panel-header img {
+    border-radius: 50%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .left-panel-header h1 {
+    margin-top: 8px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: center;
+  }
+  
+  .left-panel-header p {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .nav-links {
+    padding: 16px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 8px;
+    background: #f3f4f6;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background: linear-gradient(to right, #3b82f6, #6366f1);
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .nav-link span {
+    margin-right: 8px;
+    font-size: 1.25rem;
+    color: #3b82f6;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover span {
+    color: white;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .left-panel {
+      width: 60px;
+    }
+  
+    .left-panel.expanded {
+      position: absolute;
+      width: 224px;
+      z-index: 100;
+      background: white;
+    }
+  
+    .left-panel-header img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .nav-link {
+      padding: 8px;
+    }
+  
+    .nav-link span {
+      font-size: 1rem;
+    }
+  
+    .left-panel-header h1 {
+      font-size: 1rem;
+    }
+  }
+  
+  /* For very small devices (mobile) */
+  @media (max-width: 480px) {
+    .left-panel.expanded {
+      width: 200px;
+    }
+  
+    .nav-link {
+      font-size: 0.875rem;
+    }
+  }
+  

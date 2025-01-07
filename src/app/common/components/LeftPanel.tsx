@@ -5,6 +5,7 @@ import Image from "next/image";
 import imagotipoImage from "@/assets/imagenes/IMAGOTIPO.jpg";
 import Link from "next/link"; // Importamos el componente Link de Next.js
 import RouterLinks from "@/config/RouterLinks"; // Importamos RouterLinks
+import "../leftpanel/leftpanel.css";
 
 interface LeftPanelButtonProps {
   label: string;

@@ -7,11 +7,13 @@
   padding: 1rem 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten en pantallas pequeñas */
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem; /* Espaciado para pantallas pequeñas */
 }
 
 .logo-circle {
@@ -41,23 +43,26 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  order: -1; /* Asegurar que el logo esté centrado en pantallas pequeñas */
+  margin-bottom: 1rem;
 }
 
 .center-image {
-  max-width: 200px;  /* Ajustado para tamaño más grande */
-  max-height: 80px;  /* Ajustado para tamaño más grande */
+  max-width: 150px;  /* Ajuste para pantallas pequeñas */
+  max-height: 60px;
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
+  gap: 8px; /* Espaciado entre botones */
+  flex-wrap: wrap; /* Ajustar botones en pantallas pequeñas */
 }
 
 .profile-button,
 .help-button {
   background-color: #3b82f6; /* Azul */
   padding: 8px 16px;
-  margin-left: 8px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
@@ -73,9 +78,12 @@
   transform: scale(1.05);
 }
 
-.profile-button,
-.help-button {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.profile-button img,
+.help-button img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  margin-right: 8px;
 }
 
 /* Mejorar el texto del navbar */
@@ -86,11 +94,41 @@
   font-weight: 600;
 }
 
-/* Estilo para las imágenes de los botones de perfil y ayuda */
-.profile-button img,
-.help-button img {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  margin-right: 8px;
+/* Responsive: Mobile-first approach */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    flex-direction: column; /* Cambiar a diseño en columna */
+  }
+
+  .navbar-left,
+  .navbar-right {
+    justify-content: center; /* Centrar los elementos */
+  }
+
+  .home-button {
+    padding: 8px 12px;
+    font-size: 0.875rem; /* Reducir el tamaño del texto */
+  }
+
+  .profile-button,
+  .help-button {
+    padding: 8px 12px;
+    font-size: 0.875rem; /* Reducir el tamaño del texto */
+  }
+
+  .center-image {
+    max-width: 120px;
+    max-height: 50px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    padding: 1rem 3rem; /* Mayor padding en pantallas grandes */
+  }
+
+  .center-image {
+    max-width: 200px; /* Imagen más grande para pantallas grandes */
+  }
 }
