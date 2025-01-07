@@ -7,8 +7,8 @@ const Page = () => {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Registrar Nueva Sede",
-				hrefBackButton: RouterLinks.sedes.all,
+				navTitle: "Registrar nuevo programa",
+				hrefBackButton: RouterLinks.programas.create,
 			}}
 		>
 			{/* Contenedor principal */}
@@ -23,7 +23,7 @@ const Page = () => {
 						</div>
 
 						{/* Formulario */}
-						<ProgramaForm redirect={RouterLinks.sedes.all} />
+						<ProgramaForm redirect={RouterLinks.programas.all} />
 					</div>
 				</div>
 			</div>

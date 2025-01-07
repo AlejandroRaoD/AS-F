@@ -41,7 +41,7 @@ export default function Home() {
                     position: "top-[10px] left-[50px]",
                   },
                   {
-                    href: RouterLinks.personal.all,
+                    href: RouterLinks.employee.all,
                     bgClass: "bg-gradient-to-br from-green-700 via-green-600 to-green-500",
                     image: "/images/personal.jpg",
                     label: "Personal",
