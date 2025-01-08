@@ -9,35 +9,36 @@ import Button from "@/app/common/components/Button";
 import RouterLinks from "@/config/RouterLinks";
 import Select from "@/app/common/components/Select";
 import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
-import usePrograma from "../hook/useProgramas";
-import { programaAttributes } from "../interfaces/programa.interface";
-import { CreateProgramaDto } from "../dto/create-programa.dto";
+import useCatedra from "../hook/useCatedra";
 import useSede from "../../sedes/hooks/useSede";
 import useNucleo from "../../nucleos/hooks/useNucleo";
 import useEmployee from "../../personal/hooks/useEmployee";
+import { catedraAttributes } from "../interfaces/catedra.interface";
+import { CreateCatedraDto } from "../dto/create-catedra.dto";
+import usePrograma from "../../programas/hook/useProgramas";
 
 interface props {
-	data?: programaAttributes;
+	data?: catedraAttributes;
 	redirect?: string;
 }
 
-const ProgramaForm = (props: props) => {
+const CatedraForm = (props: props) => {
 	const { data, redirect } = props;
 	const router = useRouter();
 	const [isSubmiting, setIsSubmiting] = useState(false);
 
 	const { nucleos, getNucleos } = useNucleo();
 	const { sedes, getSedes } = useSede();
-	const { employees, getEmployees } = useEmployee();
+	const { programas, getProgramas } = usePrograma();
 
-	const { createPrograma, updatePrograma, deletePrograma } = usePrograma();
+	const { createCatedra, updateCatedra, deleteCatedra } = useCatedra();
 
 	useEffect(() => {
 		getNucleos();
 
 		if (data) {
 			getSedes();
-			getEmployees();
+			getProgramas();
 		}
 	}, []);
 
@@ -54,13 +55,13 @@ const ProgramaForm = (props: props) => {
 			sedeId: yup.string().min(3),
 			directorId: yup.string().min(3),
 		}),
-		onSubmit: async (formData: CreateProgramaDto) => {
+		onSubmit: async (formData: CreateCatedraDto) => {
 			if (isSubmiting) return;
 			setIsSubmiting(true);
 
 			try {
-				if (data) await updatePrograma(data._id, formData);
-				else await createPrograma(formData);
+				if (data) await updateCatedra(data._id, formData);
+				else await createCatedra(formData);
 
 				if (redirect) router.push(redirect);
 			} catch (error) {
@@ -73,8 +74,8 @@ const ProgramaForm = (props: props) => {
 	const handleDeleteButton = () => {
 		if (!data) return;
 		try {
-			deletePrograma(data._id);
-			router.push(RouterLinks.programas.all);
+			deleteCatedra(data._id);
+			router.push(RouterLinks.catedra.all);
 		} catch (error) {
 			console.log(error);
 		}
@@ -91,30 +92,27 @@ const ProgramaForm = (props: props) => {
 				}}
 			/>
 
+			<Select
+				labelTitle="Sede"
+				dataList={sedes.map((n) => ({ title: n.name, value: n._id }))}
+				name="sedeId"
+				onChange={({ target: { value } }) => {
+					getProgramas({ sedeId: value });
+				}}
+			/>
+
 			<form onSubmit={formik.handleSubmit}>
 				<Select
-					labelTitle="Sede"
-					dataList={sedes.map((n) => ({ title: n.name, value: n._id }))}
-					name="sedeId"
-					onChange={(e) => {
-						formik.handleChange(e);
-						getEmployees({ sedeId: e.target.value });
-					}}
-					value={formik.values.sedeId}
-					error={formik.errors.sedeId}
-				/>
-
-				<Select
-					labelTitle="Director"
-					dataList={employees.map((n) => ({ title: n.name, value: n._id }))}
-					name="directorId"
+					labelTitle="Programa"
+					dataList={programas.map((n) => ({ title: n.name, value: n._id }))}
+					name="programaId"
 					onChange={formik.handleChange}
-					value={formik.values.directorId}
-					error={formik.errors.directorId}
+					value={formik.values.programaId}
+					error={formik.errors.programaId}
 				/>
 
 				<Input
-					labelTitle="Nombre del programa"
+					labelTitle="Nombre del catedra"
 					name="name"
 					onChange={formik.handleChange}
 					value={formik.values.name}
@@ -137,4 +135,4 @@ const ProgramaForm = (props: props) => {
 	);
 };
 
-export default ProgramaForm;
+export default CatedraForm;

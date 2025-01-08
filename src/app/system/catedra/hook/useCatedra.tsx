@@ -1,10 +1,15 @@
-{/*import { catedraAttributes } from "@/types";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { QueryCatedraDto } from "../dto/query-catedra.dto";
-import { API_SERVER_URL } from "@/config";
-
-const url = `${API_SERVER_URL}/catedra`;
+import { CreateCatedraDto } from "../dto/create-catedra.dto";
+import { catedraAttributes } from "../interfaces/catedra.interface";
+import {
+	createCatedra_Request,
+	deleteCatedra_Request,
+	getCatedra_Request,
+	getCatedras_Request,
+	updateCatedra_Request,
+} from "../api/catedraApi";
+import { UpdateCatedraDto } from "../dto/update-catedra.dto";
 
 interface props {
 	id?: string | string[];
@@ -17,40 +22,39 @@ const useCatedra = (props?: props) => {
 	const getCatedra = async (id: string) => {
 		if (catedra) return;
 
-		const {
-			data: { data },
-		} = await axios.get(`${url}/${id}`);
+		const { data } = await getCatedra_Request(id);
 
 		setCatedra(data);
 	};
-
 	useEffect(() => {
 		if (!props) return;
 
-		if (typeof props.id === "string") getCatedra(props.id);
+		if (typeof props.id == "string") getCatedra(props.id);
 	}, [props]);
 
 	const getCatedras = async (query?: QueryCatedraDto) => {
-		const {
-			data: { data },
-		} = await axios.get(url, { params: query });
+		const { data } = await getCatedras_Request(query);
 
 		setCatedras(data);
 	};
 
-	const createCatedra = async (formData: Pick<catedraAttributes, "name">) => {
-		await axios.post(url, formData);
+	const createCatedra = async (formData: CreateCatedraDto) => {
+		await createCatedra_Request(formData);
 	};
 
 	const updateCatedra = async (
 		catedraId: string,
-		formData: Pick<catedraAttributes, "name">
+		formData: UpdateCatedraDto
 	) => {
-		await axios.put(`${url}/${catedraId}`, formData);
+		await updateCatedra_Request(catedraId, formData);
 	};
 
 	const deleteCatedra = async (catedraId: string) => {
-		await axios.delete(`${url}/${catedraId}`);
+		try {
+			await deleteCatedra_Request(catedraId);
+
+			setCatedras((items) => items.filter((item) => item._id != catedraId));
+		} catch (error) {}
 	};
 
 	return {
@@ -64,4 +68,4 @@ const useCatedra = (props?: props) => {
 	};
 };
 
-export default useCatedra;*/}
+export default useCatedra;

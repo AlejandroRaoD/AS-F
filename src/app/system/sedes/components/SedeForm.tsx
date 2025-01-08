@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-import { CreateSedeDto, sedeAttributes } from "@/types";
+import {  sedeAttributes } from "@/types";
 import Input from "@/app/common/components/Input";
 import useSede from "../hooks/useSede";
 import Button from "@/app/common/components/Button";
@@ -13,6 +13,7 @@ import Select from "@/app/common/components/Select";
 import useNucleo from "@/app/system/nucleos/hooks/useNucleo";
 import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
 import InputTagArray from "@/app/common/components/InputTagArray";
+import { CreateSedeDto } from "../dto/create-sede.dto";
 
 interface props {
 	data?: sedeAttributes;
@@ -80,6 +81,15 @@ const SedeForm = (props: props) => {
 
 	return (
 		<form onSubmit={formik.handleSubmit}>
+			<Select
+				labelTitle="Nucleo"
+				dataList={nucleos.map((n) => ({ title: n.name, value: n._id }))}
+				name="nucleoId"
+				onChange={formik.handleChange}
+				value={formik.values.nucleoId}
+				error={formik.errors.nucleoId}
+			/>
+
 			<Input
 				labelTitle="Nombre de la sede"
 				name="name"
@@ -102,15 +112,6 @@ const SedeForm = (props: props) => {
 				type="number"
 				dataList={phoneNumberArr}
 				changeArray={changePhoneArr}
-			/>
-
-			<Select
-				labelTitle="Nucleo"
-				dataList={nucleos.map((n) => ({ title: n.name, value: n._id }))}
-				name="nucleoId"
-				onChange={formik.handleChange}
-				value={formik.values.nucleoId}
-				error={formik.errors.nucleoId}
 			/>
 
 			<Button type="submit"> Guardar</Button>
