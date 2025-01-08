@@ -142,7 +142,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
             </>
           )}
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-          <LeftPanelButton label="Documentos" icon="📄" href={undefined} />
+          <LeftPanelButton label="Documentos" icon="📄" href={RouterLinks.documentos.all} />
         </nav>
       )}
     </div>

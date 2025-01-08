@@ -1,42 +1,51 @@
-import NavBar from "../../common/components/NavBar";
-import LeftPanel from "../../common/components/LeftPanel";
+'use client'; // Asegúrate de que este archivo es un Client Component
 
-export default function PerfilPage() {
+import React from 'react';
+import Link from 'next/link';
+import PageTemplate from '../../common/components/PageTemplate'; // Ajusta la ruta si es necesario
+import LeftPanel from '../../common/components/LeftPanel'; // Ajusta la ruta si es necesario
+import RouterLinks from '@/config/RouterLinks'; // Asegúrate de tener esta configuración
+
+const PerfilPage = () => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <LeftPanel />
+    <PageTemplate
+      navBarProps={{
+        navTitle: 'Perfil', // Título del Navbar
+        hrefBackButton: '#', // Ruta para el botón de retroceso
+        showProfileButton: false, // Opcional: ocultar el botón de perfil si es necesario
+      }}
+    >
+      <div className="flex min-h-screen bg-gray-100">
+        {/* Main Content */}
+        <div className="flex flex-col flex-grow ml-64">
+          {/* Header */}
+          <div className="bg-gray-200 py-8 px-4 text-center">
+            <h1 className="text-4xl font-bold text-gray-800">Página de Perfil</h1>
+            <p className="text-lg text-gray-600 mt-4">Aquí podrás gestionar los perfiles de los usuarios.</p>
+          </div>
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-grow ml-56">
-        {/* Navbar */}
-        <NavBar
-          navTitle="Página de Perfil"
-          hrefBackButton="/" // Llevará al inicio
-          showProfileButton={false} // Ocultar botón de perfil
-        />
-
-        {/* Contenido principal */}
-        <div className="flex flex-col items-center justify-center flex-grow">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">Página de Perfil</h1>
-          <p className="text-lg text-gray-600 mb-8">
-            Aquí podrás gestionar los perfiles
-          </p>
-
-          {/* Contenedor de los botones */}
-          <div className="flex gap-6">
+          {/* Buttons Container */}
+          <div className="flex justify-center gap-8 mt-10 mb-16">
             {/* Botón Usuario Normal */}
-            <button className="w-64 h-64 bg-blue-500 text-white text-2xl font-bold rounded-lg shadow-lg hover:bg-blue-600 transition">
+            <Link
+              href="#"
+              className="w-72 h-72 bg-blue-500 text-white text-2xl font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
+            >
               Usuario Normal
-            </button>
+            </Link>
 
             {/* Botón Super Usuario */}
-            <button className="w-64 h-64 bg-green-500 text-white text-2xl font-bold rounded-lg shadow-lg hover:bg-green-600 transition">
+            <Link
+              href="#"
+              className="w-72 h-72 bg-green-500 text-white text-2xl font-bold rounded-lg shadow-lg hover:bg-green-600 transition transform hover:scale-105"
+            >
               Super Usuario
-            </button>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
+    </PageTemplate>
   );
-}
+};
+
+export default PerfilPage;

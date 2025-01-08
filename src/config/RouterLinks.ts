@@ -72,7 +72,12 @@ const RouterLinks = {
 		one: (id: IdParam) => `/system/estadisticas/${oneString(id)}`,
 		edit: (id: IdParam) => `/system/estadisticas/${oneString(id)}/editar`,
 	},
-		  
+	documentos: {
+		all: "/system/documentos",
+		create: "/system/documentos/nuevo",
+		one: (id) => `/system/documentos/${oneString(id)}`,
+		edit: (id) => `/system/documentos/${oneString(id)}/editar`,
+	  },	  
 };
 
 export default RouterLinks;
