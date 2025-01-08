@@ -1,6 +1,5 @@
-import { CreateSedeDto, sedeAttributes } from "@/types";
+import {  sedeAttributes } from "@/types";
 import { useState, useEffect } from "react";
-import { API_SERVER_URL } from "@/config";
 import { QuerySedeDto } from "../dto/query-sede.dto";
 import {
 	createSede_Request,
@@ -10,6 +9,7 @@ import {
 	updateSede_Request,
 } from "../api/sede.api";
 import { UpdateSedeDto } from "../dto/update-sede.dto";
+import { CreateSedeDto } from "../dto/create-sede.dto";
 
 interface props {
 	id?: string | string[];

@@ -46,14 +46,12 @@ const CatedraForm = (props: props) => {
 		initialValues: data || {
 			name: "",
 			description: "",
-			sedeId: "",
-			directorId: "",
+			programaId: "",
 		},
 		validationSchema: yup.object({
 			name: yup.string().min(3),
 			description: yup.string().min(3),
-			sedeId: yup.string().min(3),
-			directorId: yup.string().min(3),
+			programaId: yup.string().min(3),
 		}),
 		onSubmit: async (formData: CreateCatedraDto) => {
 			if (isSubmiting) return;

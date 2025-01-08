@@ -12,7 +12,7 @@ import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
 import Select from "@/app/common/components/Select";
 import { furnitureAttributes } from "../interfaces/furniture.interface";
 import useNucleo from "../../nucleos/hooks/useNucleo";
-import useSede from "../../employee/hooks/useSede";
+import useSede from "../../sedes/hooks/useSede";
 
 interface props {
 	data?: furnitureAttributes;
