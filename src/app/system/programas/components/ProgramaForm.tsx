@@ -4,17 +4,19 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-import { CreateSedeDto, sedeAttributes } from "@/types";
 import Input from "@/app/common/components/Input";
 import Button from "@/app/common/components/Button";
 import RouterLinks from "@/config/RouterLinks";
 import Select from "@/app/common/components/Select";
 import useNucleo from "@/app/system/nucleos/hooks/useNucleo";
 import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
-import InputTagArray from "@/app/common/components/InputTagArray";
+import usePrograma from "../hook/useProgramas";
+import { programaAttributes } from "../interfaces/programa.interface";
+import { CreateProgramaDto } from "../dto/create-programa.dto";
+import useSede from "../../employee/hooks/useSede";
 
 interface props {
-	data?: sedeAttributes;
+	data?: programaAttributes;
 	redirect?: string;
 }
 
@@ -22,42 +24,35 @@ const ProgramaForm = (props: props) => {
 	const { data, redirect } = props;
 	const router = useRouter();
 	const [isSubmiting, setIsSubmiting] = useState(false);
-	const { nucleos, getNucleos } = useNucleo();
-	const { createSede, updateSede, deleteSede } = useSede();
 
-	const [phoneNumberArr, setPhoneNumberArr] = useState<string[]>([]);
-	const changePhoneArr = (arr: string[]) => setPhoneNumberArr(arr);
+	const { sedes, getSedes } = useSede();
+
+	const { createPrograma, updatePrograma, deletePrograma } = usePrograma();
 
 	useEffect(() => {
-		getNucleos();
+		getSedes();
 	}, []);
-
-	useEffect(() => {
-		if (data) changePhoneArr(data.phone_number);
-	}, [data]);
 
 	const formik = useFormik({
 		initialValues: data || {
 			name: "",
-			address: "",
-			phone_number: [],
-			nucleoId: "",
+			description: "",
+			sedeId: "",
+			directorId: "",
 		},
 		validationSchema: yup.object({
-			name: yup.string().min(3, "debe tener minimo 3 letras"),
-			address: yup.string().min(3, "debe tener minimo 3 letras"),
-			phone_number: yup.array(),
-			nucleoId: yup.string().min(3),
+			name: yup.string().min(3),
+			description: yup.string().min(3),
+			sedeId: yup.string().min(3),
+			directorId: yup.string().min(3),
 		}),
-		onSubmit: async (formData: CreateSedeDto) => {
+		onSubmit: async (formData: CreateProgramaDto) => {
 			if (isSubmiting) return;
 			setIsSubmiting(true);
 
-			formData.phone_number = phoneNumberArr;
-
 			try {
-				if (data) await updateSede(data._id, formData);
-				else await createSede(formData);
+				if (data) await updatePrograma(data._id, formData);
+				else await createPrograma(formData);
 
 				if (redirect) router.push(redirect);
 			} catch (error) {
@@ -70,8 +65,8 @@ const ProgramaForm = (props: props) => {
 	const handleDeleteButton = () => {
 		if (!data) return;
 		try {
-			deleteSede(data._id);
-			router.push(RouterLinks.sedes.all);
+			deletePrograma(data._id);
+			router.push(RouterLinks.programas.all);
 		} catch (error) {
 			console.log(error);
 		}
@@ -80,7 +75,7 @@ const ProgramaForm = (props: props) => {
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Input
-				labelTitle="Nombre de la sede"
+				labelTitle="Nombre del programa"
 				name="name"
 				onChange={formik.handleChange}
 				value={formik.values.name}
@@ -88,28 +83,20 @@ const ProgramaForm = (props: props) => {
 			/>
 
 			<Input
-				labelTitle="dirección "
-				name="address"
+				labelTitle="Descripcion"
+				name="description"
 				onChange={formik.handleChange}
-				value={formik.values.address}
-				error={formik.errors.address}
-			/>
-
-			<InputTagArray
-				labelTitle="Telefono"
-				name="phone_number"
-				type="number"
-				dataList={phoneNumberArr}
-				changeArray={changePhoneArr}
+				value={formik.values.description}
+				error={formik.errors.description}
 			/>
 
 			<Select
-				labelTitle="Nucleo"
-				dataList={nucleos.map((n) => ({ title: n.name, value: n._id }))}
-				name="nucleoId"
+				labelTitle="Sede"
+				dataList={sedes.map((n) => ({ title: n.name, value: n._id }))}
+				name="sedeId"
 				onChange={formik.handleChange}
-				value={formik.values.nucleoId}
-				error={formik.errors.nucleoId}
+				value={formik.values.sedeId}
+				error={formik.errors.sedeId}
 			/>
 
 			<Button type="submit"> Guardar</Button>

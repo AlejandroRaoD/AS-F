@@ -1,18 +1,18 @@
 import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
-import SedeForm from "../components/SedeForm";
 import RouterLinks from "@/config/RouterLinks";
+import EmployeeForm from "../components/EmployeeForm";
 
 const Page = () => {
 	return (
 		<>
 			<PageTemplate
 				navBarProps={{
-					navTitle: "Registrar nueva sede",
-					hrefBackButton: RouterLinks.sedes.all,
+					navTitle: "Registrar nuevo personal",
+					hrefBackButton: RouterLinks.employee.all,
 				}}
 			>
-				<SedeForm redirect={RouterLinks.sedes.all} />
+				<EmployeeForm redirect={RouterLinks.employee.all} />
 			</PageTemplate>
 		</>
 	);

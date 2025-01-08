@@ -112,7 +112,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
           <LeftPanelButton label="Estadísticas" icon="📊" href={RouterLinks.estadisticas.all} />
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
-          <LeftPanelButton label="Personal" icon="👩‍💼" href={RouterLinks.personal.all} />
+          <LeftPanelButton label="Personal" icon="👩‍💼" href={RouterLinks.employee.all} />
           <LeftPanelButton label="Estudiantes" icon="🎓" href={RouterLinks.estudiantes.all} />
           <LeftPanelButton label="Bienes" icon="🏢" href={RouterLinks.bienes.all} />
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
