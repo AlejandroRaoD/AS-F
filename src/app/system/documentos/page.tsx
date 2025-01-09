@@ -24,20 +24,24 @@ const DocumentosPage = () => {
 
         <main>
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-700">Constancias de Estudio</h2>
+            <h2 className="text-xl font-semibold text-gray-700">Constancia de Estudio</h2>
             <p className="text-gray-500 mb-2">
               Selecciona a un estudiante y genera su constancia personalizada.
             </p>
-            <button
-              className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600"
-              onClick={() => alert('Función para generar constancia en construcción')}
+            <Link
+              href="/system/documentos/constEstudio" // Ruta correcta a la nueva página para generar constancia
+              passHref
             >
-              Generar Constancia de Estudio
-            </button>
+              <button
+                className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600"
+              >
+                Constancia de Estudio
+              </button>
+            </Link>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-700">Comodatos de Instrumentos</h2>
+            <h2 className="text-xl font-semibold text-gray-700">Comodato</h2>
             <p className="text-gray-500 mb-2">
               Genera y administra los documentos de comodato para los instrumentos asignados.
             </p>
@@ -45,7 +49,7 @@ const DocumentosPage = () => {
               className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600"
               onClick={() => alert('Función para generar comodato en construcción')}
             >
-              Generar Comodato
+              Comodato
             </button>
           </section>
 
