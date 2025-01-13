@@ -20,11 +20,11 @@ const PageTemplate = (props: props) => {
 
   return (
     <>
-      <div className="h-screen grid grid-rows-[4rem_1fr] transition-all duration-300" style={{ marginLeft: isPanelCollapsed ? "3.5rem" : "13rem" }}>
+      <div className="h-screen grid grid-rows-[4rem_1fr] transition-all duration-300" style={{ marginLeft: isPanelCollapsed ? "3.5rem" : "14rem" }}>
         {/* Pasa la función togglePanel como prop a LeftPanel */}
         <NavBar {...navBarProps} />
 
-        <div className="overflow-y-auto p-4">{children}</div>
+        <div className="overflow-y-auto p-6">{children}</div>
 
         <Toaster />
       </div>

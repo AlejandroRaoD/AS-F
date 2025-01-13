@@ -1,4 +1,4 @@
-import {  sedeAttributes } from "@/types";
+import { sedeAttributes } from "@/types";
 import { useState, useEffect } from "react";
 import { QuerySedeDto } from "../dto/query-sede.dto";
 import {
@@ -13,11 +13,14 @@ import { CreateSedeDto } from "../dto/create-sede.dto";
 
 interface props {
 	id?: string | string[];
+	query?: QuerySedeDto;
 }
 
 const useSede = (props?: props) => {
 	const [sede, setSede] = useState<sedeAttributes>();
 	const [sedes, setSedes] = useState<sedeAttributes[]>([]);
+
+	const [alreadyQuery, setAlreadyQuery] = useState(false);
 
 	const getSede = async (id: string) => {
 		if (sede) return;
@@ -26,10 +29,17 @@ const useSede = (props?: props) => {
 
 		setSede(data);
 	};
+
 	useEffect(() => {
+		if (alreadyQuery) return;
+
 		if (!props) return;
 
 		if (typeof props.id == "string") getSede(props.id);
+
+		if (props.query && !sedes.length) getSedes(props.query);
+
+		setAlreadyQuery(true);
 	}, [props]);
 
 	const getSedes = async (query?: QuerySedeDto) => {
