@@ -18,7 +18,7 @@ const DocumentosPage = () => {
         <header className="border-b-2 border-gray-300 mb-6 pb-4 text-center">
           <h1 className="text-3xl font-semibold text-gray-800">Gestión de Documentos</h1>
           <p className="text-gray-500">
-            Genera constancias de estudio y comodatos de instrumentos de forma rápida y sencilla.
+            Genera constancias de estudio, comodatos de instrumentos y certificados de forma rápida y sencilla.
           </p>
         </header>
 
@@ -29,7 +29,7 @@ const DocumentosPage = () => {
               Selecciona a un estudiante y genera su constancia personalizada.
             </p>
             <Link
-              href="/system/documentos/constEstudio" // Ruta correcta a la nueva página para generar constancia
+              href={RouterLinks.documentos.constanciaEstudio} // Usa la configuración de rutas
               passHref
             >
               <button
@@ -45,12 +45,33 @@ const DocumentosPage = () => {
             <p className="text-gray-500 mb-2">
               Genera y administra los documentos de comodato para los instrumentos asignados.
             </p>
-            <button
-              className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600"
-              onClick={() => alert('Función para generar comodato en construcción')}
+            <Link
+              href={RouterLinks.documentos.comodato} // Usa la configuración de rutas
+              passHref
             >
-              Comodato
-            </button>
+              <button
+                className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600"
+              >
+                Comodato
+              </button>
+            </Link>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-700">Certificados</h2>
+            <p className="text-gray-500 mb-2">
+              Genera certificados personalizados para estudiantes y personal.
+            </p>
+            <Link
+              href={RouterLinks.documentos.certificados} // Usa la configuración de rutas
+              passHref
+            >
+              <button
+                className="px-6 py-3 bg-purple-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-purple-600"
+              >
+                Certificados
+              </button>
+            </Link>
           </section>
 
           <section>

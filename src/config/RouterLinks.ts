@@ -77,6 +77,7 @@ const RouterLinks = {
     all: "/system/documentos",
     constanciaEstudio: "/system/documentos/constEstudio",
     comodato: "/system/documentos/comodato",
+    certificados: "/system/documentos/certificados",
     create: "/system/documentos/nuevo",
     one: (id: IdParam) => `/system/documentos/${oneString(id)}`,
     edit: (id: IdParam) => `/system/documentos/${oneString(id)}/editar`,
