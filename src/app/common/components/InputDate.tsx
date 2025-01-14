@@ -6,24 +6,42 @@ interface props extends DatepickerType {
 	name: string;
 	labelTitle?: string;
 	error?: string;
+	containerClassName?: string;
+	className?: string;
+	notPadding?: boolean;
 }
 const InputDate = (props: props) => {
-	const { name, labelTitle, error, ...inputProps } = props;
-
+	const {
+		name,
+		labelTitle,
+		error,
+		containerClassName,
+		className,
+		notPadding,
+		...inputProps
+	} = props;
 
 	return (
-		<div className="">
-			<label className="" htmlFor="name">
-				{labelTitle}
-			</label>
+		<div
+			className={clsx(
+				"flex flex-1 flex-col",
+				notPadding || "mb-4",
+				containerClassName
+			)}
+		>
+			{labelTitle && (
+				<label className="" htmlFor={name}>
+					{labelTitle}
+				</label>
+			)}
 
 			<Datepicker
 				primaryColor="blue"
-				// toggleClassName="absolute bg-blue-900 text-white rounded-r-lg right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
-				inputClassName={clsx(
-					"px-4 py-3 mt-1 w-full rounded focus:shadow focus:outline-gray-400",
-					error ? "border-red-500" : "border-gray-300"
-				)}
+				// inputClassName={clsx(
+				// 	`px-4 py-2  border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500`,
+				// 	error ? "border-red-500" : "border-gray-300",
+				// 	className
+				// )}
 				i18n="es"
 				useRange={false}
 				asSingle

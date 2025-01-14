@@ -19,6 +19,8 @@ const SimpleSearch = (props: props) => {
 			onSubmit={async (e) => {
 				e.preventDefault();
 
+				if (!inputValue) return;
+
 				try {
 					await onSubmit(inputValue);
 				} catch (error) {
@@ -27,6 +29,7 @@ const SimpleSearch = (props: props) => {
 			}}
 		>
 			<Input
+				notPadding
 				type="search"
 				name="search"
 				placeholder="Buscar"

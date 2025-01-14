@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { InputHTMLAttributes } from "react";
 
 interface props extends InputHTMLAttributes<HTMLInputElement> {
@@ -5,6 +6,7 @@ interface props extends InputHTMLAttributes<HTMLInputElement> {
 	labelTitle?: string;
 	error?: string;
 	containerClassName?: string;
+	notPadding?: boolean;
 }
 const Input = (props: props) => {
 	const {
@@ -13,11 +15,18 @@ const Input = (props: props) => {
 		error,
 		containerClassName,
 		className,
+		notPadding,
 		...inputProps
 	} = props;
 
 	return (
-		<div className={`flex flex-1 flex-col ${containerClassName}`}>
+		<div
+			className={clsx(
+				"flex flex-1 flex-col",
+				notPadding || "mb-4",
+				containerClassName
+			)}
+		>
 			{labelTitle && (
 				<label className="" htmlFor={name}>
 					{labelTitle}
@@ -25,8 +34,10 @@ const Input = (props: props) => {
 			)}
 
 			<input
-				// className="px-4 py-3 mt-1 w-full rounded focus:shadow focus:outline-gray-400"
-				className={`px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+				className={clsx(
+					`px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500`,
+					className
+				)}
 				name={name}
 				id={name}
 				{...inputProps}

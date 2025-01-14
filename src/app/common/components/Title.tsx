@@ -7,7 +7,7 @@ interface props {
 }
 
 const getClassOfTitle = (str: titleTypes): string => {
-	return str == "h1" ? "text-2xl font-semibold" : "text-2xl";
+	return str == "h1" ? "text-2xl font-semibold mb-5" : "text-xl font-semibold mb-2";
 };
 
 const Title = (props: props) => {
@@ -16,7 +16,7 @@ const Title = (props: props) => {
 	let titleClassName = getClassOfTitle(titleType);
 
 	return (
-		<div className={`text-gray-800 mb-5 ${titleClassName}`}>{children}</div>
+		<div className={`text-gray-800 ${titleClassName}`}>{children}</div>
 	);
 };
 

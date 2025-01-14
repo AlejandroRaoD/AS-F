@@ -51,7 +51,7 @@ const EmployeeForm = (props: props) => {
 			email: "",
 			gender: Gender.Masculine,
 			address: "",
-			phone_number:[],
+			phone_number: [],
 			businessPosition: "",
 			sedeId: "",
 		},
@@ -69,6 +69,8 @@ const EmployeeForm = (props: props) => {
 			if (isSubmiting) return;
 			setIsSubmiting(true);
 
+			formData.phone_number = phoneNumberArr;
+			
 			try {
 				if (data) await updateEmployee(data._id, formData);
 				else await createEmployee(formData);
@@ -93,34 +95,36 @@ const EmployeeForm = (props: props) => {
 
 	return (
 		<>
-			<Select
-				labelTitle="nucleo"
-				dataList={nucleos.map(({ _id, name }) => ({
-					title: name,
-					value: _id,
-				}))}
-				name="nucleos"
-				onChange={async ({ target: { value } }) => {
-					// e.preventDefault()
-
-					await getSedes({ nucleoId: value });
-
-					formik.setFieldValue("sedeId", "");
-				}}
-			/>
-
 			<form onSubmit={formik.handleSubmit}>
-				<Select
-					labelTitle="sede"
-					dataList={sedes.map(({ _id, name }) => ({
-						title: name,
-						value: _id,
-					}))}
-					name="sedeId"
-					onChange={formik.handleChange}
-					value={formik.values.sedeId}
-					error={formik.errors.sedeId}
-				/>
+				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+					<Select
+						labelTitle="nucleo"
+						dataList={nucleos.map(({ _id, name }) => ({
+							title: name,
+							value: _id,
+						}))}
+						name="nucleos"
+						onChange={async ({ target: { value } }) => {
+							// e.preventDefault()
+
+							await getSedes({ nucleoId: value });
+
+							formik.setFieldValue("sedeId", "");
+						}}
+					/>
+
+					<Select
+						labelTitle="sede"
+						dataList={sedes.map(({ _id, name }) => ({
+							title: name,
+							value: _id,
+						}))}
+						name="sedeId"
+						onChange={formik.handleChange}
+						value={formik.values.sedeId}
+						error={formik.errors.sedeId}
+					/>
+				</div>
 
 				<Select
 					labelTitle="Tipo de personal"
@@ -134,72 +138,83 @@ const EmployeeForm = (props: props) => {
 					error={formik.errors.businessPosition}
 				/>
 
-				<Input
-					labelTitle="Nombre"
-					name="name"
-					onChange={formik.handleChange}
-					value={formik.values.name}
-					error={formik.errors.name}
-				/>
+				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+					<Input
+						labelTitle="Nombre"
+						name="name"
+						onChange={formik.handleChange}
+						value={formik.values.name}
+						error={formik.errors.name}
+					/>
 
-				<Input
-					labelTitle="Apellido"
-					name="lastname"
-					onChange={formik.handleChange}
-					value={formik.values.lastname}
-					error={formik.errors.lastname}
-				/>
+					<Input
+						labelTitle="Apellido"
+						name="lastname"
+						onChange={formik.handleChange}
+						value={formik.values.lastname}
+						error={formik.errors.lastname}
+					/>
+				</div>
 
-				<InputDate
-					labelTitle="Fecha de nacimiento"
-					name="birthday"
-					onChange={(value) => {
-						formik.setFieldValue("birthday", value.startDate);
-					}}
-					value={{
-						startDate: formik.values.birthday,
-						endDate: formik.values.birthday,
-					}}
-					// error={formik.errors.birthday}
-				/>
+				<div className="grid gap-2 grid-cols-1 lg:grid-cols-6">
+					<Select
+						labelTitle="nacionalidad"
+						dataList={Object.values(Nationality).map((v) => ({
+							title: v,
+							value: v,
+						}))}
+						containerClassName="col-span-1"
+						name="nationality"
+						onChange={formik.handleChange}
+						value={formik.values.nationality}
+						error={formik.errors.nationality}
+					/>
 
-				<Select
-					labelTitle="nacionalidad"
-					dataList={Object.values(Nationality).map((v) => ({
-						title: v,
-						value: v,
-					}))}
-					name="nationality"
-					onChange={formik.handleChange}
-					value={formik.values.nationality}
-					error={formik.errors.nationality}
-				/>
-				<Input
-					labelTitle="Cedula"
-					type="number"
-					name="CI"
-					onChange={formik.handleChange}
-					value={formik.values.CI}
-					error={formik.errors.CI}
-				/>
-				<Input
-					labelTitle="email"
-					name="email"
-					onChange={formik.handleChange}
-					value={formik.values.email}
-					error={formik.errors.email}
-				/>
-				<Select
-					labelTitle="genero"
-					dataList={Object.values(Gender).map((v) => ({
-						title: v,
-						value: v,
-					}))}
-					name="gender"
-					onChange={formik.handleChange}
-					value={formik.values.gender}
-					error={formik.errors.gender}
-				/>
+					<Input
+						containerClassName="col-span-2"
+						labelTitle="Cedula"
+						type="number"
+						name="CI"
+						onChange={formik.handleChange}
+						value={formik.values.CI}
+						error={formik.errors.CI}
+					/>
+
+					<Input
+						containerClassName="col-span-3"
+						labelTitle="email"
+						name="email"
+						onChange={formik.handleChange}
+						value={formik.values.email}
+						error={formik.errors.email}
+					/>
+				</div>
+
+				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+					<InputDate
+						labelTitle="Fecha de nacimiento"
+						name="birthday"
+						onChange={(value) => {
+							formik.setFieldValue("birthday", value.startDate);
+						}}
+						value={{
+							startDate: formik.values.birthday,
+							endDate: formik.values.birthday,
+						}}
+						// error={formik.errors.birthday}
+					/>
+					<Select
+						labelTitle="genero"
+						dataList={Object.values(Gender).map((v) => ({
+							title: v,
+							value: v,
+						}))}
+						name="gender"
+						onChange={formik.handleChange}
+						value={formik.values.gender}
+						error={formik.errors.gender}
+					/>
+				</div>
 
 				<Input
 					labelTitle="dirección"

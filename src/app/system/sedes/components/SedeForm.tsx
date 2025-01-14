@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-import {  sedeAttributes } from "@/types";
+import { sedeAttributes } from "@/types";
 import Input from "@/app/common/components/Input";
 import useSede from "../hooks/useSede";
 import Button from "@/app/common/components/Button";
