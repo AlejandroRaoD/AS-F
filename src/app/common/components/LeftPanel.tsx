@@ -115,6 +115,8 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
           <LeftPanelButton label="Personal" icon="👩‍💼" href={RouterLinks.employee.all} />
           <LeftPanelButton label="Estudiantes" icon="🎓" href={RouterLinks.estudiantes.all} />
           <LeftPanelButton label="Bienes" icon="🏢" href={RouterLinks.bienes.all} />
+          <LeftPanelButton label="Instrumentos" icon="S" href={RouterLinks.instrument.all} />
+           
           <div className="h-2 my-2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></div>
           <div
             className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
