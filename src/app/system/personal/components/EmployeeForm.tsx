@@ -33,12 +33,16 @@ const EmployeeForm = (props: props) => {
 	const { sedes, getSedes } = useSede();
 	const { createEmployee, updateEmployee, deleteEmployee } = useEmployee();
 
-	const [phoneNumberArr, setPhoneNumberArr] = useState<string[]>([]);
+	const [phoneNumberArr, setPhoneNumberArr] = useState<string[]>(
+		data ? data.phone_number : []
+	);
 	const changePhoneArr = (arr: string[]) => setPhoneNumberArr(arr);
 
 	useEffect(() => {
 		getNucleos();
-		if (data) getSedes();
+		if (data) {
+			getSedes();
+		}
 	}, []);
 
 	const formik = useFormik({
@@ -70,7 +74,7 @@ const EmployeeForm = (props: props) => {
 			setIsSubmiting(true);
 
 			formData.phone_number = phoneNumberArr;
-			
+
 			try {
 				if (data) await updateEmployee(data._id, formData);
 				else await createEmployee(formData);

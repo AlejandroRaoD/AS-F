@@ -18,7 +18,7 @@ const Page = () => {
 		<>
 			<PageTemplate
 				navBarProps={{
-					navTitle: "Editar Bien",
+					navTitle: "Editar Personal",
 					hrefBackButton: RouterLinks.employee.one(id),
 				}}
 			>
