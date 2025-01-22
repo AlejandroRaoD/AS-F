@@ -8,6 +8,7 @@ import LeftIcon from "./icons/LeftIcon";
 import Image from "next/image";
 
 import systemNavbarImage from "@/assets/imagenes/system-navbar.png";
+import MenuIcon from "./icons/MenuIcon";
 
 export interface NavBarProps {
   navTitle: ReactNode;
@@ -79,20 +80,7 @@ const NavBar = (props: NavBarProps) => {
       {/* Botón de hamburguesa para dispositivos pequeños */}
       <div className="block lg:hidden ml-4">
         <button className="text-gray-800 hover:text-blue-600 focus:outline-none">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <MenuIcon />
         </button>
       </div>
     </nav>
