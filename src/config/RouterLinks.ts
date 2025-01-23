@@ -62,6 +62,14 @@ const RouterLinks = {
     one: (id: IdParam) => `/system/comodatos/${oneString(id)}`,
     edit: (id: IdParam) => `/system/comodatos/${oneString(id)}/editar`,
   },
+
+  studentEnrollment: {
+    all: "/system/inscripciones",
+    create: "/system/inscripciones/nuevo",
+    one: (id: IdParam) => `/system/inscripciones/${oneString(id)}`,
+    edit: (id: IdParam) => `/system/inscripciones/${oneString(id)}/editar`,
+  },
+
   employee: {
     all: "/system/personal",
     create: "/system/personal/nuevo",

@@ -1,0 +1,36 @@
+"use client";
+
+import React from "react";
+import PageTemplate from "@/app/common/components/PageTemplate";
+import { useParams } from "next/navigation";
+import RouterLinks from "@/config/RouterLinks";
+import getOneStringParams from "@/app/common/helpers/getOneStringParams";
+import useComodato from "../../hooks/useStudentEnrollment";
+import ComodatoForm from "../../components/ComodatoForm";
+
+const Page = () => {
+	const { id } = useParams();
+
+	const comodatoId = getOneStringParams(id);
+	const { comodato } = useComodato({ id: comodatoId });
+
+	return (
+		<>
+			<PageTemplate
+				navBarProps={{
+					navTitle: "Editar Comodato",
+					hrefBackButton: RouterLinks.comodato.one(id),
+				}}
+			>
+				{comodato && (
+					<ComodatoForm
+						data={comodato}
+						redirect={RouterLinks.comodato.one(id)}
+					/>
+				)}
+			</PageTemplate>
+		</>
+	);
+};
+
+export default Page;
