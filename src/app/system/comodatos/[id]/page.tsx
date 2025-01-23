@@ -5,60 +5,110 @@ import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
-import useInstrument from "../hooks/useComodato";
 import IconButton from "@/app/common/components/IconButton";
 import EditIcon from "@/app/common/components/icons/EditIcon";
 import TextValue from "@/app/common/components/TextValue";
 import useSede from "../../sedes/hooks/useSede";
 import SectionContainer from "@/app/common/components/SectionContainer";
+import useComodato from "../hooks/useComodato";
+import useInstrument from "../../instrumentos/hooks/useInstrument";
+import useStudent from "../../estudiantes/hooks/useStudent";
+import Title from "@/app/common/components/Title";
+import Button from "@/app/common/components/Button";
 
 const Page = () => {
 	const { id } = useParams();
-	const instrumentId = getOneStringParams(id);
-	const { instrument } = useInstrument({ id: instrumentId });
+	const comodatoId = getOneStringParams(id);
+
+	const { comodato } = useComodato({ id: comodatoId });
 	const { sede, getSede } = useSede();
+	const { instrument, getInstrument } = useInstrument();
+	const { student, getStudent } = useStudent();
 
 	useEffect(() => {
-		if (instrument) getSede(instrument.sedeId);
-	}, [instrument]);
+		if (comodato) {
+			getInstrument(comodato.instrumentId).then(async (d) => {
+				await getSede(d.sedeId);
+			});
+			getStudent(comodato.studentId);
+		}
+	}, [comodato]);
 
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Detalles de personal",
-				hrefBackButton: RouterLinks.instrument.all,
+				navTitle: "Detalles del comodato",
+				hrefBackButton: RouterLinks.comodato.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.instrument.edit(id)}>
+					<IconButton href={RouterLinks.comodato.edit(id)}>
 						<EditIcon />
 					</IconButton>
 				),
 			}}
 		>
-			{/* <Button href={RouterLinks.instrument.edit(id)}>Editar datos</Button> */}
+			{/* <Button href={RouterLinks.comodato.edit(id)}>Editar datos</Button> */}
 
-			{instrument && (
-				<SectionContainer>
-					<div className="grid grid-cols-2">
+			{comodato && (
+				<>
+					<SectionContainer className="grid grid-cols-2">
+						<TextValue
+							title="Fecha inicio"
+							value={new Date(comodato.initDate).toLocaleDateString()}
+						/>
+
+						<TextValue
+							title="Fecha final"
+							value={new Date(comodato.endDate).toLocaleDateString()}
+						/>
+
+						<TextValue title="N° contrato" value={comodato.contractNumber} />
+						{/* <TextValue title="Estado" value={comodato.status} /> */}
+					</SectionContainer>
+				</>
+			)}
+
+			<div className="grid grid-cols-2 gap-2">
+				{instrument && (
+					<SectionContainer>
+						<Title>Instrumento</Title>
+
 						<TextValue title="Nombre" value={instrument.name} />
-						<TextValue title="Marca" value={instrument.brand} />
+
 						<TextValue title="Modelo" value={instrument.model} />
-						<TextValue title="Serian N°" value={instrument.serialNumber} />
+						<TextValue title="Marca" value={instrument.brand} />
 
 						{sede && <TextValue title="Sede" value={sede.name} />}
-					</div>
+						<div className="flex justify-end">
+							<Button href={RouterLinks.instrument.one(instrument._id)}>
+								Detalles
+							</Button>
+						</div>
+					</SectionContainer>
+				)}
 
-					<TextValue
-						title="Descripción"
-						value={instrument.description}
-						largeContent
-					/>
-					<TextValue
-						title="Observación"
-						value={instrument.observation}
-						largeContent
-					/>
-				</SectionContainer>
-			)}
+				{student && (
+					<SectionContainer>
+						<Title>Estudiante</Title>
+						<TextValue
+							title="Nombre"
+							value={`${student.name} ${student.lastname}`}
+						/>
+
+						<TextValue
+							title="Cédula"
+							value={`${student.nationality}-${student.CI}`}
+						/>
+
+						<TextValue title="Email" value={student.email} />
+						<TextValue title="Telefono" value={student.phone_number[0]} />
+						<div className="flex justify-end">
+							<Button href={RouterLinks.estudiantes.one(student._id)}>
+								Detalles
+							</Button>
+						</div>
+					</SectionContainer>
+				)}
+			</div>
 		</PageTemplate>
 	);
 };

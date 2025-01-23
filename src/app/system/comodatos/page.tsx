@@ -40,10 +40,10 @@ export default function BienesPage() {
 
 			<div className="flex flex-col">
 				<div className="grid grid-cols-4 mb-2 px-4 text-gray-700">
-					<div>Instrumento</div>
 					<div>Contrato N°</div>
-					<div>Inicio</div>
-					<div>Final</div>
+					<div>Instrumento</div>
+					<div>Estudiante</div>
+					<div>Finalización</div>
 				</div>
 
 				{comodatos.length ? (

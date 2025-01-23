@@ -18,6 +18,7 @@ const InputDate = (props: props) => {
 		containerClassName,
 		className,
 		notPadding,
+		asSingle = true,
 		...inputProps
 	} = props;
 
@@ -44,7 +45,7 @@ const InputDate = (props: props) => {
 				// )}
 				i18n="es"
 				useRange={false}
-				asSingle
+				asSingle={asSingle}
 				inputId={name}
 				inputName={name}
 				{...inputProps}

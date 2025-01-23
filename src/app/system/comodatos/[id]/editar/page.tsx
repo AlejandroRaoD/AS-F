@@ -5,27 +5,27 @@ import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
-import useInstrument from "../../hooks/useComodato";
-import InstrumentForm from "../../components/ComodatoForm";
+import useComodato from "../../hooks/useComodato";
+import ComodatoForm from "../../components/ComodatoForm";
 
 const Page = () => {
 	const { id } = useParams();
 
-	const instrumentId = getOneStringParams(id);
-	const { instrument } = useInstrument({ id: instrumentId });
+	const comodatoId = getOneStringParams(id);
+	const { comodato } = useComodato({ id: comodatoId });
 
 	return (
 		<>
 			<PageTemplate
 				navBarProps={{
-					navTitle: "Editar Instrumento",
-					hrefBackButton: RouterLinks.instrument.one(id),
+					navTitle: "Editar Comodato",
+					hrefBackButton: RouterLinks.comodato.one(id),
 				}}
 			>
-				{instrument && (
-					<InstrumentForm
-						data={instrument}
-						redirect={RouterLinks.instrument.one(id)}
+				{comodato && (
+					<ComodatoForm
+						data={comodato}
+						redirect={RouterLinks.comodato.one(id)}
 					/>
 				)}
 			</PageTemplate>

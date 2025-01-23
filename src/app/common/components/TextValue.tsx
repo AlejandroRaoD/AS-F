@@ -3,7 +3,7 @@ import React from "react";
 
 interface props {
 	title: string;
-	value: string | string[];
+	value: string | string[] | number | number[];
 	largeContent?: boolean;
 }
 

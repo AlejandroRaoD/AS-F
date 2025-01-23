@@ -13,6 +13,9 @@ import Select from "@/app/common/components/Select";
 import useNucleo from "../../nucleos/hooks/useNucleo";
 import useSede from "../../sedes/hooks/useSede";
 import { ComodatoAttributes } from "../interfaces/comodato.interface";
+import useInstrument from "../../instrumentos/hooks/useInstrument";
+import useStudent from "../../estudiantes/hooks/useStudent";
+import InputDate from "@/app/common/components/InputDate";
 
 interface props {
 	data?: ComodatoAttributes;
@@ -25,34 +28,34 @@ const ComodatoForm = (props: props) => {
 	const [isSubmiting, setIsSubmiting] = useState(false);
 	const { nucleos, getNucleos } = useNucleo();
 	const { sedes, getSedes } = useSede();
-	const { createComodato, updateComodato, deleteComodato } =
-		useComodato();
+	const { instruments, getInstruments } = useInstrument();
+	const { students, getStudents } = useStudent();
+	const { createComodato, updateComodato, deleteComodato } = useComodato();
 
 	useEffect(() => {
 		getNucleos();
+		getStudents();
+
 		if (data) {
 			getSedes();
+			getInstruments();
 		}
 	}, []);
 
 	const formik = useFormik({
 		initialValues: data || {
-			name: "",
-			description: "",
-			serialNumber: "",
-			brand: "",
-			model: "",
-			observation: "",
-			sedeId: "",
+			instrumentId: "",
+			studentId: "",
+			initDate: "",
+			endDate: "",
+			contractNumber: "",
 		},
 		validationSchema: yup.object({
-			name: yup.string().min(3),
-			description: yup.string(),
-			serialNumber: yup.string(),
-			brand: yup.string(),
-			model: yup.string(),
-			observation: yup.string(),
-			sedeId: yup.string().min(3),
+			instrumentId: yup.string().min(3),
+			studentId: yup.string().min(3),
+			initDate: yup.date(),
+			endDate: yup.date(),
+			contractNumber: yup.string().min(1),
 		}),
 		onSubmit: async (formData: ComodatoAttributes) => {
 			if (isSubmiting) return;
@@ -83,82 +86,78 @@ const ComodatoForm = (props: props) => {
 	return (
 		<>
 			<form onSubmit={formik.handleSubmit}>
-				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
-					<Select
-						labelTitle="nucleo"
-						dataList={nucleos.map(({ _id, name }) => ({
-							title: name,
+				<Select
+					labelTitle="Núcleo"
+					dataList={nucleos.map(({ _id, name }) => ({
+						title: name,
+						value: _id,
+					}))}
+					name="nucleos"
+					onChange={async ({ target: { value } }) => {
+						await getSedes({ nucleoId: value });
+					}}
+				/>
+
+				<Select
+					labelTitle="Sede"
+					dataList={sedes.map(({ _id, name }) => ({
+						title: name,
+						value: _id,
+					}))}
+					name="sede"
+					onChange={async ({ target: { value } }) => {
+						await getInstruments({ sedeId: value });
+						formik.setFieldValue("instrumentId", "");
+					}}
+				/>
+
+				<Select
+					labelTitle="Instrumento"
+					dataList={instruments.map(({ _id, name, serialNumber }) => ({
+						title: `${serialNumber} - ${name}`,
+						value: _id,
+					}))}
+					name="instrumentId"
+					onChange={formik.handleChange}
+					value={formik.values.instrumentId}
+					error={formik.errors.instrumentId}
+				/>
+
+				<Select
+					labelTitle="Estudiante"
+					dataList={students.map(
+						({ _id, name, lastname, CI, nationality }) => ({
+							title: `${nationality}-${CI}  ${name} ${lastname}`,
 							value: _id,
-						}))}
-						name="nucleos"
-						onChange={async ({ target: { value } }) => {
-							await getSedes({ nucleoId: value });
-
-							formik.setFieldValue("sedeId", "");
-						}}
-					/>
-
-					<Select
-						labelTitle="sede"
-						dataList={sedes.map(({ _id, name }) => ({
-							title: name,
-							value: _id,
-						}))}
-						name="sedeId"
-						onChange={formik.handleChange}
-						value={formik.values.sedeId}
-						error={formik.errors.sedeId}
-					/>
-				</div>
-
-				<Input
-					labelTitle="Nombre"
-					name="name"
+						})
+					)}
+					name="studentId"
 					onChange={formik.handleChange}
-					value={formik.values.name}
-					error={formik.errors.name}
+					value={formik.values.studentId}
+					error={formik.errors.studentId}
 				/>
 
-				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
-					<Input
-						labelTitle="Marca"
-						name="brand"
-						onChange={formik.handleChange}
-						value={formik.values.brand}
-						error={formik.errors.brand}
-					/>
-
-					<Input
-						labelTitle="Modelo"
-						name="model"
-						onChange={formik.handleChange}
-						value={formik.values.model}
-						error={formik.errors.model}
-					/>
-				</div>
-
-				<Input
-					labelTitle="Serial N°"
-					name="serialNumber"
-					onChange={formik.handleChange}
-					value={formik.values.serialNumber}
-					error={formik.errors.serialNumber}
+				<InputDate
+					labelTitle="Duración del comodato"
+					name="dates"
+					onChange={(value) => {
+						formik.setFieldValue("initDate", value.startDate);
+						formik.setFieldValue("endDate", value.endDate);
+					}}
+					value={{
+						startDate: new Date(formik.values.initDate),
+						endDate: new Date(formik.values.endDate),
+					}}
+					asSingle={false}
+					// error={formik.errors.birthday}
 				/>
 
 				<Input
-					labelTitle="Descripción"
-					name="description"
+					labelTitle="N° contrato"
+					name="contractNumber"
 					onChange={formik.handleChange}
-					value={formik.values.description}
-					error={formik.errors.description}
-				/>
-
-				<Input
-					labelTitle="Observación"
-					name="observation"
-					onChange={formik.handleChange}
-					value={formik.values.observation}
-					error={formik.errors.observation}
+					value={formik.values.contractNumber}
+					error={formik.errors.contractNumber}
 				/>
 
 				<Button type="submit"> Guardar</Button>
