@@ -55,6 +55,13 @@ const RouterLinks = {
     one: (id: IdParam) => `/system/instrumentos/${oneString(id)}`,
     edit: (id: IdParam) => `/system/instrumentos/${oneString(id)}/editar`,
   },
+
+  comodato: {
+    all: "/system/comodatos",
+    create: "/system/comodatos/nuevo",
+    one: (id: IdParam) => `/system/comodatos/${oneString(id)}`,
+    edit: (id: IdParam) => `/system/comodatos/${oneString(id)}/editar`,
+  },
   employee: {
     all: "/system/personal",
     create: "/system/personal/nuevo",

@@ -28,12 +28,6 @@ const Page = () => {
 							data={student}
 							// redirect={RouterLinks.estudiantes.one(id)}
 						/>
-
-						<h2>Editar relaciones</h2>
-						<StudentRelationForm
-							studentId={student._id}
-							// redirect={RouterLinks.estudiantes.one(id)}
-						/>
 					</>
 				)}
 			</PageTemplate>

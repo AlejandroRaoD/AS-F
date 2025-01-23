@@ -10,7 +10,11 @@ import clsx from "clsx";
 import LeftPanelButton from "./LeftPanelButton";
 import Spacer from "./Spacer";
 import DotsVerticalIcon from "./icons/DotsVerticalIcon";
+import PerfilIcon from "./icons/PerfilIcon";
 import IconButton from "./IconButton";
+import HelpIcon from "./icons/HelpIcon";
+import MusicIcon from "./icons/MusicIcon";
+import ShareIcon from "./icons/ShareIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -92,20 +96,22 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						href={RouterLinks.employee.all}
 					/>
 					<LeftPanelButton
+						label="Representante"
+						icon="👨‍👩‍👧"
+						href={RouterLinks.representante.all}
+					/>
+					<LeftPanelButton
 						label="Estudiantes"
 						icon="🎓"
 						href={RouterLinks.estudiantes.all}
 					/>
+
 					<LeftPanelButton
-						label="Bienes"
-						icon="🏢"
-						href={RouterLinks.bienes.all}
+						label="Comodatos"
+						icon={<ShareIcon />}
+						href={RouterLinks.comodato.all}
 					/>
-					<LeftPanelButton
-						label="Instrumentos"
-						icon="S"
-						href={RouterLinks.instrument.all}
-					/>
+
 					<Spacer />
 					<div
 						className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
@@ -147,10 +153,16 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 								icon="🎶"
 								href={RouterLinks.catedra.all}
 							/>
+
 							<LeftPanelButton
-								label="Representante"
-								icon="👨‍👩‍👧"
-								href={RouterLinks.representante.all}
+								label="Bienes"
+								icon="🏢"
+								href={RouterLinks.bienes.all}
+							/>
+							<LeftPanelButton
+								label="Instrumentos"
+								icon={<MusicIcon />}
+								href={RouterLinks.instrument.all}
 							/>
 						</>
 					)}
@@ -165,22 +177,19 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 
 			{isPanelCollapsed || (
 				<div className="flex items-center mt-auto  pl-4 py-2 bg-white">
-					<div className="w-8 h-8 rounded-full overflow-hidden bg-gray-500">
-						{/* <Image
-							src={imagotipoImage}
-							alt="perfil"
-							className="w-full h-full"
-							width={30}
-							height={30}
-						/> */}
-					</div>
+					<Link
+						href={RouterLinks.perfil.all}
+						className="w-8 h-8 rounded-full overflow-hidden  "
+					>
+						<PerfilIcon />
+					</Link>
 
 					<div className="flex-1 ml-2">
 						<div>admin</div>
 					</div>
 
-					<IconButton href={RouterLinks.perfil.all}>
-						<DotsVerticalIcon />
+					<IconButton href={RouterLinks.help.all}>
+						<HelpIcon />
 					</IconButton>
 				</div>
 			)}

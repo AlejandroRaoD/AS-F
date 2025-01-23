@@ -57,22 +57,22 @@ const NavBar = (props: NavBarProps) => {
         ) : (
           <>
             {/* Mostrar solo si showProfileButton es verdadero */}
-            {showProfileButton && (
+            {/* {showProfileButton && (
               <Link href={RouterLinks.perfil.all}>
                 <button className="profile-button px-4 py-2 bg-blue-600 text-white rounded-md shadow-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105">
                   Perfil
                 </button>
               </Link>
-            )}
+            )} */}
 
             {/* Mostrar solo si showHelpButton es verdadero */}
-            {showHelpButton && (
+            {/* {showHelpButton && (
               <Link href={RouterLinks.help.all}>
                 <button className="help-button px-4 py-2 bg-indigo-600 text-white rounded-md shadow-lg hover:bg-indigo-700 transition-all duration-200 transform hover:scale-105">
                   Ayuda
                 </button>
               </Link>
-            )}
+            )} */}
           </>
         )}
       </div>
