@@ -13,6 +13,8 @@ import SectionContainer from "@/app/common/components/SectionContainer";
 import useEmployee from "../../personal/hooks/useEmployee";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import { EmployeeItem } from "../../personal/components/EmployeeItem";
+import useFurniture from "../../bienes/hooks/useFurniture";
+import { FurnitureItem } from "../../bienes/components/FurnitureItem";
 
 const Page = () => {
 	const { id } = useParams();
@@ -22,10 +24,11 @@ const Page = () => {
 	const { nucleo, getNucleo } = useNucleo();
 	const { sede } = useSede({ id: sedeId });
 	const { employees } = useEmployee({ query: { sedeId } });
+	const { furnitures } = useFurniture({ query: { sedeId } });
 
 	useEffect(() => {
 		if (!sede) return;
-		if (!nucleo) getNucleo(sede.nucleoId);
+		getNucleo(sede.nucleoId);
 	}, [sede]);
 
 	return (
@@ -69,12 +72,13 @@ const Page = () => {
 				</SectionContainer>
 
 				<SectionContainer>
-					<Title titleType="h2">Estudiantes</Title>
-					{/* <p className="-mt-4">Núcleo: {nucleo && nucleo.name}</p> */}
-				</SectionContainer>
+					<Title titleType="h2">
+						Bienes ({furnitures.reduce((a, b) => a + b.quantity, 0)})
+					</Title>
 
-				<SectionContainer>
-					<Title titleType="h2">Bienes</Title>
+					{furnitures.slice(0, 10).map((item) => (
+						<FurnitureItem key={item._id} data={item} type="inList" />
+					))}
 					{/* <p className="-mt-4">Núcleo: {nucleo && nucleo.name}</p> */}
 				</SectionContainer>
 			</div>

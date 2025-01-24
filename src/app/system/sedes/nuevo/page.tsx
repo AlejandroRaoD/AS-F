@@ -11,22 +11,10 @@ const Page = () => {
 				hrefBackButton: RouterLinks.sedes.all,
 			}}
 		>
-			{/* Contenedor principal */}
-			<div className="bg-gray-50 min-h-screen flex items-center justify-center px-6">
-				{/* Tarjeta central con fondo y sombra */}
-				<div className="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
-					{/* Contenido del formulario */}
-					<div className="p-8">
-						{/* Título y descripción */}
-						<div className="text-center mb-8">
-							<h1 className="text-4xl font-bold text-gray-800 mb-4">Registrar Nueva Sede</h1>
-						</div>
-
+		
 						{/* Formulario */}
 						<SedeForm redirect={RouterLinks.sedes.all} />
-					</div>
-				</div>
-			</div>
+				
 		</PageTemplate>
 	);
 };

@@ -33,21 +33,22 @@ const Page = () => {
 				),
 			}}
 		>
-			{nucleo ? (
-				<Title titleType="h2">
-					<b>Nombre: </b> {nucleo.name}
-				</Title>
-			) : (
-				<p className="text-center text-gray-500">
-					Cargando los detalles del núcleo...
-				</p>
-			)}
+			<SectionContainer>
+				{nucleo ? (
+					<Title titleType="h2">
+						<b>Nombre: </b> {nucleo.name}
+					</Title>
+				) : (
+					<p className="text-center text-gray-500">
+						Cargando los detalles del núcleo...
+					</p>
+				)}
+			</SectionContainer>
 
 			<SectionContainer>
 				<Title titleType="h1"> Sedes</Title>
 
 				<div className="flex flex-col">
-
 					{sedes.map((sede) => (
 						<SedeItem key={sede._id} data={sede} type="inList" />
 					))}

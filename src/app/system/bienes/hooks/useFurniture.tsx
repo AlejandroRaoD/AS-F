@@ -8,11 +8,15 @@ import { UpdateFurnitureDto } from "../dto/update-furniture.dto";
 
 interface props {
   id?: string | string[];
+  query?: QueryFurnitureDto;
 }
 
 const useFurniture = (props?: props) => {
   const [furniture, setFurniture] = useState<furnitureAttributes>();
   const [furnitures, setFurnitures] = useState<furnitureAttributes[]>([]);
+
+  const [alreadyQuery, setAlreadyQuery] = useState(false);
+
 
   const getFurniture = async (id: string) => {
     if (furniture) return;
@@ -23,9 +27,15 @@ const useFurniture = (props?: props) => {
   };
 
   useEffect(() => {
+    if (alreadyQuery) return;
+
     if (!props) return;
 
     if (typeof props.id == "string") getFurniture(props.id);
+
+		if (props.query && !furnitures.length) getFurnitures(props.query);
+
+    setAlreadyQuery(true);
   }, [props]);
 
   const getFurnitures = async (query?: QueryFurnitureDto) => {
