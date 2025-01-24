@@ -63,6 +63,12 @@ const RouterLinks = {
     edit: (id: IdParam) => `/system/comodatos/${oneString(id)}/editar`,
   },
 
+  enrollmentPeriod: {
+    all: "/system/periodo_inscripciones",
+    create: "/system/periodo_inscripciones/nuevo",
+    one: (id: IdParam) => `/system/periodo_inscripciones/${oneString(id)}`,
+    edit: (id: IdParam) => `/system/periodo_inscripciones/${oneString(id)}/editar`,
+  },
   studentEnrollment: {
     all: "/system/inscripciones",
     create: "/system/inscripciones/nuevo",

@@ -5,27 +5,27 @@ import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
-import useInstrument from "../../hooks/useInstrument";
-import InstrumentForm from "../../components/InstrumentForm";
+import useEnrollmentPeriod from "../../hooks/useEnrollmentPeriod";
+import EnrollmentPeriodForm from "../../components/EnrollmentPeriodForm";
 
 const Page = () => {
 	const { id } = useParams();
 
-	const instrumentId = getOneStringParams(id);
-	const { instrument } = useInstrument({ id: instrumentId });
+	const enrollmentPeriodId = getOneStringParams(id);
+	const { enrollmentPeriod } = useEnrollmentPeriod({ id: enrollmentPeriodId });
 
 	return (
 		<>
 			<PageTemplate
 				navBarProps={{
-					navTitle: "Editar Instrumento",
-					hrefBackButton: RouterLinks.instrument.one(id),
+					navTitle: "Editar período de inscripciones",
+					hrefBackButton: RouterLinks.enrollmentPeriod.one(id),
 				}}
 			>
-				{instrument && (
-					<InstrumentForm
-						data={instrument}
-						redirect={RouterLinks.instrument.one(id)}
+				{enrollmentPeriod && (
+					<EnrollmentPeriodForm
+						data={enrollmentPeriod}
+						redirect={RouterLinks.enrollmentPeriod.one(id)}
 					/>
 				)}
 			</PageTemplate>

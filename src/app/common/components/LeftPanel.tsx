@@ -15,6 +15,7 @@ import IconButton from "./IconButton";
 import HelpIcon from "./icons/HelpIcon";
 import MusicIcon from "./icons/MusicIcon";
 import ShareIcon from "./icons/ShareIcon";
+import CalendarIcon from "./icons/CalendarIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -110,6 +111,12 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						label="Comodatos"
 						icon={<ShareIcon />}
 						href={RouterLinks.comodato.all}
+					/>
+
+					<LeftPanelButton
+						label="Períodos de Inscripciones"
+						icon={<CalendarIcon />}
+						href={RouterLinks.enrollmentPeriod.all}
 					/>
 
 					<Spacer />

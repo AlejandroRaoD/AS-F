@@ -7,7 +7,7 @@ export enum EnrollmentPeriodStatus {
 
 export interface enrollmentPeriodAttributes {
 	_id: string;
-	year: Number;
-	step: Number;
+	year: number;
+	step: number;
 	status: EnrollmentPeriodStatus;
 }
