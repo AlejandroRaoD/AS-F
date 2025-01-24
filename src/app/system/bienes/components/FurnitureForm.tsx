@@ -71,10 +71,10 @@ const FurnitureForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteFurniture(data._id);
+			await deleteFurniture(data._id);
 			router.push(RouterLinks.bienes.all);
 		} catch (error) {
 			console.log(error);

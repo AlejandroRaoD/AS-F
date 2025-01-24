@@ -69,10 +69,10 @@ const SedeForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteSede(data._id);
+			await deleteSede(data._id);
 			router.push(RouterLinks.sedes.all);
 		} catch (error) {
 			console.log(error);
@@ -89,7 +89,6 @@ const SedeForm = (props: props) => {
 				value={formik.values.nucleoId}
 				error={formik.errors.nucleoId}
 			/>
-
 			<Input
 				labelTitle="Nombre de la sede"
 				name="name"
@@ -97,7 +96,6 @@ const SedeForm = (props: props) => {
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>
-
 			<Input
 				labelTitle="dirección "
 				name="address"
@@ -105,7 +103,6 @@ const SedeForm = (props: props) => {
 				value={formik.values.address}
 				error={formik.errors.address}
 			/>
-
 			<InputTagArray
 				labelTitle="Telefono"
 				name="phone_number"
@@ -113,10 +110,15 @@ const SedeForm = (props: props) => {
 				dataList={phoneNumberArr}
 				changeArray={changePhoneArr}
 			/>
+			<div className="grid grid-cols-2 gap-2">
+				<Button type="submit">Guardar</Button>
 
-			<Button type="submit"> Guardar</Button>
-
-			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+				{data && (
+					<Button variant="error-outline" onClick={handleDeleteButton}>
+						Eliminar
+					</Button>
+				)}
+			</div>
 		</form>
 	);
 };

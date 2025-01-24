@@ -1,46 +1,72 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
-import Button from "@/app/common/components/Button";
 import useCatedra from "../hook/useCatedra";
+import SectionContainer from "@/app/common/components/SectionContainer";
+import TextValue from "@/app/common/components/TextValue";
+import IconButton from "@/app/common/components/IconButton";
+import EditIcon from "@/app/common/components/icons/EditIcon";
+import usePrograma from "../../programas/hook/useProgramas";
+import useSede from "../../sedes/hooks/useSede";
+import useNucleo from "../../nucleos/hooks/useNucleo";
 
 const Page = () => {
 	const { id } = useParams();
 	const catedraId = getOneStringParams(id);
 
 	const { catedra } = useCatedra({ id: catedraId });
+	const { programa, getPrograma } = usePrograma();
+	const { sede, getSede } = useSede();
+	const { nucleo, getNucleo } = useNucleo();
+
+	useEffect(() => {
+		if (!catedra) return;
+
+		getPrograma(catedra.programaId).then(async (i) => {
+			const s = await getSede(i.sedeId);
+
+			getNucleo(s.nucleoId);
+		});
+	}, [catedra]);
 
 	return (
 		<PageTemplate
 			navBarProps={{
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.catedra.all,
-				// rightButtons: (
-				// 	<>
-				// 		<IconButton href={RouterLinks.programas.edit(id)}>
-				// 			<EditIcon />
-				// 		</IconButton>
-				// 	</>
-				// ),
+				rightButtons: (
+					<IconButton href={RouterLinks.catedra.edit(id)}>
+						<EditIcon />
+					</IconButton>
+				),
 			}}
 		>
-			<Button href={RouterLinks.catedra.edit(id)}>Editar datos</Button>
-
-			<div>
+			<SectionContainer>
 				{catedra && (
 					<>
-						<Title>{catedra.name}</Title>
-						<Title>{catedra.description}</Title>
+						<TextValue largeContent title="Nombre" value={catedra.name} />
 
-						<Title>{catedra.programaId}</Title>
+						<TextValue
+							largeContent
+							title="Descripción"
+							value={catedra.description}
+						/>
+
+						{programa && (
+							<TextValue largeContent title="Programa" value={programa.name} />
+						)}
+						{sede && <TextValue largeContent title="Sede" value={sede.name} />}
+						{nucleo && (
+							<TextValue largeContent title="Núcleo" value={nucleo.name} />
+						)}
 					</>
 				)}
-			</div>
+			</SectionContainer>
 		</PageTemplate>
 	);
 };

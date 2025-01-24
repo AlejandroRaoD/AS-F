@@ -58,6 +58,8 @@ const StudentForm = (props: props) => {
 
 			formData.phone_number = phoneNumberArr;
 
+			if (!formData.email) delete formData.email;
+
 			try {
 				if (data) await updateStudent(data._id, formData);
 				else await createStudent(formData);
@@ -70,10 +72,10 @@ const StudentForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteStudent(data._id);
+			await deleteStudent(data._id);
 			router.push(RouterLinks.estudiantes.all);
 		} catch (error) {
 			console.log(error);
@@ -96,20 +98,6 @@ const StudentForm = (props: props) => {
 				value={formik.values.lastname}
 				error={formik.errors.lastname}
 			/>
-
-			<InputDate
-				labelTitle="Fecha de nacimiento"
-				name="birthday"
-				onChange={(value) => {
-					formik.setFieldValue("birthday", value.startDate);
-				}}
-				value={{
-					startDate: formik.values.birthday,
-					endDate: formik.values.birthday,
-				}}
-				// error={formik.errors.birthday}
-			/>
-
 			<Select
 				labelTitle="nacionalidad"
 				dataList={Object.values(Nationality).map((v) => ({
@@ -128,6 +116,18 @@ const StudentForm = (props: props) => {
 				onChange={formik.handleChange}
 				value={formik.values.CI}
 				error={formik.errors.CI}
+			/>
+			<InputDate
+				labelTitle="Fecha de nacimiento"
+				name="birthday"
+				onChange={(value) => {
+					formik.setFieldValue("birthday", value.startDate);
+				}}
+				value={{
+					startDate: formik.values.birthday,
+					endDate: formik.values.birthday,
+				}}
+				// error={formik.errors.birthday}
 			/>
 			<Input
 				labelTitle="email"
@@ -161,8 +161,15 @@ const StudentForm = (props: props) => {
 				dataList={phoneNumberArr}
 				changeArray={changePhoneArr}
 			/>
-			<Button type="submit"> Guardar</Button>
-			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+			<div className="grid grid-cols-2 gap-2">
+				<Button type="submit">Guardar</Button>
+
+				{data && (
+					<Button variant="error-outline" onClick={handleDeleteButton}>
+						Eliminar
+					</Button>
+				)}
+			</div>{" "}
 		</form>
 	);
 };

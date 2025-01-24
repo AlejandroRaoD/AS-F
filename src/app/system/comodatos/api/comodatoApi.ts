@@ -14,21 +14,21 @@ export const getComodato_Request = async (
 
 export const getComodatos_Request = async (
 	query?: QueryComodatoDto
-): PromiseFormatRes<comodatoAttributes[]> =>
+): PromiseFormatRes<ComodatoAttributes[]> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createComodato_Request = async (
 	data: CreateComodatoDto
-): PromiseFormatRes<comodatoAttributes> =>
+): PromiseFormatRes<ComodatoAttributes> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateComodato_Request = async (
 	id: string,
 	data: UpdateComodatoDto
-): PromiseFormatRes<comodatoAttributes> =>
+): PromiseFormatRes<ComodatoAttributes> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteComodato_Request = async (
 	id: string
-): PromiseFormatRes<comodatoAttributes> =>
+): PromiseFormatRes<ComodatoAttributes> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

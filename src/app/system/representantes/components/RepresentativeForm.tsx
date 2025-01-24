@@ -71,11 +71,11 @@ const RepresentativeForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton =  async() => {
 		if (!data) return;
 		try {
-			deleteRepresentative(data._id);
-			router.push(RouterLinks.estudiantes.all);
+		await	deleteRepresentative(data._id);
+			router.push(RouterLinks.representante.all);
 		} catch (error) {
 			console.log(error);
 		}
@@ -90,13 +90,32 @@ const RepresentativeForm = (props: props) => {
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>
-
 			<Input
 				labelTitle="Apellido del representante"
 				name="lastname"
 				onChange={formik.handleChange}
 				value={formik.values.lastname}
 				error={formik.errors.lastname}
+			/>
+
+			<Select
+				labelTitle="nacionalidad"
+				dataList={Object.values(Nationality).map((v) => ({
+					title: v,
+					value: v,
+				}))}
+				name="nationality"
+				onChange={formik.handleChange}
+				value={formik.values.nationality}
+				error={formik.errors.nationality}
+			/>
+			<Input
+				labelTitle="Cedula"
+				type="number"
+				name="CI"
+				onChange={formik.handleChange}
+				value={formik.values.CI}
+				error={formik.errors.CI}
 			/>
 
 			<InputDate
@@ -112,26 +131,6 @@ const RepresentativeForm = (props: props) => {
 				// error={formik.errors.birthday}
 			/>
 
-			<Select
-				labelTitle="nacionalidad"
-				dataList={Object.values(Nationality).map((v) => ({
-					title: v,
-					value: v,
-				}))}
-				name="nationality"
-				onChange={formik.handleChange}
-				value={formik.values.nationality}
-				error={formik.errors.nationality}
-			/>
-
-			<Input
-				labelTitle="Cedula"
-				type="number"
-				name="CI"
-				onChange={formik.handleChange}
-				value={formik.values.CI}
-				error={formik.errors.CI}
-			/>
 			<Input
 				labelTitle="email"
 				name="email"
@@ -164,7 +163,6 @@ const RepresentativeForm = (props: props) => {
 				dataList={phoneNumberArr}
 				changeArray={changePhoneArr}
 			/>
-
 			<Input
 				labelTitle="Trabajo"
 				name="job"
@@ -172,9 +170,15 @@ const RepresentativeForm = (props: props) => {
 				value={formik.values.job}
 				error={formik.errors.job}
 			/>
+			<div className="grid grid-cols-2 gap-2">
+				<Button type="submit">Guardar</Button>
 
-			<Button type="submit"> Guardar</Button>
-			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+				{data && (
+					<Button variant="error-outline" onClick={handleDeleteButton}>
+						Eliminar
+					</Button>
+				)}
+			</div>
 		</form>
 	);
 };

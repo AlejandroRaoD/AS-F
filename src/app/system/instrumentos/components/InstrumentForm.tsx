@@ -70,10 +70,10 @@ const InstrumentForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteInstrument(data._id);
+			await deleteInstrument(data._id);
 			router.push(RouterLinks.instrument.all);
 		} catch (error) {
 			console.log(error);

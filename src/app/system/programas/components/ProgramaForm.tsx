@@ -70,10 +70,10 @@ const ProgramaForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deletePrograma(data._id);
+			await deletePrograma(data._id);
 			router.push(RouterLinks.programas.all);
 		} catch (error) {
 			console.log(error);
@@ -106,7 +106,10 @@ const ProgramaForm = (props: props) => {
 
 				<Select
 					labelTitle="Director"
-					dataList={employees.map((n) => ({ title: n.name, value: n._id }))}
+					dataList={employees.map((n) => ({
+						title: `${n.nationality}-${n.CI} | ${n.name} ${n.lastname}`,
+						value: n._id,
+					}))}
 					name="directorId"
 					onChange={formik.handleChange}
 					value={formik.values.directorId}
@@ -129,9 +132,15 @@ const ProgramaForm = (props: props) => {
 					error={formik.errors.description}
 				/>
 
-				<Button type="submit"> Guardar</Button>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

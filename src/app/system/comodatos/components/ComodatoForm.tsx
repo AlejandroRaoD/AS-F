@@ -73,10 +73,10 @@ const ComodatoForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteComodato(data._id);
+			await deleteComodato(data._id);
 			router.push(RouterLinks.comodato.all);
 		} catch (error) {
 			console.log(error);

@@ -119,10 +119,10 @@ const StudentEnrollmentForm = (props: props) => {
 		formik.setFieldValue("content", contentInscription);
 	};
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton =async () => {
 		if (!data) return;
 		try {
-			deleteStudentEnrollment(data._id);
+		await	deleteStudentEnrollment(data._id);
 			router.push(RouterLinks.studentEnrollment.all);
 		} catch (error) {
 			console.log(error);

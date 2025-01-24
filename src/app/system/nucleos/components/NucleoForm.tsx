@@ -44,10 +44,10 @@ const NucleoForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteNucleo(data._id);
+			await deleteNucleo(data._id);
 			router.push(RouterLinks.nucleos.all);
 		} catch (error) {
 			console.log(error);
@@ -63,9 +63,15 @@ const NucleoForm = (props: props) => {
 				error={formik.errors.name}
 			/>
 
-			<Button type="submit">Guardar</Button>
+			<div className="grid grid-cols-2 gap-2">
+				<Button type="submit">Guardar</Button>
 
-			{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+				{data && (
+					<Button variant="error-outline" onClick={handleDeleteButton}>
+						Eliminar
+					</Button>
+				)}
+			</div>
 		</form>
 	);
 };

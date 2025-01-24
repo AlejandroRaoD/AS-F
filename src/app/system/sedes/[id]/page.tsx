@@ -15,6 +15,11 @@ import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import { EmployeeItem } from "../../personal/components/EmployeeItem";
 import useFurniture from "../../bienes/hooks/useFurniture";
 import { FurnitureItem } from "../../bienes/components/FurnitureItem";
+import TextValue from "@/app/common/components/TextValue";
+import usePrograma from "../../programas/hook/useProgramas";
+import { ProgramaItem } from "../../programas/components/ProgramaItem";
+import useCatedra from "../../catedra/hook/useCatedra";
+import { CatedraItem } from "../../catedra/components/CatedraItem";
 
 const Page = () => {
 	const { id } = useParams();
@@ -25,11 +30,17 @@ const Page = () => {
 	const { sede } = useSede({ id: sedeId });
 	const { employees } = useEmployee({ query: { sedeId } });
 	const { furnitures } = useFurniture({ query: { sedeId } });
+	const { programas } = usePrograma({ query: { sedeId } });
+	const { catedras, getCatedrasOfThisPrograms } = useCatedra();
 
 	useEffect(() => {
 		if (!sede) return;
-		getNucleo(sede.nucleoId);
-	}, [sede]);
+
+		if (!nucleo) getNucleo(sede.nucleoId);
+
+		if (programas.length && !catedras.length)
+			getCatedrasOfThisPrograms(programas.map((i) => i._id));
+	}, [sede, programas.length]);
 
 	return (
 		<PageTemplate
@@ -46,8 +57,16 @@ const Page = () => {
 			<SectionContainer>
 				{sede ? (
 					<>
-						<Title titleType="h1">{sede.name}</Title>
-						<p className="-mt-4">Núcleo: {nucleo && nucleo.name}</p>
+						<div className="grid grid-cols-2">
+							<TextValue title="Nombre" value={sede.name} />
+							<TextValue title="Teléfono" value={sede.phone_number} />
+						</div>
+
+						<TextValue largeContent title="Dirección" value={sede.address} />
+
+						{nucleo && (
+							<TextValue largeContent title="Núcleo" value={nucleo.name} />
+						)}
 					</>
 				) : (
 					// <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto my-6">
@@ -58,17 +77,15 @@ const Page = () => {
 				)}
 			</SectionContainer>
 
-			<div className="grid grid-cols-2 gap-4">
+			<div className="grid grid-cols-2 gap-2">
 				<SectionContainer>
 					<Title titleType="h2">Empleados ({employees.length})</Title>
 
 					<div className="flex flex-col">
-						{employees.slice(0, 10).map((item) => (
+						{employees.slice(0, 5).map((item) => (
 							<EmployeeItem key={item._id} data={item} type="inList" />
 						))}
 					</div>
-
-					{/* <p className="-mt-4">Núcleo: {nucleo && nucleo.name}</p> */}
 				</SectionContainer>
 
 				<SectionContainer>
@@ -76,10 +93,25 @@ const Page = () => {
 						Bienes ({furnitures.reduce((a, b) => a + b.quantity, 0)})
 					</Title>
 
-					{furnitures.slice(0, 10).map((item) => (
+					{furnitures.slice(0, 5).map((item) => (
 						<FurnitureItem key={item._id} data={item} type="inList" />
 					))}
-					{/* <p className="-mt-4">Núcleo: {nucleo && nucleo.name}</p> */}
+				</SectionContainer>
+
+				<SectionContainer>
+					<Title titleType="h2">Programas ({programas.length})</Title>
+
+					{programas.slice(0, 5).map((item) => (
+						<ProgramaItem key={item._id} data={item} type="inList" />
+					))}
+				</SectionContainer>
+
+				<SectionContainer>
+					<Title titleType="h2">Catedras ({catedras.length})</Title>
+
+					{catedras.slice(0, 5).map((item) => (
+						<CatedraItem key={item._id} data={item} type="inList" />
+					))}
 				</SectionContainer>
 			</div>
 		</PageTemplate>

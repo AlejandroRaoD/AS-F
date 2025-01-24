@@ -3,13 +3,13 @@
 import Link from "next/link";
 import RouterLinks from "@/config/RouterLinks";
 import { furnitureAttributes } from "../interfaces/furniture.interface";
-import useFurniture from "../hooks/useFurniture";
 type typeItem = "item" | "inList";
 
 interface props {
 	data: furnitureAttributes;
 	type?: typeItem;
 }
+
 
 export const FurnitureItem = (props: props) => {
 	const { data, type } = props;

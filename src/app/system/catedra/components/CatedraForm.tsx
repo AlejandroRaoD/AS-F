@@ -69,10 +69,10 @@ const CatedraForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteCatedra(data._id);
+			await deleteCatedra(data._id);
 			router.push(RouterLinks.catedra.all);
 		} catch (error) {
 			console.log(error);
@@ -125,9 +125,15 @@ const CatedraForm = (props: props) => {
 					error={formik.errors.description}
 				/>
 
-				<Button type="submit"> Guardar</Button>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

@@ -87,10 +87,10 @@ const EmployeeForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteEmployee(data._id);
+			await deleteEmployee(data._id);
 			router.push(RouterLinks.employee.all);
 		} catch (error) {
 			console.log(error);
@@ -129,7 +129,6 @@ const EmployeeForm = (props: props) => {
 						error={formik.errors.sedeId}
 					/>
 				</div>
-
 				<Select
 					labelTitle="Tipo de personal"
 					dataList={Object.values(BusinessPosition).map((v) => ({
@@ -141,7 +140,6 @@ const EmployeeForm = (props: props) => {
 					value={formik.values.businessPosition}
 					error={formik.errors.businessPosition}
 				/>
-
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<Input
 						labelTitle="Nombre"
@@ -159,7 +157,6 @@ const EmployeeForm = (props: props) => {
 						error={formik.errors.lastname}
 					/>
 				</div>
-
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-6">
 					<Select
 						labelTitle="nacionalidad"
@@ -193,7 +190,6 @@ const EmployeeForm = (props: props) => {
 						error={formik.errors.email}
 					/>
 				</div>
-
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<InputDate
 						labelTitle="Fecha de nacimiento"
@@ -219,7 +215,6 @@ const EmployeeForm = (props: props) => {
 						error={formik.errors.gender}
 					/>
 				</div>
-
 				<Input
 					labelTitle="dirección"
 					name="address"
@@ -227,7 +222,6 @@ const EmployeeForm = (props: props) => {
 					value={formik.values.address}
 					error={formik.errors.address}
 				/>
-
 				<InputTagArray
 					labelTitle="Telefono"
 					name="phone_number"
@@ -235,9 +229,15 @@ const EmployeeForm = (props: props) => {
 					dataList={phoneNumberArr}
 					changeArray={changePhoneArr}
 				/>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

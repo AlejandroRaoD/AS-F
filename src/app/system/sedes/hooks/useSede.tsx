@@ -28,6 +28,8 @@ const useSede = (props?: props) => {
 		const { data } = await getSede_Request(id);
 
 		setSede(data);
+
+		return data;
 	};
 
 	useEffect(() => {
@@ -47,7 +49,7 @@ const useSede = (props?: props) => {
 
 		setSedes(data);
 
-		return data
+		return data;
 	};
 
 	const createSede = async (formData: CreateSedeDto) => {

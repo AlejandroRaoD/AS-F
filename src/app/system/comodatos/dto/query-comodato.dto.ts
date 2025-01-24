@@ -1,4 +1,4 @@
-import { PaginationDto } from "../../common/dtos/pagination.dto";
+import { PaginationDto } from "@/app/common/dtos/pagination.dto";
 
 export interface QueryComodatoDto extends PaginationDto {
 	instrumentId?: string;

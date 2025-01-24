@@ -21,12 +21,10 @@ const Page = () => {
 				}}
 			>
 				{programa && (
-	
-						<ProgramaForm
-							data={programa}
-							redirect={RouterLinks.programas.one(id)}
-						/>
-		
+					<ProgramaForm
+						data={programa}
+						redirect={RouterLinks.programas.one(id)}
+					/>
 				)}
 			</PageTemplate>
 		</>

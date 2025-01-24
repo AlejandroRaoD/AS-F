@@ -52,10 +52,10 @@ const EnrollmentPeriodForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton = () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-			deleteEnrollmentPeriod(data._id);
+			await deleteEnrollmentPeriod(data._id);
 			router.push(RouterLinks.enrollmentPeriod.all);
 		} catch (error) {
 			console.log(error);
@@ -65,24 +65,22 @@ const EnrollmentPeriodForm = (props: props) => {
 	return (
 		<>
 			<form onSubmit={formik.handleSubmit}>
-
 				<div className="grid grid-cols-2 gap-2">
+					<Input
+						labelTitle="Año"
+						name="year"
+						onChange={formik.handleChange}
+						value={formik.values.year}
+						error={formik.errors.year}
+					/>
 
-				<Input
-					labelTitle="Año"
-					name="year"
-					onChange={formik.handleChange}
-					value={formik.values.year}
-					error={formik.errors.year}
-				/>
-
-				<Input
-					labelTitle="Período"
-					name="step"
-					onChange={formik.handleChange}
-					value={formik.values.step}
-					error={formik.errors.step}
-				/>
+					<Input
+						labelTitle="Período"
+						name="step"
+						onChange={formik.handleChange}
+						value={formik.values.step}
+						error={formik.errors.step}
+					/>
 				</div>
 
 				<Button type="submit"> Guardar</Button>

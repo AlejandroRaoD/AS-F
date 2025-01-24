@@ -13,11 +13,15 @@ import { UpdateProgramaDto } from "../dto/update-programa.dto";
 
 interface props {
 	id?: string | string[];
+	query?: QueryProgramaDto;
 }
 
 const usePrograma = (props?: props) => {
 	const [programa, setPrograma] = useState<programaAttributes>();
 	const [programas, setProgramas] = useState<programaAttributes[]>([]);
+
+  const [alreadyQuery, setAlreadyQuery] = useState(false);
+
 
 	const getPrograma = async (id: string) => {
 		if (programa) return;
@@ -25,12 +29,21 @@ const usePrograma = (props?: props) => {
 		const { data } = await getPrograma_Request(id);
 
 		setPrograma(data);
+
+		return data
 	};
+
 	useEffect(() => {
 		if (!props) return;
 
 		if (typeof props.id == "string") getPrograma(props.id);
+
+		if (props.query && !programas.length) getProgramas(props.query);
+
+    setAlreadyQuery(true);
+
 	}, [props]);
+
 
 	const getProgramas = async (query?: QueryProgramaDto) => {
 		const { data } = await getProgramas_Request(query);
