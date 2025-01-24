@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import Input from "@/app/common/components/Input";
-import useComodato from "../hooks/useComodato";
+import useComodato from "../hooks/useStudentEnrollment";
 import Button from "@/app/common/components/Button";
 import RouterLinks from "@/config/RouterLinks";
 import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";

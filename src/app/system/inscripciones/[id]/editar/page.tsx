@@ -5,7 +5,7 @@ import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
-import useComodato from "../../hooks/useComodato";
+import useComodato from "../../hooks/useStudentEnrollment";
 import ComodatoForm from "../../components/ComodatoForm";
 
 const Page = () => {

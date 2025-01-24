@@ -2,31 +2,32 @@
 import { useEffect } from "react";
 import PageTemplate from "../../common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
-import useComodato from "./hooks/useComodato";
-import { ComodatoItem } from "./components/ComodatoItem";
+import useEnrollmentPeriod from "./hooks/useEnrollmentPeriod";
+import { EnrollmentPeriodItem } from "./components/EnrollmentPeriodItem";
+import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 
 export default function BienesPage() {
-	const { comodatos, getComodatos } = useComodato();
+	const { enrollmentPeriods, getEnrollmentPeriods } = useEnrollmentPeriod();
 
 	// Obtener bienes con filtros
 	useEffect(() => {
-		getComodatos();
+		getEnrollmentPeriods();
 	}, []);
 
-	// const onSubmitQuery = async (name: string) => getComodatos({ name });
-	// const onClearQuery = async () => getComodatos();
+	// const onSubmitQuery = async (year: number) => getEnrollmentPeriods({ year });
+	// const onClearQuery = async () => getEnrollmentPeriods();
 
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Comodatos",
+				navTitle: "Períodos de inscripciones",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
 					<>
-						<IconButton href={RouterLinks.comodato.create}>
+						<IconButton href={RouterLinks.enrollmentPeriod.create}>
 							<PlusIcon />
 						</IconButton>
 					</>
@@ -39,15 +40,15 @@ export default function BienesPage() {
 			{/* Lista de bienes */}
 
 			<div className="flex flex-col">
-				<div className="grid grid-cols-4 mb-2 px-4 text-gray-700">
-					<div>Contrato N°</div>
-					<div>Instrumento</div>
-					<div>Estudiante</div>
-					<div>Finalización</div>
+				<div className="mb-2 px-4 text-gray-700">
+					<div>Período</div>
+			
 				</div>
 
-				{comodatos.length ? (
-					comodatos.map((bien) => <ComodatoItem key={bien._id} data={bien} />)
+				{enrollmentPeriods.length ? (
+					enrollmentPeriods.map((bien) => (
+						<EnrollmentPeriodItem key={bien._id} data={bien} />
+					))
 				) : (
 					<p className="text-center text-gray-500 mt-10">
 						No se encontraron bienes con los filtros aplicados. Intenta

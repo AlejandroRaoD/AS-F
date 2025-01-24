@@ -28,6 +28,8 @@ const useInstrument = (props?: props) => {
 		const { data } = await getInstrument_Request(id);
 
 		setInstrument(data);
+
+		return data
 	};
 
 	useEffect(() => {

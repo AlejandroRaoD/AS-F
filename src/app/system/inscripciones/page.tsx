@@ -2,34 +2,34 @@
 import { useEffect } from "react";
 import PageTemplate from "../../common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
-import useComodato from "./hooks/useComodato";
-import { ComodatoItem } from "./components/ComodatoItem";
+import useStudentEnrollment from "./hooks/useStudentEnrollment";
+import { StudentEnrollmentItem } from "./components/StudentEnrollmentItem";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 
 export default function BienesPage() {
-	const { comodatos, getComodatos } = useComodato();
+	const { studentEnrollments, getStudentEnrollments } = useStudentEnrollment();
 
 	// Obtener bienes con filtros
 	useEffect(() => {
-		getComodatos();
+		getStudentEnrollments();
 	}, []);
 
-	// const onSubmitQuery = async (name: string) => getComodatos({ name });
-	// const onClearQuery = async () => getComodatos();
+	// const onSubmitQuery = async (name: string) => getStudentEnrollments({ name });
+	// const onClearQuery = async () => getStudentEnrollments();
 
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Comodatos",
+				navTitle: "StudentEnrollments",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-					<>
-						<IconButton href={RouterLinks.comodato.create}>
+	
+						<IconButton href={RouterLinks.studentEnrollment.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+			
 				),
 			}}
 		>
@@ -46,8 +46,8 @@ export default function BienesPage() {
 					<div>Finalización</div>
 				</div>
 
-				{comodatos.length ? (
-					comodatos.map((bien) => <ComodatoItem key={bien._id} data={bien} />)
+				{studentEnrollments.length ? (
+					studentEnrollments.map((bien) => <StudentEnrollmentItem key={bien._id} data={bien} />)
 				) : (
 					<p className="text-center text-gray-500 mt-10">
 						No se encontraron bienes con los filtros aplicados. Intenta

@@ -10,7 +10,7 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import TextValue from "@/app/common/components/TextValue";
 import useSede from "../../sedes/hooks/useSede";
 import SectionContainer from "@/app/common/components/SectionContainer";
-import useComodato from "../hooks/useComodato";
+import useComodato from "../hooks/useStudentEnrollment";
 import useInstrument from "../../instrumentos/hooks/useInstrument";
 import useStudent from "../../estudiantes/hooks/useStudent";
 import Title from "@/app/common/components/Title";

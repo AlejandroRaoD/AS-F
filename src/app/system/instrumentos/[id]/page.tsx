@@ -25,7 +25,7 @@ const Page = () => {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Detalles de personal",
+				navTitle: "Detalles del instrumento",
 				hrefBackButton: RouterLinks.instrument.all,
 				rightButtons: (
 					<IconButton href={RouterLinks.instrument.edit(id)}>

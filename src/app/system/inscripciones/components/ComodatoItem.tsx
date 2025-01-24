@@ -2,30 +2,33 @@
 
 import Link from "next/link";
 import RouterLinks from "@/config/RouterLinks";
-import useComodato from "../hooks/useComodato";
+import useStudentEnrollment from "../hooks/useStudentEnrollment";
 import useSede from "../../sedes/hooks/useSede";
-import { ComodatoAttributes } from "../interfaces/comodato.interface";
 import useInstrument from "../../instrumentos/hooks/useInstrument";
 import useStudent from "../../estudiantes/hooks/useStudent";
+import { studentEnrollmentAttributes } from "../interfaces/studentEnrollment.interface";
 
 type typeItem = "item" | "inList";
 
 interface props {
-	data: ComodatoAttributes;
+	data: studentEnrollmentAttributes;
 	type?: typeItem;
 }
 
-export const ComodatoItem = (props: props) => {
+export const StudentEnrollmentItem = (props: props) => {
 	const { data, type = "item" } = props;
 
-	const { contractNumber, endDate, instrumentId, studentId } = data;
-	const { instrument } = useInstrument({ id: instrumentId });
+	const { studentId, enrollmentPeriodId, sedeId, content } = data;
+
+	// catedraId
+	// comodatoId
+
 	const { student } = useStudent({ id: studentId });
 
 	if (type == "inList")
 		return (
 			<Link
-				href={RouterLinks.comodato.one(data._id)}
+				href={RouterLinks.studentEnrollment.one(data._id)}
 				className="grid grid-cols-5 p-2 border-b hover:shadow"
 			>
 				<div className="col-span-2">{contractNumber}</div>
@@ -35,7 +38,7 @@ export const ComodatoItem = (props: props) => {
 
 	return (
 		<Link
-			href={RouterLinks.comodato.one(data._id)}
+			href={RouterLinks.studentEnrollment.one(data._id)}
 			className="border mb-2 p-4 border-gray-300 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:border-green-500 hover:bg-gray-50"
 		>
 			<div className="grid lg:grid-cols-4">
