@@ -36,6 +36,18 @@ const useCatedra = (props?: props) => {
 		const { data } = await getCatedras_Request(query);
 
 		setCatedras(data);
+
+		return data;
+	};
+
+	const getCatedrasOfThisPrograms = async (arr?: string[]) => {
+		const { data } = await getCatedras_Request();
+
+		const filter = data.filter((a) => arr.includes(a.programaId));
+
+		setCatedras(filter);
+
+		return;
 	};
 
 	const createCatedra = async (formData: CreateCatedraDto) => {
@@ -62,6 +74,7 @@ const useCatedra = (props?: props) => {
 		catedras,
 		getCatedra,
 		getCatedras,
+		getCatedrasOfThisPrograms,
 		createCatedra,
 		updateCatedra,
 		deleteCatedra,

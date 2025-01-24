@@ -5,17 +5,16 @@ import Image from "next/image";
 import imagotipoImage from "@/assets/imagenes/IMAGOTIPO.jpg";
 import Link from "next/link"; // Importamos el componente Link de Next.js
 import RouterLinks from "@/config/RouterLinks"; // Importamos RouterLinks
-import "../leftpanel/leftpanel.css";
 import clsx from "clsx";
 import LeftPanelButton from "./LeftPanelButton";
-import Spacer from "./Spacer";
-import DotsVerticalIcon from "./icons/DotsVerticalIcon";
+import LeftPanelSpacer from "./LeftPanelSpacer";
 import PerfilIcon from "./icons/PerfilIcon";
 import IconButton from "./IconButton";
 import HelpIcon from "./icons/HelpIcon";
 import MusicIcon from "./icons/MusicIcon";
 import ShareIcon from "./icons/ShareIcon";
 import CalendarIcon from "./icons/CalendarIcon";
+import PuzzleIcon from "./icons/PuzzleIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -82,14 +81,14 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 			{!isPanelCollapsed && (
 				<nav className="flex-1 overflow-y-auto flex flex-col mt-2 px-4 space-y-0.5">
 					<LeftPanelButton label="Inicio" icon="🏠" href="/" />
-					<Spacer />
+					<LeftPanelSpacer />
 					<LeftPanelButton
 						label="Estadísticas"
 						icon="📊"
 						href={RouterLinks.estadisticas.all}
 					/>
 
-					<Spacer />
+					<LeftPanelSpacer />
 
 					<LeftPanelButton
 						label="Personal"
@@ -119,7 +118,13 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						href={RouterLinks.enrollmentPeriod.all}
 					/>
 
-					<Spacer />
+					<LeftPanelButton
+						label="Inscripciones"
+						icon={<PuzzleIcon />}
+						href={RouterLinks.studentEnrollment.all}
+					/>
+
+					<LeftPanelSpacer />
 					<div
 						className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
 						onClick={toggleTables}
@@ -173,7 +178,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 							/>
 						</>
 					)}
-					<Spacer />
+					<LeftPanelSpacer />
 					<LeftPanelButton
 						label="Documentos"
 						icon="📄"

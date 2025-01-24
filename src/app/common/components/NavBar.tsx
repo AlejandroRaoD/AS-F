@@ -1,8 +1,6 @@
 // NavBar.tsx
 
 import React, { ReactNode } from "react";
-import Link from "next/link";
-import RouterLinks from "@/config/RouterLinks";
 import IconButton from "./IconButton";
 import LeftIcon from "./icons/LeftIcon";
 import Image from "next/image";

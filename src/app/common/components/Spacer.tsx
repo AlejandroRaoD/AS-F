@@ -1,5 +1,9 @@
-const Spacer = () => (
-	<span className="h-1 my-1 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 rounded-full"></span>
-);
+import React from 'react'
 
-export default Spacer;
+const Spacer = () => {
+  return (
+    <div className="border-b my-4"></div>
+  )
+}
+
+export default Spacer

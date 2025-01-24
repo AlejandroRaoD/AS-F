@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import PageTemplate from "../../common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
 import useStudentEnrollment from "./hooks/useStudentEnrollment";
-import { StudentEnrollmentItem } from "./components/StudentEnrollmentItem";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import { StudentEnrollmentItem } from "./components/StudentEnrollmentItem";
 
 export default function BienesPage() {
 	const { studentEnrollments, getStudentEnrollments } = useStudentEnrollment();
@@ -21,7 +21,7 @@ export default function BienesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "StudentEnrollments",
+				navTitle: "Inscripciones",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
@@ -39,11 +39,11 @@ export default function BienesPage() {
 			{/* Lista de bienes */}
 
 			<div className="flex flex-col">
-				<div className="grid grid-cols-4 mb-2 px-4 text-gray-700">
-					<div>Contrato N°</div>
-					<div>Instrumento</div>
-					<div>Estudiante</div>
-					<div>Finalización</div>
+				<div className="grid lg:grid-cols-6 mb-2 px-4 text-gray-700">
+					<div className="col-span-1">Período</div>
+					<div className="col-span-1">Cédula</div>
+					<div className="col-span-2">Estudiante</div>
+					<div className="col-span-2">Sede</div>
 				</div>
 
 				{studentEnrollments.length ? (

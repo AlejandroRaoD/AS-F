@@ -1,18 +1,18 @@
 import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
-import ComodatoForm from "../components/ComodatoForm";
+import StudentEnrollmentForm from "../components/StudentEnrollmentForm";
 
 const Page = () => {
 	return (
 		<>
 			<PageTemplate
 				navBarProps={{
-					navTitle: "Registrar Comodato",
-					hrefBackButton: RouterLinks.comodato.all,
+					navTitle: "Registrar inscripción",
+					hrefBackButton: RouterLinks.studentEnrollment.all,
 				}}
 			>
-				<ComodatoForm redirect={RouterLinks.comodato.all} />
+				<StudentEnrollmentForm redirect={RouterLinks.studentEnrollment.all} />
 			</PageTemplate>
 		</>
 	);

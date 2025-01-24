@@ -36,6 +36,8 @@ const usePrograma = (props?: props) => {
 		const { data } = await getProgramas_Request(query);
 
 		setProgramas(data);
+
+		return data;
 	};
 
 	const createPrograma = async (formData: CreateProgramaDto) => {

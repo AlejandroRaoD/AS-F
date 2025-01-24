@@ -46,6 +46,8 @@ const useSede = (props?: props) => {
 		const { data } = await getSedes_Request(query);
 
 		setSedes(data);
+
+		return data
 	};
 
 	const createSede = async (formData: CreateSedeDto) => {
