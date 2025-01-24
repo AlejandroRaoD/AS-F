@@ -10,9 +10,7 @@ const ConstEstudioPage = () => {
     studentName: "",
     idNumber: "",
     course: "",
-    schedule: "",
-    dates: [],
-    newDate: "",
+    schedule: ""
   });
 
   const handleChange = (e) => {
@@ -20,17 +18,11 @@ const ConstEstudioPage = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleAddDate = () => {
-    if (form.newDate.trim() !== "") {
-      setForm({ ...form, dates: [...form.dates, form.newDate], newDate: "" });
-    }
-  };
-
   const handleGeneratePDF = () => {
     generatePDF('PagePDF', 'constancia-estudio.pdf');
   };
 
-  const { studentName, idNumber, course, schedule, dates, newDate } = form;
+  const { studentName, idNumber, course, schedule } = form;
   const currentDate = new Date();
   const day = currentDate.getDate();
   const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -61,10 +53,33 @@ const ConstEstudioPage = () => {
               display: flex;
               flex-direction: column;
               justify-content: center;
+              position: relative;
             }
-            .underline-bold { 
+
+            .header-logos {
+              display: flex;
+              justify-content: space-between; /* Asegura que los logos estén a los extremos */
+              align-items: center; /* Alinea verticalmente */
+              margin-bottom: 2cm;
+            }
+
+            .header-logo-left,
+            .header-logo-right {
+              width: 5cm; /* Tamaño uniforme para ambos logos */
+              height: auto; /* Mantiene la proporción de los logos */
+            }
+
+            .underline-bold {
               text-decoration: underline; 
               font-weight: bold; 
+            }
+
+            .corner-logo {
+              position: absolute;
+              top: 2cm;
+              right: 2cm;
+              width: 4cm;
+              height: auto;
             }
           `}
         </style>
@@ -77,6 +92,12 @@ const ConstEstudioPage = () => {
         <main>
           <form className="space-y-6 max-w-xl mx-auto">
             <div id="PagePDF">
+              {/* Logos superiores */}
+              <div className="header-logos">
+                <img src="/images/logo-1.png" alt="Logo Izquierdo" className="header-logo-left" />
+                <img src="/images/logo-2.png" alt="Logo Derecho" className="header-logo-right" />
+              </div>
+
               <div className="text-center mb-6" style={{ paddingTop: '1cm' }}>
                 <h2 className="text-2xl font-semibold underline-bold">Constancia</h2>
               </div>
@@ -91,7 +112,6 @@ const ConstEstudioPage = () => {
 
               <div className="text-center" style={{ marginTop: '3cm' }}>
                 <p className="text-xl font-semibold">Atentamente,</p>
-                <div className="flex justify-center space-x-12 my-10"></div>
                 <div className="flex justify-center space-x-12 my-10">
                   <div className="border-t-2 w-1/2"><p>____________________</p></div>
                   <div className="border-t-2 w-1/2"><p>____________________</p></div>
@@ -100,15 +120,10 @@ const ConstEstudioPage = () => {
                 <div className="border-t-2 w-1/3 mx-auto my-2"></div>
                 <p className="font-semibold">Comité Núcleo.</p>
               </div>
-
-              <div className="text-center" style={{ marginTop: '2cm' }}>
-                <div className="border-t-2 w-1/3 mx-auto my-4"></div>
-                <div className="border-t-2 w-1/3 mx-auto my-4"></div>
-              </div>
             </div>
 
+            {/* Campos de entrada */}
             <div className="space-y-6">
-              {/* Campos de entrada */}
               <div>
                 <label htmlFor="studentName" className="block text-gray-700">Nombre del Estudiante</label>
                 <input
@@ -156,34 +171,6 @@ const ConstEstudioPage = () => {
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                 />
               </div>
-
-              <div>
-                <label htmlFor="newDate" className="block text-gray-700">Agregar Fecha</label>
-                <input
-                  type="text"
-                  id="newDate"
-                  name="newDate"
-                  value={newDate}
-                  onChange={handleChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-                />
-                <button
-                  type="button"
-                  onClick={handleAddDate}
-                  className="mt-2 px-4 py-2 bg-green-500 text-white rounded-md"
-                >
-                  Agregar Fecha
-                </button>
-              </div>
-
-              {/* Mostrar fechas agregadas */}
-              {dates.length > 0 && (
-                <ul className="mt-4">
-                  {dates.map((date, index) => (
-                    <li key={index} className="text-gray-700">{date}</li>
-                  ))}
-                </ul>
-              )}
             </div>
 
             <button
