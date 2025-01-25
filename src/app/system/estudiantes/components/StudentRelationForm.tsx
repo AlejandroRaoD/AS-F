@@ -10,6 +10,9 @@ import useStudentRelation from "../hooks/useStudentRelation";
 import { CreateStudentRelationDto } from "../dto/create-student-relation.dto";
 import Title from "@/app/common/components/Title";
 import useRepresentative from "../../representantes/hooks/useRepresentative";
+import SearchIcon from "@/app/common/components/icons/SearchIcon";
+import IconButton from "@/app/common/components/IconButton";
+import TextValue from "@/app/common/components/TextValue";
 
 interface props {
 	studentId: string;
@@ -59,32 +62,39 @@ const StudentRelationForm = (props: props) => {
 
 	return (
 		<>
-			<div>
-				<Title>buscar representante</Title>
+			<div className="flex items-center">
+				<Title titleType="h2">Añadir Relacion</Title>
 
-				<Input
-					labelTitle="Cedula de representante"
-					name="ci"
-					value={InputCI}
-					onChange={(e) => onChangeCI(e.target.value)}
-				/>
+				<form
+					className="ml-auto flex"
+					onSubmit={(e) => {
+						e.preventDefault();
+						queryRepresentative();
+					}}
+				>
+					<Input
+						placeholder="Cedula de representante"
+						containerClassName="mb-0"
+						name="ci"
+						value={InputCI}
+						onChange={(e) => onChangeCI(e.target.value)}
+					/>
 
-				<Button onClick={queryRepresentative}>Buscar</Button>
+					<IconButton type="submit" onClick={queryRepresentative}>
+						<SearchIcon />
+					</IconButton>
+				</form>
 			</div>
 
+			{representatives[0] && (
+				<Input
+					labelTitle="Nombre Completo"
+					name="Nombre"
+					readOnly
+					value={`${representatives[0].name} ${representatives[0].lastname}`}
+				/>
+			)}
 			<form onSubmit={formik.handleSubmit}>
-				{representatives[0] && (
-					<p>
-						<div>
-							{representatives[0].name} {representatives[0].lastname}
-						</div>
-
-						<div>
-							{representatives[0].nationality}-{representatives[0].CI}
-						</div>
-					</p>
-				)}
-
 				<Input
 					labelTitle="Relacion con el estudiante"
 					name="familyBond"

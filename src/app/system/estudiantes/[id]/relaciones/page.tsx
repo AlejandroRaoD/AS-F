@@ -8,6 +8,8 @@ import StudentRelationForm from "../../components/StudentRelationForm";
 import useStudentRelation from "../../hooks/useStudentRelation";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import StudentRelationItem from "../../components/StudentRelationItem";
+import SectionContainer from "@/app/common/components/SectionContainer";
+import Title from "@/app/common/components/Title";
 
 const Page = () => {
 	const { id } = useParams();
@@ -23,19 +25,22 @@ const Page = () => {
 				hrefBackButton: RouterLinks.estudiantes.one(id),
 			}}
 		>
-			{studentRelations.map((a) => (
-				<StudentRelationItem key={a._id} data={a} edit={true} />
-			))}
+			<SectionContainer>
+				<Title titleType="h2"> Relaciones</Title>
 
-			{studentRelations && (
-				<>
-					<h2>añadir</h2>
+				{studentRelations.map((a) => (
+					<StudentRelationItem key={a._id} data={a} edit={true} />
+				))}
+			</SectionContainer>
+
+			<SectionContainer>
+				{studentRelations && (
 					<StudentRelationForm
 						studentId={studentId}
 						// redirect={RouterLinks.estudiantes.one(id)}
 					/>
-				</>
-			)}
+				)}
+			</SectionContainer>
 		</PageTemplate>
 	);
 };

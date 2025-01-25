@@ -1,7 +1,9 @@
+import clsx from "clsx";
 import React, { ReactNode } from "react";
 
 type titleTypes = "h1" | "h2" | "h3";
 interface props {
+	className?: string;
 	titleType?: titleTypes;
 	children: ReactNode;
 }
@@ -16,11 +18,15 @@ const getClassOfTitle = (str: titleTypes): string =>
 		: "text-lg";
 
 const Title = (props: props) => {
-	const { children, titleType } = props;
+	const { children, titleType, className } = props;
 
 	let titleClassName = getClassOfTitle(titleType);
 
-	return <div className={`text-gray-800  ${titleClassName}`}>{children}</div>;
+	return (
+		<div className={clsx("text-gray-800", titleClassName, className)}>
+			{children}
+		</div>
+	);
 };
 
 export default Title;
