@@ -82,9 +82,15 @@ const EnrollmentPeriodForm = (props: props) => {
 						error={formik.errors.step}
 					/>
 				</div>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

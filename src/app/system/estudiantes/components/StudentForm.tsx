@@ -169,7 +169,7 @@ const StudentForm = (props: props) => {
 						Eliminar
 					</Button>
 				)}
-			</div>{" "}
+			</div>
 		</form>
 	);
 };

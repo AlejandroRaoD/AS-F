@@ -119,10 +119,10 @@ const StudentEnrollmentForm = (props: props) => {
 		formik.setFieldValue("content", contentInscription);
 	};
 
-	const handleDeleteButton =async () => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-		await	deleteStudentEnrollment(data._id);
+			await deleteStudentEnrollment(data._id);
 			router.push(RouterLinks.studentEnrollment.all);
 		} catch (error) {
 			console.log(error);
@@ -143,7 +143,6 @@ const StudentEnrollmentForm = (props: props) => {
 						await getSedes({ nucleoId: value });
 					}}
 				/>
-
 				<Select
 					labelTitle="Sede"
 					dataList={sedes.map(({ _id, name }) => ({
@@ -158,7 +157,6 @@ const StudentEnrollmentForm = (props: props) => {
 					value={formik.values.sedeId}
 					error={formik.errors.sedeId}
 				/>
-
 				<Select
 					labelTitle="Períodos"
 					dataList={enrollmentPeriods.map(({ _id, year, step }) => ({
@@ -170,7 +168,6 @@ const StudentEnrollmentForm = (props: props) => {
 					value={formik.values.enrollmentPeriodId}
 					error={formik.errors.enrollmentPeriodId}
 				/>
-
 				<Select
 					labelTitle="Estudiante"
 					dataList={students.map(
@@ -184,7 +181,6 @@ const StudentEnrollmentForm = (props: props) => {
 					value={formik.values.studentId}
 					error={formik.errors.studentId}
 				/>
-
 				<SectionContainer>
 					<Title titleType="h2">Catedras inscritas</Title>
 
@@ -234,9 +230,15 @@ const StudentEnrollmentForm = (props: props) => {
 						</IconButton>
 					</div>
 				</SectionContainer>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

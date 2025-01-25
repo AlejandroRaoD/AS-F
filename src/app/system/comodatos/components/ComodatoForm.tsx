@@ -97,7 +97,6 @@ const ComodatoForm = (props: props) => {
 						await getSedes({ nucleoId: value });
 					}}
 				/>
-
 				<Select
 					labelTitle="Sede"
 					dataList={sedes.map(({ _id, name }) => ({
@@ -110,7 +109,6 @@ const ComodatoForm = (props: props) => {
 						formik.setFieldValue("instrumentId", "");
 					}}
 				/>
-
 				<Select
 					labelTitle="Instrumento"
 					dataList={instruments.map(({ _id, name, serialNumber }) => ({
@@ -122,7 +120,6 @@ const ComodatoForm = (props: props) => {
 					value={formik.values.instrumentId}
 					error={formik.errors.instrumentId}
 				/>
-
 				<Select
 					labelTitle="Estudiante"
 					dataList={students.map(
@@ -136,7 +133,6 @@ const ComodatoForm = (props: props) => {
 					value={formik.values.studentId}
 					error={formik.errors.studentId}
 				/>
-
 				<InputDate
 					labelTitle="Duración del comodato"
 					name="dates"
@@ -151,7 +147,6 @@ const ComodatoForm = (props: props) => {
 					asSingle={false}
 					// error={formik.errors.birthday}
 				/>
-
 				<Input
 					labelTitle="N° contrato"
 					name="contractNumber"
@@ -159,9 +154,15 @@ const ComodatoForm = (props: props) => {
 					value={formik.values.contractNumber}
 					error={formik.errors.contractNumber}
 				/>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);
