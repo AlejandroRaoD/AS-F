@@ -71,10 +71,10 @@ const RepresentativeForm = (props: props) => {
 		},
 	});
 
-	const handleDeleteButton =  async() => {
+	const handleDeleteButton = async () => {
 		if (!data) return;
 		try {
-		await	deleteRepresentative(data._id);
+			await deleteRepresentative(data._id);
 			router.push(RouterLinks.representante.all);
 		} catch (error) {
 			console.log(error);
@@ -83,79 +83,57 @@ const RepresentativeForm = (props: props) => {
 
 	return (
 		<form onSubmit={formik.handleSubmit}>
-			<Input
-				labelTitle="Nombre del representante"
-				name="name"
-				onChange={formik.handleChange}
-				value={formik.values.name}
-				error={formik.errors.name}
-			/>
-			<Input
-				labelTitle="Apellido del representante"
-				name="lastname"
-				onChange={formik.handleChange}
-				value={formik.values.lastname}
-				error={formik.errors.lastname}
-			/>
+			<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+				<Input
+					labelTitle="Nombre del representante"
+					name="name"
+					onChange={formik.handleChange}
+					value={formik.values.name}
+					error={formik.errors.name}
+				/>
+				<Input
+					labelTitle="Apellido del representante"
+					name="lastname"
+					onChange={formik.handleChange}
+					value={formik.values.lastname}
+					error={formik.errors.lastname}
+				/>
+			</div>
 
-			<Select
-				labelTitle="nacionalidad"
-				dataList={Object.values(Nationality).map((v) => ({
-					title: v,
-					value: v,
-				}))}
-				name="nationality"
-				onChange={formik.handleChange}
-				value={formik.values.nationality}
-				error={formik.errors.nationality}
-			/>
-			<Input
-				labelTitle="Cedula"
-				type="number"
-				name="CI"
-				onChange={formik.handleChange}
-				value={formik.values.CI}
-				error={formik.errors.CI}
-			/>
+			<div className="grid gap-2 grid-cols-1 lg:grid-cols-6">
+				<Select
+					labelTitle="nacionalidad"
+					dataList={Object.values(Nationality).map((v) => ({
+						title: v,
+						value: v,
+					}))}
+					containerClassName="col-span-1"
+					name="nationality"
+					onChange={formik.handleChange}
+					value={formik.values.nationality}
+					error={formik.errors.nationality}
+				/>
 
-			<InputDate
-				labelTitle="Fecha de nacimiento"
-				name="birthday"
-				onChange={(value) => {
-					formik.setFieldValue("birthday", value.startDate);
-				}}
-				value={{
-					startDate: formik.values.birthday,
-					endDate: formik.values.birthday,
-				}}
-				// error={formik.errors.birthday}
-			/>
+				<Input
+					containerClassName="col-span-2"
+					labelTitle="Cedula"
+					type="number"
+					name="CI"
+					onChange={formik.handleChange}
+					value={formik.values.CI}
+					error={formik.errors.CI}
+				/>
 
-			<Input
-				labelTitle="email"
-				name="email"
-				onChange={formik.handleChange}
-				value={formik.values.email}
-				error={formik.errors.email}
-			/>
-			<Select
-				labelTitle="genero"
-				dataList={Object.values(Gender).map((v) => ({
-					title: v,
-					value: v,
-				}))}
-				name="gender"
-				onChange={formik.handleChange}
-				value={formik.values.gender}
-				error={formik.errors.gender}
-			/>
-			<Input
-				labelTitle="direccion"
-				name="address"
-				onChange={formik.handleChange}
-				value={formik.values.address}
-				error={formik.errors.address}
-			/>
+				<Input
+					containerClassName="col-span-3"
+					labelTitle="email"
+					name="email"
+					onChange={formik.handleChange}
+					value={formik.values.email}
+					error={formik.errors.email}
+				/>
+			</div>
+			
 			<InputTagArray
 				labelTitle="Telefono"
 				name="phone_number"
@@ -163,6 +141,41 @@ const RepresentativeForm = (props: props) => {
 				dataList={phoneNumberArr}
 				changeArray={changePhoneArr}
 			/>
+
+			<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+				<InputDate
+					labelTitle="Fecha de nacimiento"
+					name="birthday"
+					onChange={(value) => {
+						formik.setFieldValue("birthday", value.startDate);
+					}}
+					value={{
+						startDate: formik.values.birthday,
+						endDate: formik.values.birthday,
+					}}
+					// error={formik.errors.birthday}
+				/>
+
+				<Select
+					labelTitle="genero"
+					dataList={Object.values(Gender).map((v) => ({
+						title: v,
+						value: v,
+					}))}
+					name="gender"
+					onChange={formik.handleChange}
+					value={formik.values.gender}
+					error={formik.errors.gender}
+				/>
+			</div>
+			<Input
+				labelTitle="direccion"
+				name="address"
+				onChange={formik.handleChange}
+				value={formik.values.address}
+				error={formik.errors.address}
+			/>
+
 			<Input
 				labelTitle="Trabajo"
 				name="job"

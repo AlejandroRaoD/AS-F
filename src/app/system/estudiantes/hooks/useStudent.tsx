@@ -13,11 +13,13 @@ import { UpdateStudentDto } from "../dto/update-student.dto";
 
 interface props {
 	id?: string | string[];
+	query?: QueryStudentDto;
 }
 
 const useStudent = (props?: props) => {
 	const [student, setStudent] = useState<studentAttributes>();
 	const [students, setStudents] = useState<studentAttributes[]>([]);
+	const [alreadyQuery, setAlreadyQuery] = useState(false);
 
 	const getStudent = async (id: string) => {
 		if (student) return;
@@ -25,11 +27,19 @@ const useStudent = (props?: props) => {
 		const { data } = await getStudent_Request(id);
 
 		setStudent(data);
+
+		return data;
 	};
 	useEffect(() => {
+		if (alreadyQuery) return;
+
 		if (!props) return;
 
 		if (typeof props.id == "string") getStudent(props.id);
+		
+		if (props.query && !students.length) getStudents(props.query);
+
+		setAlreadyQuery(true);
 	}, [props]);
 
 	const getStudents = async (query?: QueryStudentDto) => {

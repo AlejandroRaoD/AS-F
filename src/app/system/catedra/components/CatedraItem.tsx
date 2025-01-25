@@ -28,9 +28,10 @@ export const CatedraItem = (props: props) => {
 		return (
 			<Link
 				href={RouterLinks.programas.one(data._id)}
-				className="flex p-2 border-b hover:shadow"
+				className="flex justify-between p-2 border-b hover:shadow"
 			>
 				<div>{data.name}</div>
+				<div>{programa && programa.name}</div>
 			</Link>
 		);
 

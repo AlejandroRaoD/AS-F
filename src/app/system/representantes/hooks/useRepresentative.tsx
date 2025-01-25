@@ -13,6 +13,7 @@ import {
 
 interface props {
 	id?: string | string[];
+	query?: QueryRepresentativeDto;
 }
 
 const useRepresentative = (props?: props) => {
@@ -22,18 +23,27 @@ const useRepresentative = (props?: props) => {
 		representativeAttributes[]
 	>([]);
 
+	const [alreadyQuery, setAlreadyQuery] = useState(false);
+
 	const getRepresentative = async (id: string) => {
 		if (representative) return;
 
 		const { data } = await getRepresentative_Request(id);
 
 		setRepresentative(data);
+
+		return data;
 	};
 
 	useEffect(() => {
+		if (alreadyQuery) return;
 		if (!props) return;
 
 		if (typeof props.id == "string") getRepresentative(props.id);
+
+		if (props.query && !representatives.length) getRepresentatives(props.query);
+
+		setAlreadyQuery(true);
 	}, [props]);
 
 	const getRepresentatives = async (query?: QueryRepresentativeDto) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
@@ -10,47 +10,58 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import Button from "@/app/common/components/Button";
 import useFurniture from "../hooks/useFurniture";
+import SectionContainer from "@/app/common/components/SectionContainer";
+import TextValue from "@/app/common/components/TextValue";
+import useSede from "../../sedes/hooks/useSede";
 
 const Page = () => {
 	const { id } = useParams();
 	const furnitureId = getOneStringParams(id);
 	const { furniture } = useFurniture({ id: furnitureId });
+	const { sede, getSede } = useSede();
+
+	useEffect(() => {
+		if (!furniture) return;
+
+		getSede(furniture.sedeId);
+	}, [furniture]);
 
 	return (
 		<PageTemplate
 			navBarProps={{
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.bienes.all,
-				// rightButtons: (
-				// 	<>
-				// 		<IconButton href={RouterLinks.estudiantes.edit(id)}>
-				// 			<EditIcon />
-				// 		</IconButton>
-				// 	</>
-				// ),
+				rightButtons: (
+					<IconButton href={RouterLinks.bienes.edit(id)}>
+						<EditIcon />
+					</IconButton>
+				),
 			}}
 		>
-			<Button href={RouterLinks.bienes.edit(id)}>Editar datos</Button>
-
-			<div>
-				{furniture && (
+			<SectionContainer className="grid lg:grid-cols-2">
+				{furniture ? (
 					<>
-						<p>{furniture.name}</p>
-						<p>{furniture.quantity}</p>
-						<p>{furniture.description}</p>
-						<p>{furniture.serialNumber}</p>
-						<p>{furniture.brand}</p>
+						<TextValue title="Nombre" value={furniture.name} />
+						<TextValue title="Cantidad" value={furniture.quantity} />
+						<TextValue title="Descripcion" value={furniture.description} />
+						<TextValue title="Serial" value={furniture.serialNumber} />
+						<TextValue title="Marca" value={furniture.brand} />
+						<TextValue title="Modelo" value={furniture.model} />
+						<TextValue title="Observacion" value={furniture.observation} />
+						<TextValue title="Lugar" value={furniture.localLocation} />
 
-						<p>{furniture.model}</p>
-
-						<p>{furniture.observation}</p>
-
-						<p>{furniture.localLocation}</p>
-
-						<p>{furniture.sedeId}</p>
+						{sede && <TextValue title="Sede" value={sede.name} />}
 					</>
+				) : (
+					// <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto my-6">
+					// </div>
+					<p className="text-center text-gray-500">
+						Cargando los detalles de la sede...
+					</p>
 				)}
-			</div>
+			</SectionContainer>
+
+			<div>{furniture && <></>}</div>
 		</PageTemplate>
 	);
 };

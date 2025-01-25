@@ -83,34 +83,35 @@ const FurnitureForm = (props: props) => {
 
 	return (
 		<>
-			<Select
-				labelTitle="nucleo"
-				dataList={nucleos.map(({ _id, name }) => ({
-					title: name,
-					value: _id,
-				}))}
-				name="nucleos"
-				onChange={async ({ target: { value } }) => {
-					// e.preventDefault()
-
-					await getSedes({ nucleoId: value });
-
-					formik.setFieldValue("sedeId", "");
-				}}
-			/>
-
 			<form onSubmit={formik.handleSubmit}>
-				<Select
-					labelTitle="sede"
-					dataList={sedes.map(({ _id, name }) => ({
-						title: name,
-						value: _id,
-					}))}
-					name="sedeId"
-					onChange={formik.handleChange}
-					value={formik.values.sedeId}
-					error={formik.errors.sedeId}
-				/>
+				<div className="grid grid-cols-2 gap-2">
+					<Select
+						labelTitle="nucleo"
+						dataList={nucleos.map(({ _id, name }) => ({
+							title: name,
+							value: _id,
+						}))}
+						name="nucleos"
+						onChange={async ({ target: { value } }) => {
+							// e.preventDefault()
+
+							await getSedes({ nucleoId: value });
+
+							formik.setFieldValue("sedeId", "");
+						}}
+					/>
+					<Select
+						labelTitle="sede"
+						dataList={sedes.map(({ _id, name }) => ({
+							title: name,
+							value: _id,
+						}))}
+						name="sedeId"
+						onChange={formik.handleChange}
+						value={formik.values.sedeId}
+						error={formik.errors.sedeId}
+					/>
+				</div>
 
 				<Input
 					labelTitle="cantidad"
@@ -120,7 +121,6 @@ const FurnitureForm = (props: props) => {
 					error={formik.errors.quantity}
 					type="number"
 				/>
-
 				<Input
 					labelTitle="Nombre del bien"
 					name="name"
@@ -128,7 +128,6 @@ const FurnitureForm = (props: props) => {
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
-
 				<Input
 					labelTitle="descripcion"
 					name="description"
@@ -136,7 +135,6 @@ const FurnitureForm = (props: props) => {
 					value={formik.values.description}
 					error={formik.errors.description}
 				/>
-
 				<Input
 					labelTitle="numero de serial"
 					name="serialNumber"
@@ -145,22 +143,22 @@ const FurnitureForm = (props: props) => {
 					error={formik.errors.serialNumber}
 				/>
 
-				<Input
-					labelTitle="marca"
-					name="brand"
-					onChange={formik.handleChange}
-					value={formik.values.brand}
-					error={formik.errors.brand}
-				/>
-
-				<Input
-					labelTitle="modelo"
-					name="model"
-					onChange={formik.handleChange}
-					value={formik.values.model}
-					error={formik.errors.model}
-				/>
-
+				<div className="grid grid-cols-2 gap-2">
+					<Input
+						labelTitle="marca"
+						name="brand"
+						onChange={formik.handleChange}
+						value={formik.values.brand}
+						error={formik.errors.brand}
+					/>
+					<Input
+						labelTitle="modelo"
+						name="model"
+						onChange={formik.handleChange}
+						value={formik.values.model}
+						error={formik.errors.model}
+					/>
+				</div>
 				<Input
 					labelTitle="observacion"
 					name="observation"
@@ -168,7 +166,6 @@ const FurnitureForm = (props: props) => {
 					value={formik.values.observation}
 					error={formik.errors.observation}
 				/>
-
 				<Input
 					labelTitle="lugar"
 					name="localLocation"
@@ -176,9 +173,15 @@ const FurnitureForm = (props: props) => {
 					value={formik.values.localLocation}
 					error={formik.errors.localLocation}
 				/>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);

@@ -6,6 +6,7 @@ import RouterLinks from "@/config/RouterLinks";
 import { CatedraItem } from "./components/CatedraItem";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import SimpleSearch from "@/app/common/components/SimpleSearch";
 
 const Page = () => {
 	const { catedras, getCatedras } = useCatedras();
@@ -13,6 +14,9 @@ const Page = () => {
 	useEffect(() => {
 		getCatedras();
 	}, []);
+
+	const onSubmitQuery = async (name: string) => getCatedras({ name });
+	const onClearQuery = async () => getCatedras();
 
 	return (
 		<PageTemplate
@@ -27,6 +31,8 @@ const Page = () => {
 			}}
 		>
 			<div className="flex flex-col">
+				<SimpleSearch onSubmit={onSubmitQuery} onClear={onClearQuery} />
+
 				<div className="grid grid-cols-2 mb-2 px-4 text-gray-700">
 					<div>Nombre</div>
 					<div>Programa</div>

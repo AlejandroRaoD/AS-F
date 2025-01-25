@@ -17,28 +17,26 @@ const Page = () => {
 	const { studentRelations } = useStudentRelation({ query: { studentId } });
 
 	return (
-		<>
-			<PageTemplate
-				navBarProps={{
-					navTitle: "Editar relaciones",
-					hrefBackButton: RouterLinks.estudiantes.one(id),
-				}}
-			>
-				{studentRelations.map((a) => (
-					<StudentRelationItem key={a._id} data={a} edit={true} />
-				))}
+		<PageTemplate
+			navBarProps={{
+				navTitle: "Editar relaciones",
+				hrefBackButton: RouterLinks.estudiantes.one(id),
+			}}
+		>
+			{studentRelations.map((a) => (
+				<StudentRelationItem key={a._id} data={a} edit={true} />
+			))}
 
-				{studentRelations && (
-					<>
-						<h2>añadir</h2>
-						<StudentRelationForm
-							studentId={studentId}
-							// redirect={RouterLinks.estudiantes.one(id)}
-						/>
-					</>
-				)}
-			</PageTemplate>
-		</>
+			{studentRelations && (
+				<>
+					<h2>añadir</h2>
+					<StudentRelationForm
+						studentId={studentId}
+						// redirect={RouterLinks.estudiantes.one(id)}
+					/>
+				</>
+			)}
+		</PageTemplate>
 	);
 };
 

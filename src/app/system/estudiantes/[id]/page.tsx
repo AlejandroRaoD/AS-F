@@ -10,9 +10,10 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import useStudent from "../hooks/useStudent";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useStudentRelation from "../hooks/useStudentRelation";
-import Link from "next/link";
 import Button from "@/app/common/components/Button";
 import StudentRelationItem from "../components/StudentRelationItem";
+import SectionContainer from "@/app/common/components/SectionContainer";
+import TextValue from "@/app/common/components/TextValue";
 
 const Page = () => {
 	const { id } = useParams();
@@ -27,47 +28,53 @@ const Page = () => {
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.estudiantes.all,
 				rightButtons: (
-					<>
-						<IconButton href={RouterLinks.estudiantes.edit(id)}>
-							<EditIcon />
-						</IconButton>
-					</>
+					<IconButton href={RouterLinks.estudiantes.edit(id)}>
+						<EditIcon />
+					</IconButton>
 				),
 			}}
 		>
-			<Button href={RouterLinks.estudiantes.edit(id)}>Editar datos</Button>
-
-			<div>
+			<SectionContainer>
 				{student && (
 					<>
-						<Title>
-							{student.name} {student.lastname}
-						</Title>
-						{student.phone_number.map((a) => (
-							<Title key={a}>{a}</Title>
-						))}
-						<Title>{new Date(student.birthday).toLocaleDateString()}</Title>
-						<Title>{student.address}</Title>
-						<Title>{student.gender}</Title>
-						<Title>
-							{student.nationality}-{student.CI}
-						</Title>
-						<Title>{student.email}</Title>
+						<div className="grid grid-cols-2">
+							<TextValue title="Nombre" value={student.name} />
+							<TextValue title="Apellido" value={student.lastname} />
+							<TextValue
+								title="Nacimiento"
+								value={new Date(student.birthday).toDateString()}
+							/>
+							<TextValue
+								title="C.I."
+								value={`${student.nationality}-${student.CI}`}
+							/>
+							<TextValue title="Direccion" value={student.address} />
+							<TextValue title="Genero" value={student.gender} />
+						</div>
+
+						<div className="grid grid-cols-2">
+							<TextValue title="Telefono" value={student.phone_number} />
+							<TextValue title="Email" value={student.email} />
+						</div>
 					</>
 				)}
-			</div>
+			</SectionContainer>
 
-			<div>
-				<Title>Relaciones</Title>
+			<SectionContainer>
+				<div className="flex justify-between">
+					<Title titleType="h3">Relaciones</Title>
 
-				{studentRelations.map((a) => (
-					<StudentRelationItem key={a._id} data={a} />
-				))}
+					<Button href={RouterLinks.estudiantes.relaciones(studentId)}>
+						Editar relaciones
+					</Button>
+				</div>
 
-				<Button href={RouterLinks.estudiantes.relaciones(studentId)}>
-					Editar relaciones
-				</Button>
-			</div>
+				<div>
+					{studentRelations.map((a) => (
+						<StudentRelationItem key={a._id} data={a} />
+					))}
+				</div>
+			</SectionContainer>
 		</PageTemplate>
 	);
 };

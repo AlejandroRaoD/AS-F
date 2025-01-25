@@ -16,12 +16,12 @@ interface props {
 	query?: QueryStudentRelationDto;
 }
 
-let queried = false;
-
 const useStudentRelation = (props?: props) => {
 	const [studentRelations, setStudentRelations] = useState<
 		studentRelationAllDataAttributes[]
 	>([]);
+
+	const [alreadyQuery, setAlreadyQuery] = useState(false);
 
 	const getStudentRelations = async (query?: QueryStudentRelationDto) => {
 		const { data } = await getStudentRelations_Request(query);
@@ -30,15 +30,16 @@ const useStudentRelation = (props?: props) => {
 	};
 
 	useEffect(() => {
+		if (alreadyQuery) return;
+
 		if (!props) return;
 
 		if (!props.query) return;
 
-		if (queried || studentRelations.length) return;
+		if (props.query && !studentRelations.length)
+			getStudentRelations(props.query);
 
-		getStudentRelations(props.query);
-
-		queried = true;
+		setAlreadyQuery(true);
 	}, [props]);
 
 	const createStudentRelation = async (formData: CreateStudentRelationDto) => {

@@ -110,7 +110,6 @@ const InstrumentForm = (props: props) => {
 						error={formik.errors.sedeId}
 					/>
 				</div>
-
 				<Input
 					labelTitle="Nombre"
 					name="name"
@@ -118,7 +117,6 @@ const InstrumentForm = (props: props) => {
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
-
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<Input
 						labelTitle="Marca"
@@ -136,7 +134,6 @@ const InstrumentForm = (props: props) => {
 						error={formik.errors.model}
 					/>
 				</div>
-
 				<Input
 					labelTitle="Serial N°"
 					name="serialNumber"
@@ -144,7 +141,6 @@ const InstrumentForm = (props: props) => {
 					value={formik.values.serialNumber}
 					error={formik.errors.serialNumber}
 				/>
-
 				<Input
 					labelTitle="Descripción"
 					name="description"
@@ -152,7 +148,6 @@ const InstrumentForm = (props: props) => {
 					value={formik.values.description}
 					error={formik.errors.description}
 				/>
-
 				<Input
 					labelTitle="Observación"
 					name="observation"
@@ -160,9 +155,15 @@ const InstrumentForm = (props: props) => {
 					value={formik.values.observation}
 					error={formik.errors.observation}
 				/>
+				<div className="grid grid-cols-2 gap-2">
+					<Button type="submit">Guardar</Button>
 
-				<Button type="submit"> Guardar</Button>
-				{data && <Button onClick={handleDeleteButton}>Eliminar</Button>}
+					{data && (
+						<Button variant="error-outline" onClick={handleDeleteButton}>
+							Eliminar
+						</Button>
+					)}
+				</div>
 			</form>
 		</>
 	);
