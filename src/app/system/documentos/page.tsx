@@ -1,9 +1,9 @@
-'use client'; // Esto convierte el archivo en un Client Component
+"use client"; // Esto convierte el archivo en un Client Component
 
-import React from 'react';
-import PageTemplate from '../../common/components/PageTemplate'; // Ajusta la ruta según tu proyecto
-import RouterLinks from '@/config/RouterLinks'; // Asegúrate de tener esta configuración
-import Link from 'next/link';
+import React from "react";
+import PageTemplate from "../../common/components/PageTemplate"; // Ajusta la ruta según tu proyecto
+import RouterLinks from "@/config/RouterLinks"; // Asegúrate de tener esta configuración
+import Link from "next/link";
 
 const DocumentosPage = () => {
   return (
@@ -14,76 +14,43 @@ const DocumentosPage = () => {
         showHelpButton: false, // Si no necesitas el botón de ayuda
       }}
     >
-      <div className="p-6 font-sans">
-        <header className="border-b-2 border-gray-300 mb-6 pb-4 text-center">
-          <h1 className="text-3xl font-semibold text-gray-800">Gestión de Documentos</h1>
-          <p className="text-gray-500">
-            Genera constancias de estudio, comodatos de instrumentos y certificados de forma rápida y sencilla.
+      <div className="p-6 font-sans bg-gradient-to-r from-gray-100 to-gray-200 min-h-screen">
+        <header className="border-b-4 border-gray-500 mb-8 pb-6 text-center">
+          <h1 className="text-4xl font-extrabold text-gray-800">Gestión de Documentos</h1>
+          <p className="text-gray-600 text-lg mt-2">
+            Crea documentos rápidamente.
           </p>
         </header>
 
         <main>
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-700">Constancia de Estudio</h2>
-            <p className="text-gray-500 mb-2">
-              Selecciona a un estudiante y genera su constancia personalizada.
+          {/* Sección Constancia de Estudio */}
+          <section className="mb-12 text-center transition-all duration-300 hover:scale-105">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Constancia de Estudio</h2>
+            <p className="text-gray-500 mb-6 text-lg">
+              Genera constancias fácilmente.
             </p>
-            <Link
-              href={RouterLinks.documentos.constanciaEstudio} // Usa la configuración de rutas
-              passHref
-            >
+            <Link href={RouterLinks.documentos.constanciaEstudio} passHref>
               <button
-                className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600"
+                className="px-10 py-5 bg-blue-600 text-white font-semibold rounded-xl shadow-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
               >
-                Constancia de Estudio
+                Crear Constancia
               </button>
             </Link>
           </section>
 
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-700">Comodato</h2>
-            <p className="text-gray-500 mb-2">
-              Genera y administra los documentos de comodato para los instrumentos asignados.
+          {/* Sección Comodato */}
+          <section className="mb-12 text-center transition-all duration-300 hover:scale-105">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Comodato de Instrumentos</h2>
+            <p className="text-gray-500 mb-6 text-lg">
+              Administra los comodatos de los instrumentos.
             </p>
-            <Link
-              href={RouterLinks.documentos.comodato} // Usa la configuración de rutas
-              passHref
-            >
+            <Link href={RouterLinks.documentos.comodato} passHref>
               <button
-                className="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600"
+                className="px-10 py-5 bg-green-600 text-white font-semibold rounded-xl shadow-xl hover:bg-green-700 transition-all duration-300 transform hover:scale-105"
               >
-                Comodato
+                Crear Comodato
               </button>
             </Link>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-700">Certificados</h2>
-            <p className="text-gray-500 mb-2">
-              Genera certificados personalizados para estudiantes y personal.
-            </p>
-            <Link
-              href={RouterLinks.documentos.certificados} // Usa la configuración de rutas
-              passHref
-            >
-              <button
-                className="px-6 py-3 bg-purple-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-purple-600"
-              >
-                Certificados
-              </button>
-            </Link>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-gray-700">Historial de Documentos</h2>
-            <p className="text-gray-500 mb-2">
-              Aquí podrás ver un registro de los documentos generados recientemente.
-            </p>
-            <div className="border border-gray-300 rounded-lg p-4 bg-gray-100">
-              <p className="text-gray-500 text-center">
-                Aún no hay documentos generados.
-              </p>
-            </div>
           </section>
         </main>
       </div>
