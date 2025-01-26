@@ -66,7 +66,7 @@ const useAuth = (outProps?: props) => {
 		logout();
 		setUserProfile(null);
 
-		if (!outProps?.autoRedirect) window.location.replace(RouterLinks.login);
+		if (props.autoRedirect) window.location.replace(RouterLinks.login);
 	};
 
 	return { userProfile, getProfile, singIn, singout };
