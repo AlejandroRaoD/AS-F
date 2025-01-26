@@ -80,7 +80,12 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 
 			{!isPanelCollapsed && (
 				<nav className="flex-1 overflow-y-auto flex flex-col mt-2 px-4 space-y-0.5">
-					<LeftPanelButton label="Inicio" icon="🏠" href="/" />
+					<LeftPanelButton
+						label="Inicio"
+						icon="🏠"
+						href={RouterLinks.dashboard}
+					/>
+					
 					<LeftPanelSpacer />
 					<LeftPanelButton
 						label="Estadísticas"
