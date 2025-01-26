@@ -209,7 +209,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					</Link>
 
 					<div className="flex-1 ml-2">
-						{userProfile && (
+						{userProfile && userProfile.employeeId ? (
 							<>
 								<div>{userProfile.employeeId.name}</div>
 								<div className="text-xs">
@@ -217,6 +217,8 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 									{userProfile.employeeId.CI}
 								</div>
 							</>
+						) : (
+							<div>Super admin</div>
 						)}
 					</div>
 

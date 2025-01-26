@@ -31,7 +31,7 @@ export default function Page() {
 			password: yup
 				.string()
 				.required("Coloque la Contraseña")
-				.min(6, "Debe contener 8 caracteres"),
+				.min(8, "Debe contener 8 caracteres"),
 		}),
 
 		onSubmit: async (formData: LoginDto) => {
