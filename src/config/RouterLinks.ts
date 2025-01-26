@@ -4,6 +4,7 @@ const oneString = (str?: IdParam): string =>
 	str ? (str instanceof Array ? str[0] : str) : "";
 
 const RouterLinks = {
+	landing: "/",
 	dashboard: "/system",
 	login: "/system/auth/login",
 	register: "/system/auth/register",

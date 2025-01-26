@@ -15,6 +15,8 @@ import MusicIcon from "./icons/MusicIcon";
 import ShareIcon from "./icons/ShareIcon";
 import CalendarIcon from "./icons/CalendarIcon";
 import PuzzleIcon from "./icons/PuzzleIcon";
+import useAuth from "@/app/system/auth/hook/useAuth";
+import LogoutIcon from "./icons/LogoutIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -22,6 +24,8 @@ interface LeftPanelProps {
 }
 
 const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
+	const { userProfile, singout } = useAuth();
+
 	const storedIsTablesOpen =
 		typeof window !== "undefined"
 			? localStorage.getItem("isTablesOpen") === "true"
@@ -51,7 +55,10 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 			}
 		>
 			{/* Header */}
-			<div className="flex p-4 items-center border-b border-gray-100  group">
+			<Link
+				href={RouterLinks.landing}
+				className="flex p-4 items-center border-b border-gray-100 group"
+			>
 				<div className="relative w-10 h-10">
 					{!isPanelCollapsed && (
 						<Image
@@ -74,7 +81,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						</p>
 					</div>
 				)}
-			</div>
+			</Link>
 
 			{/* Navigation Links */}
 
@@ -85,7 +92,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						icon="🏠"
 						href={RouterLinks.dashboard}
 					/>
-					
+
 					<LeftPanelSpacer />
 					<LeftPanelButton
 						label="Estadísticas"
@@ -193,7 +200,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 			)}
 
 			{isPanelCollapsed || (
-				<div className="flex items-center mt-auto  pl-4 py-2 bg-white">
+				<div className="flex items-center mt-auto  pl-2 py-2 bg-white">
 					<Link
 						href={RouterLinks.perfil.all}
 						className="w-8 h-8 rounded-full overflow-hidden  "
@@ -202,12 +209,22 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					</Link>
 
 					<div className="flex-1 ml-2">
-						<div>admin</div>
+						{userProfile && (
+							<>
+								<div>{userProfile.employeeId.name}</div>
+								<div className="text-xs">
+									{userProfile.employeeId.nationality}-
+									{userProfile.employeeId.CI}
+								</div>
+							</>
+						)}
 					</div>
 
-					<IconButton href={RouterLinks.help.all}>
-						<HelpIcon />
-					</IconButton>
+					<div className="flex flex-col">
+						<IconButton onClick={() => singout()}>
+							<LogoutIcon />
+						</IconButton>
+					</div>
 				</div>
 			)}
 
