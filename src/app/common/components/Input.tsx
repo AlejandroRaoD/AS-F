@@ -28,14 +28,18 @@ const Input = (props: props) => {
 			)}
 		>
 			{labelTitle && (
-				<label className="" htmlFor={name}>
+				<label
+					className="block text-sm font-medium text-gray-700"
+					htmlFor={name}
+				>
 					{labelTitle}
 				</label>
 			)}
 
 			<input
 				className={clsx(
-					`px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500`,
+					`px-4 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2`,
+					error ? "border-red-400" : "focus:border-blue-500",
 					className
 				)}
 				name={name}
