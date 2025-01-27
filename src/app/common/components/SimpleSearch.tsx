@@ -6,10 +6,11 @@ import axiosErrorHandle from "../helpers/axiosErrorHandle";
 interface props {
 	onSubmit(str: string);
 	onClear();
+	placeholder?: string;
 }
 
 const SimpleSearch = (props: props) => {
-	const { onSubmit, onClear } = props;
+	const { onSubmit, onClear, placeholder } = props;
 
 	const [inputValue, setInputValue] = useState("");
 
@@ -32,7 +33,7 @@ const SimpleSearch = (props: props) => {
 				notPadding
 				type="search"
 				name="search"
-				placeholder="Buscar"
+				placeholder={placeholder || "Buscar"}
 				value={inputValue}
 				onChange={(e) => {
 					const value = e.target.value.trim();

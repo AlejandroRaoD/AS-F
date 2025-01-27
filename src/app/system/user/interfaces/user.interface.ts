@@ -1,7 +1,9 @@
 import { employeeAttributes } from "../../personal/interfaces/employee.interface";
 
 export enum UserPermissions {
-	edit = "edit",
+	edit = "editar",
+	users = "vista de usuarios",
+	logs = "registros de actividades",
 }
 
 export interface UserAttributes {

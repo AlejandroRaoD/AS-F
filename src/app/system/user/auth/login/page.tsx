@@ -4,10 +4,10 @@ import { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-import useAuth from "../hook/useAuth";
+import useAuth from "../../hook/useAuth";
 import Button from "@/app/common/components/Button";
 import Input from "@/app/common/components/Input";
-import { LoginDto } from "../dto/login.dto";
+import { LoginDto } from "../../dto/login.dto";
 import RouterLinks from "@/config/RouterLinks";
 import axiosErrorHandle from "@/app/common/helpers/axiosErrorHandle";
 import { Toaster } from "react-hot-toast";

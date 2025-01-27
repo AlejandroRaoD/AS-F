@@ -15,8 +15,9 @@ import MusicIcon from "./icons/MusicIcon";
 import ShareIcon from "./icons/ShareIcon";
 import CalendarIcon from "./icons/CalendarIcon";
 import PuzzleIcon from "./icons/PuzzleIcon";
-import useAuth from "@/app/system/auth/hook/useAuth";
+import useAuth from "@/app/system/user/hook/useAuth";
 import LogoutIcon from "./icons/LogoutIcon";
+import UsersIcon from "./icons/UsersIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -187,6 +188,12 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 								label="Instrumentos"
 								icon={<MusicIcon />}
 								href={RouterLinks.instrument.all}
+							/>
+
+							<LeftPanelButton
+								label="Usuarios"
+								icon={<UsersIcon />}
+								href={RouterLinks.users.all}
 							/>
 						</>
 					)}

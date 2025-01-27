@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_SERVER_URL } from ".";
-import { getToken } from "@/app/system/auth/helper/userLocalStorage.helper";
+import { getToken } from "@/app/system/user/helper/userLocalStorage.helper";
 
 const abreuSystemAPI = axios.create({
 	baseURL: API_SERVER_URL,

@@ -46,6 +46,8 @@ const useEmployee = (props?: props) => {
 		const { data } = await getEmployees_Request(query);
 
 		setEmployees(data);
+		
+		return data;
 	};
 
 	const createEmployee = async (formData: CreateEmployeeDto) => {

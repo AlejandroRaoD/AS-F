@@ -6,8 +6,15 @@ const oneString = (str?: IdParam): string =>
 const RouterLinks = {
 	landing: "/",
 	dashboard: "/system",
-	login: "/system/auth/login",
-	register: "/system/auth/register",
+	login: "/system/user/auth/login",
+	register: "/system/user/auth/register",
+
+	users: {
+		all: "/system/user",
+		create: "/system/user/nuevo",
+		one: (id: IdParam) => `/system/user/${oneString(id)}`,
+		edit: (id: IdParam) => `/system/user/${oneString(id)}/editar`,
+	},
 
 	nucleos: {
 		all: "/system/nucleos",
