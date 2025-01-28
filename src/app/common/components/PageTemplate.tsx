@@ -20,7 +20,13 @@ const PageTemplate = (props: props) => {
 
   return (
     <>
-      <div className="h-screen grid grid-rows-[4rem_1fr] transition-all duration-300" style={{ marginLeft: isPanelCollapsed ? "3.5rem" : "14rem" }}>
+      <div
+        className="h-screen grid grid-rows-[4rem_1fr] transition-all duration-300"
+        style={{ 
+          marginLeft: isPanelCollapsed ? "3.5rem" : "14rem", 
+          backgroundColor: "#bbdefb" // Fondo blanco ligeramente más oscuro y azulado
+        }}
+      >
         {/* Pasa la función togglePanel como prop a LeftPanel */}
         <NavBar {...navBarProps} />
 
