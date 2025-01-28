@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useStudentEnrollment from "../../hooks/useStudentEnrollment";
 import StudentEnrollmentForm from "../../components/StudentEnrollmentForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -23,6 +24,7 @@ const Page = () => {
 					navTitle: "Editar StudentEnrollment",
 					hrefBackButton: RouterLinks.studentEnrollment.one(id),
 				}}
+				permissionsRequired={[UserPermissions.inscripcionesEdit]}
 			>
 				{studentEnrollment && (
 					<StudentEnrollmentForm

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import ProgramaForm from "../../components/ProgramaForm";
 import usePrograma from "../../hook/useProgramas";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -19,6 +20,7 @@ const Page = () => {
 					navTitle: "Editar Programa",
 					hrefBackButton: RouterLinks.programas.one(id),
 				}}
+				permissionsRequired={[UserPermissions.programaEdit]}
 			>
 				{programa && (
 					<ProgramaForm

@@ -6,6 +6,8 @@ import useComodato from "./hooks/useComodato";
 import { ComodatoItem } from "./components/ComodatoItem";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import { UserPermissions } from "../user/interfaces/user.interface";
+import NeedPermissions from "../user/components/NeedPermissions";
 
 export default function BienesPage() {
 	const { comodatos, getComodatos } = useComodato();
@@ -25,13 +27,15 @@ export default function BienesPage() {
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.comodatosEdit]}>
 						<IconButton href={RouterLinks.comodato.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.comodatos]}
+
 		>
 			{/* Título y botón con filtros */}
 

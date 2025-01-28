@@ -11,6 +11,8 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import TextValue from "@/app/common/components/TextValue";
 import useSede from "../../sedes/hooks/useSede";
 import SectionContainer from "@/app/common/components/SectionContainer";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -28,11 +30,14 @@ const Page = () => {
 				navTitle: "Detalles del instrumento",
 				hrefBackButton: RouterLinks.instrument.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.instrument.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.inscripcionesEdit]}>
+						<IconButton href={RouterLinks.instrument.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.instrumentos]}
 		>
 			{/* <Button href={RouterLinks.instrument.edit(id)}>Editar datos</Button> */}
 

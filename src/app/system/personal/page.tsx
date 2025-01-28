@@ -9,6 +9,8 @@ import Button from "@/app/common/components/Button";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 export default function BienesPage() {
 	const { employees, getEmployees } = useEmployee();
@@ -28,13 +30,14 @@ export default function BienesPage() {
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.personalEdit]}>
 						<IconButton href={RouterLinks.employee.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.personal]}
 		>
 			{/* Título y botón con filtros */}
 

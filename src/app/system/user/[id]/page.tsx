@@ -12,6 +12,8 @@ import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import TextValue from "@/app/common/components/TextValue";
 import useUser from "../hook/useUser";
 import UserPermissionsList from "../components/UserPermissionsList";
+import NeedPermissions from "../components/NeedPermissions";
+import { UserPermissions } from "../interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -32,11 +34,14 @@ const Page = () => {
 				navTitle: "Detalles del usuario",
 				hrefBackButton: RouterLinks.users.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.users.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.usersEdit]}>
+						<IconButton href={RouterLinks.users.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.users]}
 		>
 			{user ? (
 				<>

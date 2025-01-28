@@ -9,6 +9,8 @@ import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import useNucleo from "../nucleos/hooks/useNucleo";
 import useUser from "./hook/useUser";
+import NeedPermissions from "./components/NeedPermissions";
+import { UserPermissions } from "./interfaces/user.interface";
 
 const Page = () => {
 	const { nucleos, getNucleos } = useNucleo();
@@ -28,13 +30,14 @@ const Page = () => {
 				navTitle: "Users",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.usersEdit]}>
 						<IconButton href={RouterLinks.users.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.users]}
 		>
 			{/* <SimpleSearch onSubmit={onSubmitQuery} onClear={onClearQuery} /> */}
 

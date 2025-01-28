@@ -1,3 +1,5 @@
+import NeedPermissions from "@/app/system/user/components/NeedPermissions";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 import Link from "next/link";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
@@ -18,7 +20,7 @@ export interface SkeletonButtonProps
 export const SkeletonButton = (props: SkeletonButtonProps) => {
 	const { children, href, className, ...buttonProps } = props;
 
-	return href ? (
+	return 	href ? (
 		<Link href={href} className={className}>
 			{children}
 		</Link>
@@ -26,5 +28,6 @@ export const SkeletonButton = (props: SkeletonButtonProps) => {
 		<button type="button" className={className} {...buttonProps}>
 			{children}
 		</button>
-	);
+	)
+
 };

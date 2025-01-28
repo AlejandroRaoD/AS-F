@@ -7,6 +7,8 @@ import { EnrollmentPeriodItem } from "./components/EnrollmentPeriodItem";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import { UserPermissions } from "../user/interfaces/user.interface";
+import NeedPermissions from "../user/components/NeedPermissions";
 
 export default function BienesPage() {
 	const { enrollmentPeriods, getEnrollmentPeriods } = useEnrollmentPeriod();
@@ -26,13 +28,14 @@ export default function BienesPage() {
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.periodosEdit]}>
 						<IconButton href={RouterLinks.enrollmentPeriod.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.periodos]}
 		>
 			{/* Título y botón con filtros */}
 
@@ -42,7 +45,6 @@ export default function BienesPage() {
 			<div className="flex flex-col">
 				<div className="mb-2 px-4 text-gray-700">
 					<div>Período</div>
-			
 				</div>
 
 				{enrollmentPeriods.length ? (

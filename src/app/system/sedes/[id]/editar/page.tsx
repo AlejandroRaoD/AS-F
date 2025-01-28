@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import SedeForm from "../../components/SedeForm";
 import useSede from "../../hooks/useSede";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -19,6 +20,7 @@ const Page = () => {
 					navTitle: "Editar Sede",
 					hrefBackButton: RouterLinks.sedes.one(id),
 				}}
+				permissionsRequired={[UserPermissions.sedesEdit]}
 			>
 				{sede && (
 					<>

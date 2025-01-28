@@ -13,6 +13,8 @@ import useFurniture from "../hooks/useFurniture";
 import SectionContainer from "@/app/common/components/SectionContainer";
 import TextValue from "@/app/common/components/TextValue";
 import useSede from "../../sedes/hooks/useSede";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -32,9 +34,11 @@ const Page = () => {
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.bienes.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.bienes.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.bienesEdit]}>
+						<IconButton href={RouterLinks.bienes.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
 		>

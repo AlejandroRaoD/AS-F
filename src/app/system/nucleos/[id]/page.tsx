@@ -12,6 +12,8 @@ import useSede from "../../sedes/hooks/useSede";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import SectionContainer from "@/app/common/components/SectionContainer";
 import { SedeItem } from "../../sedes/components/SedeItem";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -27,11 +29,14 @@ const Page = () => {
 				navTitle: "Detalles del Núcleo",
 				hrefBackButton: RouterLinks.nucleos.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.nucleos.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.nucleosEdit]}>
+						<IconButton href={RouterLinks.nucleos.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.nucleos]}
 		>
 			<SectionContainer>
 				{nucleo ? (

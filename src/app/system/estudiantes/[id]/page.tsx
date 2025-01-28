@@ -14,6 +14,8 @@ import Button from "@/app/common/components/Button";
 import StudentRelationItem from "../components/StudentRelationItem";
 import SectionContainer from "@/app/common/components/SectionContainer";
 import TextValue from "@/app/common/components/TextValue";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -28,11 +30,14 @@ const Page = () => {
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.estudiantes.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.estudiantes.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.estudiantesEdit]}>
+						<IconButton href={RouterLinks.estudiantes.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.estudiantes]}
 		>
 			<SectionContainer>
 				{student && (

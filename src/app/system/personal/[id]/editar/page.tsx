@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useEmployee from "../../hooks/useEmployee";
 import EmployeeForm from "../../components/EmployeeForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const Page = () => {
 					navTitle: "Editar Personal",
 					hrefBackButton: RouterLinks.employee.one(id),
 				}}
+				permissionsRequired={[UserPermissions.personalEdit]}
 			>
 				{employee && (
 					<EmployeeForm

@@ -7,6 +7,8 @@ import { InstrumentItem } from "./components/InstrumentItem";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import { UserPermissions } from "../user/interfaces/user.interface";
+import NeedPermissions from "../user/components/NeedPermissions";
 
 export default function BienesPage() {
 	const { instruments, getInstruments } = useInstrument();
@@ -26,13 +28,14 @@ export default function BienesPage() {
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.inscripcionesEdit]}>
 						<IconButton href={RouterLinks.instrument.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.instrumentos]}
 		>
 			{/* Título y botón con filtros */}
 

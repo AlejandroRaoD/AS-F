@@ -15,6 +15,8 @@ import useSede from "../../sedes/hooks/useSede";
 import useEmployee from "../../personal/hooks/useEmployee";
 import TextValue from "@/app/common/components/TextValue";
 import useNucleo from "../../nucleos/hooks/useNucleo";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -38,11 +40,14 @@ const Page = () => {
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.programas.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.programas.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.programaEdit]}>
+						<IconButton href={RouterLinks.programas.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.programa]}
 		>
 			<SectionContainer>
 				{programa && (

@@ -10,6 +10,7 @@ import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import StudentRelationItem from "../../components/StudentRelationItem";
 import SectionContainer from "@/app/common/components/SectionContainer";
 import Title from "@/app/common/components/Title";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -24,6 +25,7 @@ const Page = () => {
 				navTitle: "Editar relaciones",
 				hrefBackButton: RouterLinks.estudiantes.one(id),
 			}}
+			permissionsRequired={[UserPermissions.estudiantesEdit]}
 		>
 			<SectionContainer>
 				<Title titleType="h2"> Relaciones</Title>

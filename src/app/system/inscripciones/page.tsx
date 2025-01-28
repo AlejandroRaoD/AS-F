@@ -6,6 +6,8 @@ import useStudentEnrollment from "./hooks/useStudentEnrollment";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import { StudentEnrollmentItem } from "./components/StudentEnrollmentItem";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 export default function BienesPage() {
 	const { studentEnrollments, getStudentEnrollments } = useStudentEnrollment();
@@ -25,13 +27,14 @@ export default function BienesPage() {
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (
-	
+					<NeedPermissions permissions={[UserPermissions.inscripcionesEdit]}>
 						<IconButton href={RouterLinks.studentEnrollment.create}>
 							<PlusIcon />
 						</IconButton>
-			
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.inscripciones]}
 		>
 			{/* Título y botón con filtros */}
 
@@ -47,7 +50,9 @@ export default function BienesPage() {
 				</div>
 
 				{studentEnrollments.length ? (
-					studentEnrollments.map((bien) => <StudentEnrollmentItem key={bien._id} data={bien} />)
+					studentEnrollments.map((bien) => (
+						<StudentEnrollmentItem key={bien._id} data={bien} />
+					))
 				) : (
 					<p className="text-center text-gray-500 mt-10">
 						No se encontraron bienes con los filtros aplicados. Intenta

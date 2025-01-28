@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { UserPermissions } from "../interfaces/user.interface";
 import useAuth from "../hook/useAuth";
+import hasPermissionsHelper from "../helper/hasPermissions.helper";
 
 interface props {
 	children: ReactNode;
@@ -14,9 +15,9 @@ const NeedPermissions = (props: props) => {
 
 	if (!userProfile) return;
 
-	const founds = permissions.filter((i) => userProfile.permissions.includes(i));
+	const result = hasPermissionsHelper(permissions, userProfile.permissions)
 
-	if (founds.length != permissions.length) return;
+	if (!result) return;
 
 	return <>{children}</>;
 };

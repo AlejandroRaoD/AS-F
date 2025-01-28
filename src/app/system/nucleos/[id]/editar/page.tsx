@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import useNucleo from "../../hooks/useNucleo";
 import NucleoForm from "../../components/NucleoForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -19,6 +20,7 @@ const Page = () => {
 					navTitle: "Editar Nucleo",
 					hrefBackButton: RouterLinks.nucleos.one(id),
 				}}
+				permissionsRequired={[UserPermissions.nucleosEdit]}
 			>
 				{nucleo && (
 					<>

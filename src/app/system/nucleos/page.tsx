@@ -8,6 +8,8 @@ import RouterLinks from "@/config/RouterLinks";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 const Page = () => {
 	const { nucleos, getNucleos } = useNucleo();
@@ -25,11 +27,14 @@ const Page = () => {
 				navTitle: "Núcleos",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<IconButton href={RouterLinks.nucleos.create}>
-						<PlusIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.nucleosEdit]}>
+						<IconButton href={RouterLinks.nucleos.create}>
+							<PlusIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.nucleos]}
 		>
 			{/* Filtros */}
 

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import CatedraForm from "../../components/CatedraForm";
 import useCatedra from "../../hook/useCatedra";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -19,6 +20,7 @@ const Page = () => {
 					navTitle: "Editar catedra",
 					hrefBackButton: RouterLinks.catedra.one(id),
 				}}
+				permissionsRequired={[UserPermissions.catedraEdit]}
 			>
 				{catedra && (
 					<CatedraForm data={catedra} redirect={RouterLinks.catedra.one(id)} />

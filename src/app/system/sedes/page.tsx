@@ -9,6 +9,8 @@ import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import useNucleo from "../nucleos/hooks/useNucleo";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 const Page = () => {
 	const { nucleos, getNucleos } = useNucleo();
@@ -28,13 +30,14 @@ const Page = () => {
 				navTitle: "Sedes",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<>
+					<NeedPermissions permissions={[UserPermissions.sedesEdit]}>
 						<IconButton href={RouterLinks.sedes.create}>
 							<PlusIcon />
 						</IconButton>
-					</>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.sedes]}
 		>
 			<SimpleSearch onSubmit={onSubmitQuery} onClear={onClearQuery} />
 
@@ -45,7 +48,6 @@ const Page = () => {
 					<div>Núcleo</div>
 				</div>
 
-        
 				{sedes.length === 0 ? (
 					<p className="text-center text-gray-500 mt-12 text-lg">
 						No se encontraron sedes. ¡Crea la primera!

@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useEnrollmentPeriod from "../../hooks/useEnrollmentPeriod";
 import EnrollmentPeriodForm from "../../components/EnrollmentPeriodForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const Page = () => {
 					navTitle: "Editar período de inscripciones",
 					hrefBackButton: RouterLinks.enrollmentPeriod.one(id),
 				}}
+				permissionsRequired={[UserPermissions.periodosEdit]}
 			>
 				{enrollmentPeriod && (
 					<EnrollmentPeriodForm

@@ -8,6 +8,8 @@ import RouterLinks from "@/config/RouterLinks";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 const Page = () => {
 	const { programas, getProgramas } = useProgramas();
@@ -25,11 +27,14 @@ const Page = () => {
 				navTitle: "Programas",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<IconButton href={RouterLinks.programas.create}>
-						<PlusIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.programaEdit]}>
+						<IconButton href={RouterLinks.programas.create}>
+							<PlusIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.programa]}
 		>
 			{/* Lista de programas */}
 			<div className="flex flex-col">
@@ -39,7 +44,7 @@ const Page = () => {
 					<div>Nombre</div>
 					<div>Sede</div>
 				</div>
-				
+
 				{programas.map((p) => (
 					<ProgramaItem data={p} key={p._id} />
 				))}

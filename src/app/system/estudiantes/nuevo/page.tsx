@@ -2,6 +2,7 @@ import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import StudentForm from "../components/StudentForm";
 import RouterLinks from "@/config/RouterLinks";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	return (
@@ -11,6 +12,7 @@ const Page = () => {
 					navTitle: "Registrar nuevo estudiante",
 					hrefBackButton: RouterLinks.estudiantes.all,
 				}}
+				permissionsRequired={[UserPermissions.estudiantes]}
 			>
 				<StudentForm redirect={RouterLinks.estudiantes.all} />
 			</PageTemplate>

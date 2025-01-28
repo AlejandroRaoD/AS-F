@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useFurniture from "../../hooks/useFurniture";
 import FurnitureForm from "../../components/FurnitureForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const Page = () => {
 					navTitle: "Editar Bien",
 					hrefBackButton: RouterLinks.bienes.one(id),
 				}}
+				permissionsRequired={[UserPermissions.bienesEdit]}
 			>
 				{furniture && (
 					<FurnitureForm

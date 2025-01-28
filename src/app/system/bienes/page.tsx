@@ -6,9 +6,10 @@ import PageTemplate from "../../common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
 import useFurniture from "./hooks/useFurniture";
 import { FurnitureItem } from "./components/FurnitureItem";
-import Button from "@/app/common/components/Button";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import { UserPermissions } from "../user/interfaces/user.interface";
+import NeedPermissions from "../user/components/NeedPermissions";
 
 export default function BienesPage() {
 	const { furnitures, getFurnitures } = useFurniture();
@@ -24,11 +25,14 @@ export default function BienesPage() {
 				navTitle: "Gestión de Bienes",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<IconButton href={RouterLinks.bienes.create}>
-						<PlusIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.bienesEdit]}>
+						<IconButton href={RouterLinks.bienes.create}>
+							<PlusIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.bienes]}
 		>
 			<div className="flex flex-col">
 				<div className="grid grid-cols-12 mb-2 px-4 text-gray-700">

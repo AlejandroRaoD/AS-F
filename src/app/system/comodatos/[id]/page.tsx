@@ -15,6 +15,8 @@ import useInstrument from "../../instrumentos/hooks/useInstrument";
 import useStudent from "../../estudiantes/hooks/useStudent";
 import Title from "@/app/common/components/Title";
 import Button from "@/app/common/components/Button";
+import { UserPermissions } from "../../user/interfaces/user.interface";
+import NeedPermissions from "../../user/components/NeedPermissions";
 
 const Page = () => {
 	const { id } = useParams();
@@ -40,11 +42,14 @@ const Page = () => {
 				navTitle: "Detalles del comodato",
 				hrefBackButton: RouterLinks.comodato.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.comodato.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.comodatosEdit]}>
+						<IconButton href={RouterLinks.comodato.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.comodatos]}
 		>
 			{/* <Button href={RouterLinks.comodato.edit(id)}>Editar datos</Button> */}
 

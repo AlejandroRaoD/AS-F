@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
 import useRepresentative from "../../hooks/useRepresentative";
 import RepresentativeForm from "../../components/RepresentativeForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -19,6 +20,7 @@ const Page = () => {
 					navTitle: "Editar Representante",
 					hrefBackButton: RouterLinks.representante.one(id),
 				}}
+				permissionsRequired={[UserPermissions.representantesEdit]}
 			>
 				{representative && (
 					<>

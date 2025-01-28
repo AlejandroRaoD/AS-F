@@ -2,6 +2,7 @@ import React from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import RouterLinks from "@/config/RouterLinks";
 import ProgramaForm from "../components/ProgramaForm";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	return (
@@ -10,6 +11,7 @@ const Page = () => {
 				navTitle: "Registrar nuevo programa",
 				hrefBackButton: RouterLinks.programas.all,
 			}}
+			permissionsRequired={[UserPermissions.programaEdit]}
 		>
 			{/* <div className="bg-gray-50 min-h-screen flex items-center justify-center px-6">
 				<div className="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">

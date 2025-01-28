@@ -6,6 +6,7 @@ import { LoginDto } from "../dto/login.dto";
 import {
 	UserAttributes,
 	UserLoggedAttributes,
+	UserPermissions,
 } from "../interfaces/user.interface";
 import {
 	getUser,
@@ -15,6 +16,8 @@ import {
 } from "../helper/userLocalStorage.helper";
 import RouterLinks from "@/config/RouterLinks";
 import toast from "react-hot-toast";
+import hasPermissionsHelper from "../helper/hasPermissions.helper";
+import { useRouter } from "next/navigation";
 
 interface props {
 	autoRedirect?: boolean;
@@ -22,11 +25,15 @@ interface props {
 }
 
 const useAuth = (outProps?: props) => {
+
+
 	const props = {
 		autoRedirect: true,
 		autoLogin: true,
 		...outProps,
 	};
+
+const router = useRouter()
 
 	const [userProfile, setUserProfile] = useState<UserLoggedAttributes | null>(
 		null
@@ -69,7 +76,21 @@ const useAuth = (outProps?: props) => {
 		if (props.autoRedirect) window.location.replace(RouterLinks.login);
 	};
 
-	return { userProfile, getProfile, singIn, singout };
+	const redirectWithoutPermission = async (permissionsRequired: UserPermissions[]) => {
+		const {permissions:userPermissions}= await getProfile();
+		
+		const result = hasPermissionsHelper(permissionsRequired, userPermissions);
+
+		if (!result) router.push(RouterLinks.dashboard);
+	};
+
+	return {
+		userProfile,
+		getProfile,
+		singIn,
+		singout,
+		redirectWithoutPermission,
+	};
 };
 
 export default useAuth;

@@ -7,7 +7,6 @@ export const Button = (props: SkeletonButtonProps) => {
 		children,
 		className,
 		variant = "primary",
-
 		...buttonProps
 	} = props;
 

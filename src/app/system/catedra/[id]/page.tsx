@@ -14,6 +14,8 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import usePrograma from "../../programas/hook/useProgramas";
 import useSede from "../../sedes/hooks/useSede";
 import useNucleo from "../../nucleos/hooks/useNucleo";
+import { UserPermissions } from "../../user/interfaces/user.interface";
+import NeedPermissions from "../../user/components/NeedPermissions";
 
 const Page = () => {
 	const { id } = useParams();
@@ -40,11 +42,14 @@ const Page = () => {
 				navTitle: "Detalles",
 				hrefBackButton: RouterLinks.catedra.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.catedra.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.catedraEdit]}>
+						<IconButton href={RouterLinks.catedra.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.catedra]}
 		>
 			<SectionContainer>
 				{catedra && (

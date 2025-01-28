@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import StudentForm from "../../components/StudentForm";
 import useStudent from "../../hooks/useStudent";
 import StudentRelationForm from "../../components/StudentRelationForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -20,6 +21,7 @@ const Page = () => {
 					navTitle: "Editar Estudiante",
 					hrefBackButton: RouterLinks.estudiantes.one(id),
 				}}
+				permissionsRequired={[UserPermissions.estudiantesEdit]}
 			>
 				{student && (
 					<>

@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useInstrument from "../../hooks/useInstrument";
 import InstrumentForm from "../../components/InstrumentForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const Page = () => {
 					navTitle: "Editar Instrumento",
 					hrefBackButton: RouterLinks.instrument.one(id),
 				}}
+				permissionsRequired={[UserPermissions.instrumentosEdit]}
 			>
 				{instrument && (
 					<InstrumentForm

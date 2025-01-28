@@ -11,6 +11,8 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import TextValue from "@/app/common/components/TextValue";
 import useSede from "../../sedes/hooks/useSede";
 import SectionContainer from "@/app/common/components/SectionContainer";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -28,11 +30,14 @@ const Page = () => {
 				navTitle: "Detalles de personal",
 				hrefBackButton: RouterLinks.employee.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.employee.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.personalEdit]}>
+						<IconButton href={RouterLinks.employee.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.personal]}
 		>
 			{/* <Button href={RouterLinks.employee.edit(id)}>Editar datos</Button> */}
 

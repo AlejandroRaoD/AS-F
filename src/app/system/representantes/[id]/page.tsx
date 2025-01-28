@@ -9,6 +9,8 @@ import EditIcon from "@/app/common/components/icons/EditIcon";
 import useRepresentative from "../hooks/useRepresentative";
 import TextValue from "@/app/common/components/TextValue";
 import SectionContainer from "@/app/common/components/SectionContainer";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -20,11 +22,14 @@ const Page = () => {
 				navTitle: "Detalles del Representante",
 				hrefBackButton: RouterLinks.representante.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.representante.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.representantesEdit]}>
+						<IconButton href={RouterLinks.representante.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.representantes]}
 		>
 			{representative && (
 				<SectionContainer>

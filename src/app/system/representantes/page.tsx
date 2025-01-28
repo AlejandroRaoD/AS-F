@@ -8,6 +8,8 @@ import { RepresentativeItem } from "./components/RepresentativeItem";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
 import IconButton from "@/app/common/components/IconButton";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 export default function EstudiantesPage() {
 	const { representatives, getRepresentatives } = useRepresentative();
@@ -25,11 +27,14 @@ export default function EstudiantesPage() {
 				navTitle: "Representantes",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<IconButton href={RouterLinks.representante.create}>
-						<PlusIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.representantesEdit]}>
+						<IconButton href={RouterLinks.representante.create}>
+							<PlusIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.representantes]}
 		>
 			<SimpleSearch onSubmit={onSubmitQuery} onClear={onClearQuery} />
 

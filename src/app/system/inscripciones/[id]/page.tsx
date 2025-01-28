@@ -18,6 +18,8 @@ import Button from "@/app/common/components/Button";
 import useEnrollmentPeriod from "../../periodo_inscripciones/hooks/useEnrollmentPeriod";
 import CatedraEnrollmentItem from "../components/CatedraEnrollmentItem";
 import Spacer from "@/app/common/components/Spacer";
+import NeedPermissions from "../../user/components/NeedPermissions";
+import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -45,11 +47,14 @@ const Page = () => {
 				navTitle: "Detalles de la inscripcion",
 				hrefBackButton: RouterLinks.studentEnrollment.all,
 				rightButtons: (
-					<IconButton href={RouterLinks.studentEnrollment.edit(id)}>
-						<EditIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.inscripcionesEdit]}>
+						<IconButton href={RouterLinks.studentEnrollment.edit(id)}>
+							<EditIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.inscripciones]}
 		>
 			{studentEnrollment && (
 				<SectionContainer>

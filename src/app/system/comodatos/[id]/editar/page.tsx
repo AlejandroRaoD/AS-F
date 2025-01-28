@@ -7,6 +7,7 @@ import RouterLinks from "@/config/RouterLinks";
 import getOneStringParams from "@/app/common/helpers/getOneStringParams";
 import useComodato from "../../hooks/useComodato";
 import ComodatoForm from "../../components/ComodatoForm";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 const Page = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const Page = () => {
 					navTitle: "Editar Comodato",
 					hrefBackButton: RouterLinks.comodato.one(id),
 				}}
+				permissionsRequired={[UserPermissions.comodatosEdit]}
 			>
 				{comodato && (
 					<ComodatoForm

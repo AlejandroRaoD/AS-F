@@ -8,6 +8,8 @@ import { StudentItem } from "./components/StudentItem";
 import SimpleSearch from "@/app/common/components/SimpleSearch";
 import IconButton from "@/app/common/components/IconButton";
 import PlusIcon from "@/app/common/components/icons/PlusIcon";
+import NeedPermissions from "../user/components/NeedPermissions";
+import { UserPermissions } from "../user/interfaces/user.interface";
 
 export default function EstudiantesPage() {
 	const { students, getStudents } = useStudent();
@@ -26,11 +28,14 @@ export default function EstudiantesPage() {
 				navTitle: "Gestión de Estudiantes",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
-					<IconButton href={RouterLinks.estudiantes.create}>
-						<PlusIcon />
-					</IconButton>
+					<NeedPermissions permissions={[UserPermissions.estudiantesEdit]}>
+						<IconButton href={RouterLinks.estudiantes.create}>
+							<PlusIcon />
+						</IconButton>
+					</NeedPermissions>
 				),
 			}}
+			permissionsRequired={[UserPermissions.estudiantes]}
 		>
 			<SimpleSearch onSubmit={onSubmitQuery} onClear={onClearQuery} />
 
