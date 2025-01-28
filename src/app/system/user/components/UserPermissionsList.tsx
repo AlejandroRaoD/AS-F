@@ -15,15 +15,16 @@ const UserPermissionsList = (props: props) => {
 	const { value, setValue } = props;
 
 	return (
-		<SectionContainer>
+		<SectionContainer className={clsx(setValue ? "border-orange-500" : "")}>
 			<Title titleType="h2">Permisos</Title>
 
-			<div className="grid lg:grid-cols-3">
+			<div className="grid lg:grid-cols-3 gap-2">
 				{Object.values(UserPermissions).map((name) => (
 					<div
 						className={clsx(
 							"flex items-center px-4 py-2 rounded ",
-							setValue && "hover:bg-slate-100"
+							setValue && "hover:bg-slate-100",
+							props.value.includes(name) && "border border-green-500"
 						)}
 						key={name}
 						onClick={() => {

@@ -18,6 +18,7 @@ import PuzzleIcon from "./icons/PuzzleIcon";
 import useAuth from "@/app/system/user/hook/useAuth";
 import LogoutIcon from "./icons/LogoutIcon";
 import UsersIcon from "./icons/UsersIcon";
+import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -94,51 +95,60 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						href={RouterLinks.dashboard}
 					/>
 
-					<LeftPanelSpacer />
+					{/* <LeftPanelSpacer /> */}
+
 					<LeftPanelButton
 						label="Estadísticas"
 						icon="📊"
 						href={RouterLinks.estadisticas.all}
+						permissions={[UserPermissions.estadisticas]}
 					/>
 
-					<LeftPanelSpacer />
+					{/* <LeftPanelSpacer /> */}
 
 					<LeftPanelButton
 						label="Personal"
 						icon="👩‍💼"
 						href={RouterLinks.employee.all}
+						permissions={[UserPermissions.personal]}
 					/>
 					<LeftPanelButton
 						label="Representante"
 						icon="👨‍👩‍👧"
 						href={RouterLinks.representante.all}
+						permissions={[UserPermissions.representantes]}
 					/>
+
 					<LeftPanelButton
 						label="Estudiantes"
 						icon="🎓"
 						href={RouterLinks.estudiantes.all}
+						permissions={[UserPermissions.estudiantes]}
 					/>
 
 					<LeftPanelButton
 						label="Comodatos"
 						icon={<ShareIcon />}
 						href={RouterLinks.comodato.all}
+						permissions={[UserPermissions.comodatos]}
 					/>
 
 					<LeftPanelButton
 						label="Períodos de Inscripciones"
 						icon={<CalendarIcon />}
 						href={RouterLinks.enrollmentPeriod.all}
+						permissions={[UserPermissions.periodos]}
 					/>
 
 					<LeftPanelButton
 						label="Inscripciones"
 						icon={<PuzzleIcon />}
 						href={RouterLinks.studentEnrollment.all}
+						permissions={[UserPermissions.inscripciones]}
 					/>
 
-					<LeftPanelSpacer />
-					<div
+					{/* <LeftPanelSpacer /> */}
+					{/* <div
 						className="flex items-center px-1.5 py-1 my-0.5 rounded-lg transition-all duration-200 bg-gray-200/90 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white group cursor-pointer"
 						onClick={toggleTables}
 					>
@@ -157,51 +167,59 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 						</span>
 					</div>
 					{isTablesOpen && (
+					)} */}
 						<>
 							<LeftPanelButton
 								label="Núcleo"
 								icon="🏫"
 								href={RouterLinks.nucleos.all}
+								permissions={[UserPermissions.nucleos]}
 							/>
 							<LeftPanelButton
 								label="Sede"
 								icon="🏢"
 								href={RouterLinks.sedes.all}
+								permissions={[UserPermissions.sedes]}
 							/>
 							<LeftPanelButton
 								label="Programa"
 								icon="📚"
 								href={RouterLinks.programas.all}
+								permissions={[UserPermissions.programa]}
 							/>
 							<LeftPanelButton
 								label="Cátedra"
 								icon="🎶"
 								href={RouterLinks.catedra.all}
+								permissions={[UserPermissions.catedra]}
 							/>
 
 							<LeftPanelButton
 								label="Bienes"
 								icon="🏢"
 								href={RouterLinks.bienes.all}
+								permissions={[UserPermissions.bienes]}
 							/>
 							<LeftPanelButton
 								label="Instrumentos"
 								icon={<MusicIcon />}
 								href={RouterLinks.instrument.all}
+								permissions={[UserPermissions.instrumentos]}
 							/>
 
 							<LeftPanelButton
 								label="Usuarios"
 								icon={<UsersIcon />}
 								href={RouterLinks.users.all}
+								permissions={[UserPermissions.users]}
 							/>
 						</>
-					)}
-					<LeftPanelSpacer />
+					{/* <LeftPanelSpacer /> */}
 					<LeftPanelButton
 						label="Documentos"
 						icon="📄"
 						href={RouterLinks.documentos.all}
+						permissions={[UserPermissions.documentos]}
 					/>
 				</nav>
 			)}
