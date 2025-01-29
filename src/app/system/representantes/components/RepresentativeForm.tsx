@@ -102,7 +102,7 @@ const RepresentativeForm = (props: props) => {
 
 			<div className="grid gap-2 grid-cols-1 lg:grid-cols-6">
 				<Select
-					labelTitle="nacionalidad"
+					labelTitle="Nacionalidad"
 					dataList={Object.values(Nationality).map((v) => ({
 						title: v,
 						value: v,
@@ -116,7 +116,7 @@ const RepresentativeForm = (props: props) => {
 
 				<Input
 					containerClassName="col-span-2"
-					labelTitle="Cedula"
+					labelTitle="Cédula"
 					type="number"
 					name="CI"
 					onChange={formik.handleChange}
@@ -126,7 +126,7 @@ const RepresentativeForm = (props: props) => {
 
 				<Input
 					containerClassName="col-span-3"
-					labelTitle="email"
+					labelTitle="Email"
 					name="email"
 					onChange={formik.handleChange}
 					value={formik.values.email}
@@ -135,7 +135,7 @@ const RepresentativeForm = (props: props) => {
 			</div>
 			
 			<InputTagArray
-				labelTitle="Telefono"
+				labelTitle="Teléfono"
 				name="phone_number"
 				type="number"
 				dataList={phoneNumberArr}
@@ -144,7 +144,7 @@ const RepresentativeForm = (props: props) => {
 
 			<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 				<InputDate
-					labelTitle="Fecha de nacimiento"
+					labelTitle="Fecha de Nacimiento"
 					name="birthday"
 					onChange={(value) => {
 						formik.setFieldValue("birthday", value.startDate);
@@ -157,7 +157,7 @@ const RepresentativeForm = (props: props) => {
 				/>
 
 				<Select
-					labelTitle="genero"
+					labelTitle="Género"
 					dataList={Object.values(Gender).map((v) => ({
 						title: v,
 						value: v,
@@ -169,7 +169,7 @@ const RepresentativeForm = (props: props) => {
 				/>
 			</div>
 			<Input
-				labelTitle="direccion"
+				labelTitle="Dirección"
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}

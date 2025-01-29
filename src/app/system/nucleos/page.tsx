@@ -24,7 +24,7 @@ const Page = () => {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Núcleos",
+				navTitle: "NÚCLEOS",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
 					<NeedPermissions permissions={[UserPermissions.nucleosEdit]}>

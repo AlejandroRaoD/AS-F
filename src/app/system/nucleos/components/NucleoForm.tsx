@@ -56,7 +56,7 @@ const NucleoForm = (props: props) => {
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Input
-				labelTitle="Nombre de nucleo"
+				labelTitle="Nombre de Núcleo"
 				name="name"
 				onChange={formik.handleChange}
 				value={formik.values.name}

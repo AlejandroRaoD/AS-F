@@ -24,7 +24,7 @@ const Page = () => {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Programas",
+				navTitle: "PROGRAMAS",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
 					<NeedPermissions permissions={[UserPermissions.programaEdit]}>

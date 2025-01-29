@@ -82,7 +82,7 @@ const SedeForm = (props: props) => {
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Select
-				labelTitle="Nucleo"
+				labelTitle="Núcleo"
 				dataList={nucleos.map((n) => ({ title: n.name, value: n._id }))}
 				name="nucleoId"
 				onChange={formik.handleChange}
@@ -97,14 +97,14 @@ const SedeForm = (props: props) => {
 				error={formik.errors.name}
 			/>
 			<Input
-				labelTitle="dirección "
+				labelTitle="Dirección "
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}
 				error={formik.errors.address}
 			/>
 			<InputTagArray
-				labelTitle="Telefono"
+				labelTitle="Teléfono"
 				name="phone_number"
 				type="number"
 				dataList={phoneNumberArr}

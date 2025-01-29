@@ -9,7 +9,7 @@ const DocumentosPage = () => {
   return (
     <PageTemplate
       navBarProps={{
-        navTitle: "Gestión de Documentos", // Título del Navbar
+        navTitle: "GESTIÓN DE DOCUMENTOS", // Título del Navbar
         hrefBackButton: RouterLinks.dashboard, // Ruta para el botón de retroceso
         showHelpButton: false, // Si no necesitas el botón de ayuda
       }}
@@ -38,7 +38,7 @@ const DocumentosPage = () => {
             </Link>
           </section>
 
-          {/* Sección Comodato */}
+          {/* Sección Comodato 
           <section className="mb-12 text-center transition-all duration-300 hover:scale-105">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">Comodato de Instrumentos</h2>
             <p className="text-gray-500 mb-6 text-lg">
@@ -51,7 +51,7 @@ const DocumentosPage = () => {
                 Crear Comodato
               </button>
             </Link>
-          </section>
+          </section>*/}
         </main>
       </div>
     </PageTemplate>

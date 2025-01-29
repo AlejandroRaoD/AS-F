@@ -86,7 +86,7 @@ const FurnitureForm = (props: props) => {
 			<form onSubmit={formik.handleSubmit}>
 				<div className="grid grid-cols-2 gap-2">
 					<Select
-						labelTitle="nucleo"
+						labelTitle="Núcleo"
 						dataList={nucleos.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -101,7 +101,7 @@ const FurnitureForm = (props: props) => {
 						}}
 					/>
 					<Select
-						labelTitle="sede"
+						labelTitle="Sede"
 						dataList={sedes.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -114,7 +114,7 @@ const FurnitureForm = (props: props) => {
 				</div>
 
 				<Input
-					labelTitle="cantidad"
+					labelTitle="Cantidad"
 					name="quantity"
 					onChange={formik.handleChange}
 					value={formik.values.quantity}
@@ -122,21 +122,21 @@ const FurnitureForm = (props: props) => {
 					type="number"
 				/>
 				<Input
-					labelTitle="Nombre del bien"
+					labelTitle="Nombre del Bien"
 					name="name"
 					onChange={formik.handleChange}
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
 				<Input
-					labelTitle="descripcion"
+					labelTitle="Descripcion"
 					name="description"
 					onChange={formik.handleChange}
 					value={formik.values.description}
 					error={formik.errors.description}
 				/>
 				<Input
-					labelTitle="numero de serial"
+					labelTitle="Número de Serial"
 					name="serialNumber"
 					onChange={formik.handleChange}
 					value={formik.values.serialNumber}
@@ -145,14 +145,14 @@ const FurnitureForm = (props: props) => {
 
 				<div className="grid grid-cols-2 gap-2">
 					<Input
-						labelTitle="marca"
+						labelTitle="Marca"
 						name="brand"
 						onChange={formik.handleChange}
 						value={formik.values.brand}
 						error={formik.errors.brand}
 					/>
 					<Input
-						labelTitle="modelo"
+						labelTitle="Modelo"
 						name="model"
 						onChange={formik.handleChange}
 						value={formik.values.model}
@@ -160,14 +160,14 @@ const FurnitureForm = (props: props) => {
 					/>
 				</div>
 				<Input
-					labelTitle="observacion"
+					labelTitle="Observacion"
 					name="observation"
 					onChange={formik.handleChange}
 					value={formik.values.observation}
 					error={formik.errors.observation}
 				/>
 				<Input
-					labelTitle="lugar"
+					labelTitle="Lugar"
 					name="localLocation"
 					onChange={formik.handleChange}
 					value={formik.values.localLocation}

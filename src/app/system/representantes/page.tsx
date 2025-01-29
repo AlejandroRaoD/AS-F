@@ -24,7 +24,7 @@ export default function EstudiantesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Representantes",
+				navTitle: "REPRESENTANTES",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
 					<NeedPermissions permissions={[UserPermissions.representantesEdit]}>

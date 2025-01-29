@@ -83,7 +83,7 @@ const ProgramaForm = (props: props) => {
 	return (
 		<>
 			<Select
-				labelTitle="Nucleo"
+				labelTitle="Núcleo"
 				dataList={nucleos.map((n) => ({ title: n.name, value: n._id }))}
 				name="nucleo"
 				onChange={({ target: { value } }) => {
@@ -117,7 +117,7 @@ const ProgramaForm = (props: props) => {
 				/>
 
 				<Input
-					labelTitle="Nombre del programa"
+					labelTitle="Nombre del Programa"
 					name="name"
 					onChange={formik.handleChange}
 					value={formik.values.name}
@@ -125,7 +125,7 @@ const ProgramaForm = (props: props) => {
 				/>
 
 				<Input
-					labelTitle="Descripcion"
+					labelTitle="Descripción"
 					name="description"
 					onChange={formik.handleChange}
 					value={formik.values.description}

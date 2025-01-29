@@ -213,7 +213,7 @@ const StudentEnrollmentForm = (props: props) => {
 
 						<Select
 							containerClassName="flex-1"
-							labelTitle="Catedra"
+							labelTitle="Cátedra"
 							dataList={catedras.map(({ _id, name }) => ({
 								title: name,
 								value: _id,

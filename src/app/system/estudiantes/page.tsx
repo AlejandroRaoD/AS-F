@@ -25,7 +25,7 @@ export default function EstudiantesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Gestión de Estudiantes",
+				navTitle: "GESTIÓN DE ESTUDIANTES",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
 					<NeedPermissions permissions={[UserPermissions.estudiantesEdit]}>

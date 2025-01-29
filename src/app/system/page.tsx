@@ -12,48 +12,48 @@ const ImageLink = [
 		href: RouterLinks.estudiantes.all,
 		bgClass: "bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500",
 		image: "/images/estudiantes.jpg",
-		label: "Estudiantes",
+		label: "ESTUDIANTES",
 		permissions: [UserPermissions.estudiantes],
 	},
 	{
 		href: RouterLinks.employee.all,
 		bgClass: "bg-gradient-to-br from-green-700 via-green-600 to-green-500",
 		image: "/images/personal.jpg",
-		label: "Personal",
+		label: "PERSONAL",
 		permissions: [UserPermissions.personal],
 	},
 	{
 		href: RouterLinks.bienes.all,
 		bgClass: "bg-gradient-to-br from-purple-700 via-purple-600 to-purple-500",
 		image: "/images/bienes.png",
-		label: "Bienes",
+		label: "BIENES",
 		permissions: [UserPermissions.bienes],
 	},
 ];
 const buttonLink = [
 	{
 		href: RouterLinks.nucleos.all,
-		label: "Nucleos",
+		label: "NÚCLEOS",
 		permissions: [UserPermissions.nucleos],
 	},
 	{
 		href: RouterLinks.sedes.all,
-		label: "Sedes",
+		label: "SEDES",
 		permissions: [UserPermissions.sedes],
 	},
 	{
 		href: RouterLinks.programas.all,
-		label: "Programa",
+		label: "PROGRAMAS",
 		permissions: [UserPermissions.programa],
 	},
 	{
 		href: RouterLinks.catedra.all,
-		label: "Catedras",
+		label: "CÁTEDRAS",
 		permissions: [UserPermissions.catedra],
 	},
 	{
 		href: RouterLinks.representante.all,
-		label: "Representantes",
+		label: "REPRESENTANTES",
 		permissions: [UserPermissions.representantes],
 	},
 ];

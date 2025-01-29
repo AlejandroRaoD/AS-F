@@ -91,7 +91,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 			{!isPanelCollapsed && (
 				<nav className="flex-1 overflow-y-auto flex flex-col mt-2 px-4 space-y-0.5">
 					<LeftPanelButton
-						label="Inicio"
+						label="INICIO"
 						icon="🏠"
 						href={RouterLinks.dashboard}
 					/>
@@ -108,41 +108,41 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					{/* <LeftPanelSpacer /> */}
 
 					<LeftPanelButton
-						label="Personal"
+						label="PERSONAL"
 						icon="👩‍💼"
 						href={RouterLinks.employee.all}
 						permissions={[UserPermissions.personal]}
 					/>
 					<LeftPanelButton
-						label="Representante"
+						label="REPRESENTANTES"
 						icon="👨‍👩‍👧"
 						href={RouterLinks.representante.all}
 						permissions={[UserPermissions.representantes]}
 					/>
 
 					<LeftPanelButton
-						label="Estudiantes"
+						label="ESTUDIANTES"
 						icon="🎓"
 						href={RouterLinks.estudiantes.all}
 						permissions={[UserPermissions.estudiantes]}
 					/>
 
 					<LeftPanelButton
-						label="Comodatos"
+						label="COMODATOS"
 						icon={<ShareIcon />}
 						href={RouterLinks.comodato.all}
 						permissions={[UserPermissions.comodatos]}
 					/>
 
 					<LeftPanelButton
-						label="Períodos de Inscripciones"
+						label="PERÍODOS DE INSCRIPCIONES"
 						icon={<CalendarIcon />}
 						href={RouterLinks.enrollmentPeriod.all}
 						permissions={[UserPermissions.periodos]}
 					/>
 
 					<LeftPanelButton
-						label="Inscripciones"
+						label="INSCRIPCIONES"
 						icon={<PuzzleIcon />}
 						href={RouterLinks.studentEnrollment.all}
 						permissions={[UserPermissions.inscripciones]}
@@ -171,51 +171,51 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					)} */}
 					<>
 						<LeftPanelButton
-							label="Núcleo"
+							label="NÚCLEO"
 							icon="🏫"
 							href={RouterLinks.nucleos.all}
 							permissions={[UserPermissions.nucleos]}
 						/>
 						<LeftPanelButton
-							label="Sede"
+							label="SEDE"
 							icon="🏢"
 							href={RouterLinks.sedes.all}
 							permissions={[UserPermissions.sedes]}
 						/>
 						<LeftPanelButton
-							label="Programa"
+							label="PROGRAMA"
 							icon="📚"
 							href={RouterLinks.programas.all}
 							permissions={[UserPermissions.programa]}
 						/>
 						<LeftPanelButton
-							label="Cátedra"
+							label="CÁTEDRA"
 							icon="🎶"
 							href={RouterLinks.catedra.all}
 							permissions={[UserPermissions.catedra]}
 						/>
 
 						<LeftPanelButton
-							label="Bienes"
+							label="BIENES"
 							icon="🏢"
 							href={RouterLinks.bienes.all}
 							permissions={[UserPermissions.bienes]}
 						/>
 						<LeftPanelButton
-							label="Instrumentos"
+							label="INSTRUMENTOS"
 							icon={<MusicIcon />}
 							href={RouterLinks.instrument.all}
 							permissions={[UserPermissions.instrumentos]}
 						/>
 
 						<LeftPanelButton
-							label="Usuarios"
+							label="USUARIOS"
 							icon={<UsersIcon />}
 							href={RouterLinks.users.all}
 							permissions={[UserPermissions.users]}
 						/>
 						<LeftPanelButton
-							label="Logs"
+							label="LOGS"
 							icon={<TerminalIcon />}
 							href={RouterLinks.system_log.all}
 							permissions={[UserPermissions.logs]}
@@ -223,7 +223,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					</>
 					{/* <LeftPanelSpacer /> */}
 					<LeftPanelButton
-						label="Documentos"
+						label="DOCUMENTOS"
 						icon="📄"
 						href={RouterLinks.documentos.all}
 						permissions={[UserPermissions.documentos]}
@@ -233,8 +233,8 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 
 			{isPanelCollapsed || (
 				<div className="flex items-center mt-auto  pl-2 py-2 bg-white">
-					<Link
-						href={RouterLinks.perfil.all}
+					*<Link
+						href={RouterLinks.users.all}
 						className="w-8 h-8 rounded-full overflow-hidden  "
 					>
 						<PerfilIcon />

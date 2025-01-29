@@ -24,7 +24,7 @@ export default function BienesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Períodos de inscripciones",
+				navTitle: "PERÍODOS DE INSCRIPCIONES",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (

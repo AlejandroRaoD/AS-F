@@ -31,7 +31,7 @@ const ConstEstudioPage = () => {
   return (
     <PageTemplate
       navBarProps={{
-        navTitle: "Constancia de Estudio",
+        navTitle: "CONSTANCIA DE ESTUDIO",
         hrefBackButton: RouterLinks.documentos.all,
         showHelpButton: false,
       }}

@@ -23,7 +23,7 @@ export default function BienesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Inscripciones",
+				navTitle: "INSCRIPCIONES",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (

@@ -22,7 +22,7 @@ export default function BienesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Gestión de Bienes",
+				navTitle: "GESTIÓN DE BIENES",
 				hrefBackButton: RouterLinks.dashboard,
 				rightButtons: (
 					<NeedPermissions permissions={[UserPermissions.bienesEdit]}>

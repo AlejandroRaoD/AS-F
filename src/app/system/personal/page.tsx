@@ -49,7 +49,7 @@ export default function BienesPage() {
 					<div className="col-span-3">Nombre</div>
 					<div className="col-span-3">Apellido</div>
 					<div className="col-span-2">Cédula</div>
-					<div className="col-span-3">Telefono</div>
+					<div className="col-span-3">Teléfono</div>
 					<div className="col-span-1">Cargo</div>
 				</div>
 

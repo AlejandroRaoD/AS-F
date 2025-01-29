@@ -24,7 +24,7 @@ export default function BienesPage() {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Instrumentos",
+				navTitle: "INSTRUMENTOS",
 				hrefBackButton: RouterLinks.dashboard,
 
 				rightButtons: (

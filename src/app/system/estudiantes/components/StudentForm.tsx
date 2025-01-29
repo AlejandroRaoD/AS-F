@@ -85,32 +85,32 @@ const StudentForm = (props: props) => {
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<Input
-				labelTitle="Nombre del estudiante"
+				labelTitle="Nombre del Estudiante"
 				name="name"
 				onChange={formik.handleChange}
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>
 			<Input
-				labelTitle="Apellido del estudiante"
+				labelTitle="Apellido del Estudiante"
 				name="lastname"
 				onChange={formik.handleChange}
 				value={formik.values.lastname}
 				error={formik.errors.lastname}
 			/>
 			<Select
-				labelTitle="nacionalidad"
+				labelTitle="Nacionalidad"
 				dataList={Object.values(Nationality).map((v) => ({
 					title: v,
 					value: v,
 				}))}
-				name="nationality"
+				name="Nationality"
 				onChange={formik.handleChange}
 				value={formik.values.nationality}
 				error={formik.errors.nationality}
 			/>
 			<Input
-				labelTitle="Cedula"
+				labelTitle="Cédula"
 				type="number"
 				name="CI"
 				onChange={formik.handleChange}
@@ -118,7 +118,7 @@ const StudentForm = (props: props) => {
 				error={formik.errors.CI}
 			/>
 			<InputDate
-				labelTitle="Fecha de nacimiento"
+				labelTitle="Fecha de Nacimiento"
 				name="birthday"
 				onChange={(value) => {
 					formik.setFieldValue("birthday", value.startDate);
@@ -130,14 +130,14 @@ const StudentForm = (props: props) => {
 				// error={formik.errors.birthday}
 			/>
 			<Input
-				labelTitle="email"
+				labelTitle="Email"
 				name="email"
 				onChange={formik.handleChange}
 				value={formik.values.email}
 				error={formik.errors.email}
 			/>
 			<Select
-				labelTitle="genero"
+				labelTitle="Género"
 				dataList={Object.values(Gender).map((v) => ({
 					title: v,
 					value: v,
@@ -148,14 +148,14 @@ const StudentForm = (props: props) => {
 				error={formik.errors.gender}
 			/>
 			<Input
-				labelTitle="dirección"
+				labelTitle="Dirección"
 				name="address"
 				onChange={formik.handleChange}
 				value={formik.values.address}
 				error={formik.errors.address}
 			/>
 			<InputTagArray
-				labelTitle="Telefono"
+				labelTitle="Teléfono"
 				name="phone_number"
 				type="number"
 				dataList={phoneNumberArr}

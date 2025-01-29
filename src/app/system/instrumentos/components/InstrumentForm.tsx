@@ -85,7 +85,7 @@ const InstrumentForm = (props: props) => {
 			<form onSubmit={formik.handleSubmit}>
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<Select
-						labelTitle="nucleo"
+						labelTitle="Núcleo"
 						dataList={nucleos.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -99,7 +99,7 @@ const InstrumentForm = (props: props) => {
 					/>
 
 					<Select
-						labelTitle="sede"
+						labelTitle="Sede"
 						dataList={sedes.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -135,7 +135,7 @@ const InstrumentForm = (props: props) => {
 					/>
 				</div>
 				<Input
-					labelTitle="Serial N°"
+					labelTitle="Serial"
 					name="serialNumber"
 					onChange={formik.handleChange}
 					value={formik.values.serialNumber}

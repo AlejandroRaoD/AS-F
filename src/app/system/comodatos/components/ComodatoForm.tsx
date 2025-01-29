@@ -134,7 +134,7 @@ const ComodatoForm = (props: props) => {
 					error={formik.errors.studentId}
 				/>
 				<InputDate
-					labelTitle="Duración del comodato"
+					labelTitle="Duración del Comodato"
 					name="dates"
 					onChange={(value) => {
 						formik.setFieldValue("initDate", value.startDate);
@@ -148,7 +148,7 @@ const ComodatoForm = (props: props) => {
 					// error={formik.errors.birthday}
 				/>
 				<Input
-					labelTitle="N° contrato"
+					labelTitle="N° Contrato"
 					name="contractNumber"
 					onChange={formik.handleChange}
 					value={formik.values.contractNumber}

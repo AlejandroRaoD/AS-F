@@ -102,7 +102,7 @@ const EmployeeForm = (props: props) => {
 			<form onSubmit={formik.handleSubmit}>
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<Select
-						labelTitle="nucleo"
+						labelTitle="Núcleo"
 						dataList={nucleos.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -118,7 +118,7 @@ const EmployeeForm = (props: props) => {
 					/>
 
 					<Select
-						labelTitle="sede"
+						labelTitle="Sede"
 						dataList={sedes.map(({ _id, name }) => ({
 							title: name,
 							value: _id,
@@ -130,7 +130,7 @@ const EmployeeForm = (props: props) => {
 					/>
 				</div>
 				<Select
-					labelTitle="Tipo de personal"
+					labelTitle="Tipo de Personal"
 					dataList={Object.values(BusinessPosition).map((v) => ({
 						title: v,
 						value: v,
@@ -159,7 +159,7 @@ const EmployeeForm = (props: props) => {
 				</div>
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-6">
 					<Select
-						labelTitle="nacionalidad"
+						labelTitle="Nacionalidad"
 						dataList={Object.values(Nationality).map((v) => ({
 							title: v,
 							value: v,
@@ -173,7 +173,7 @@ const EmployeeForm = (props: props) => {
 
 					<Input
 						containerClassName="col-span-2"
-						labelTitle="Cedula"
+						labelTitle="Cédula"
 						type="number"
 						name="CI"
 						onChange={formik.handleChange}
@@ -183,7 +183,7 @@ const EmployeeForm = (props: props) => {
 
 					<Input
 						containerClassName="col-span-3"
-						labelTitle="email"
+						labelTitle="Email"
 						name="email"
 						onChange={formik.handleChange}
 						value={formik.values.email}
@@ -192,7 +192,7 @@ const EmployeeForm = (props: props) => {
 				</div>
 				<div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
 					<InputDate
-						labelTitle="Fecha de nacimiento"
+						labelTitle="Fecha de Nacimiento"
 						name="birthday"
 						onChange={(value) => {
 							formik.setFieldValue("birthday", value.startDate);
@@ -204,7 +204,7 @@ const EmployeeForm = (props: props) => {
 						// error={formik.errors.birthday}
 					/>
 					<Select
-						labelTitle="genero"
+						labelTitle="Género"
 						dataList={Object.values(Gender).map((v) => ({
 							title: v,
 							value: v,
@@ -216,14 +216,14 @@ const EmployeeForm = (props: props) => {
 					/>
 				</div>
 				<Input
-					labelTitle="dirección"
+					labelTitle="Dirección"
 					name="address"
 					onChange={formik.handleChange}
 					value={formik.values.address}
 					error={formik.errors.address}
 				/>
 				<InputTagArray
-					labelTitle="Telefono"
+					labelTitle="Teléfono"
 					name="phone_number"
 					type="number"
 					dataList={phoneNumberArr}
