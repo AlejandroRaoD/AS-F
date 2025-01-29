@@ -145,14 +145,14 @@ export default function Home() {
 				</p>
 			</footer>
 
-			<div className="absolute bottom-4 md:bottom-6 right-4 md:right-6">
+			{/* <div className="absolute bottom-4 md:bottom-6 right-4 md:right-6">
 				<Link
 					href={RouterLinks.estadisticas.all}
 					className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-full shadow-lg hover:scale-110 transform transition-all duration-200"
 				>
 					<span className="text-xl md:text-2xl font-bold">📊</span>
 				</Link>
-			</div>
+			</div> */}
 		</PageTemplate>
 	);
 }

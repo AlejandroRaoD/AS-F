@@ -9,6 +9,13 @@ const RouterLinks = {
 	login: "/system/user/auth/login",
 	register: "/system/user/auth/register",
 
+	system_log: {
+		all: "/system/system_log",
+		// create: "/system/system_log/nuevo",
+		// one: (id: IdParam) => `/system/system_log/${oneString(id)}`,
+		// edit: (id: IdParam) => `/system/system_log/${oneString(id)}/editar`,
+	},
+
 	users: {
 		all: "/system/user",
 		create: "/system/user/nuevo",

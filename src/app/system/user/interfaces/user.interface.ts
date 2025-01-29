@@ -2,7 +2,7 @@ import { employeeAttributes } from "../../personal/interfaces/employee.interface
 
 
 export enum UserPermissions {
-	estadisticas = "Ver estadisticas",
+	// estadisticas = "Ver estadisticas",
 	// estadisticasEdit = "Editar estadisticas",
 	personal = "Ver personal",
 	personalEdit = "Editar personal",
@@ -31,7 +31,7 @@ export enum UserPermissions {
 	users = "vista de usuarios",
 	usersEdit = "Editar de usuarios",
 	documentos = "documentos",
-	documentosEdit = "Editar documentos",
+	// documentosEdit = "Editar documentos",
 	logs = "registros de actividades",
 }
 

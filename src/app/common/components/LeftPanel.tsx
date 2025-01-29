@@ -19,6 +19,7 @@ import useAuth from "@/app/system/user/hook/useAuth";
 import LogoutIcon from "./icons/LogoutIcon";
 import UsersIcon from "./icons/UsersIcon";
 import { UserPermissions } from "@/app/system/user/interfaces/user.interface";
+import TerminalIcon from "./icons/TerminalIcon";
 
 interface LeftPanelProps {
 	isPanelCollapsed: boolean;
@@ -97,12 +98,12 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 
 					{/* <LeftPanelSpacer /> */}
 
-					<LeftPanelButton
+					{/* <LeftPanelButton
 						label="Estadísticas"
 						icon="📊"
 						href={RouterLinks.estadisticas.all}
 						permissions={[UserPermissions.estadisticas]}
-					/>
+					/> */}
 
 					{/* <LeftPanelSpacer /> */}
 
@@ -168,52 +169,58 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 					</div>
 					{isTablesOpen && (
 					)} */}
-						<>
-							<LeftPanelButton
-								label="Núcleo"
-								icon="🏫"
-								href={RouterLinks.nucleos.all}
-								permissions={[UserPermissions.nucleos]}
-							/>
-							<LeftPanelButton
-								label="Sede"
-								icon="🏢"
-								href={RouterLinks.sedes.all}
-								permissions={[UserPermissions.sedes]}
-							/>
-							<LeftPanelButton
-								label="Programa"
-								icon="📚"
-								href={RouterLinks.programas.all}
-								permissions={[UserPermissions.programa]}
-							/>
-							<LeftPanelButton
-								label="Cátedra"
-								icon="🎶"
-								href={RouterLinks.catedra.all}
-								permissions={[UserPermissions.catedra]}
-							/>
+					<>
+						<LeftPanelButton
+							label="Núcleo"
+							icon="🏫"
+							href={RouterLinks.nucleos.all}
+							permissions={[UserPermissions.nucleos]}
+						/>
+						<LeftPanelButton
+							label="Sede"
+							icon="🏢"
+							href={RouterLinks.sedes.all}
+							permissions={[UserPermissions.sedes]}
+						/>
+						<LeftPanelButton
+							label="Programa"
+							icon="📚"
+							href={RouterLinks.programas.all}
+							permissions={[UserPermissions.programa]}
+						/>
+						<LeftPanelButton
+							label="Cátedra"
+							icon="🎶"
+							href={RouterLinks.catedra.all}
+							permissions={[UserPermissions.catedra]}
+						/>
 
-							<LeftPanelButton
-								label="Bienes"
-								icon="🏢"
-								href={RouterLinks.bienes.all}
-								permissions={[UserPermissions.bienes]}
-							/>
-							<LeftPanelButton
-								label="Instrumentos"
-								icon={<MusicIcon />}
-								href={RouterLinks.instrument.all}
-								permissions={[UserPermissions.instrumentos]}
-							/>
+						<LeftPanelButton
+							label="Bienes"
+							icon="🏢"
+							href={RouterLinks.bienes.all}
+							permissions={[UserPermissions.bienes]}
+						/>
+						<LeftPanelButton
+							label="Instrumentos"
+							icon={<MusicIcon />}
+							href={RouterLinks.instrument.all}
+							permissions={[UserPermissions.instrumentos]}
+						/>
 
-							<LeftPanelButton
-								label="Usuarios"
-								icon={<UsersIcon />}
-								href={RouterLinks.users.all}
-								permissions={[UserPermissions.users]}
-							/>
-						</>
+						<LeftPanelButton
+							label="Usuarios"
+							icon={<UsersIcon />}
+							href={RouterLinks.users.all}
+							permissions={[UserPermissions.users]}
+						/>
+						<LeftPanelButton
+							label="Logs"
+							icon={<TerminalIcon />}
+							href={RouterLinks.system_log.all}
+							permissions={[UserPermissions.logs]}
+						/>
+					</>
 					{/* <LeftPanelSpacer /> */}
 					<LeftPanelButton
 						label="Documentos"
