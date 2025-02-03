@@ -16,27 +16,22 @@ interface props {
 	redirect?: string;
 }
 
-const EnrollmentPeriodForm = (props: props) => {
-	const { data, redirect } = props;
-
+const EnrollmentPeriodForm = ({ data, redirect }: props) => {
 	const router = useRouter();
 	const [isSubmiting, setIsSubmiting] = useState(false);
-	const {
-		createEnrollmentPeriod,
-		updateEnrollmentPeriod,
-		deleteEnrollmentPeriod,
-	} = useEnrollmentPeriod();
+	const { createEnrollmentPeriod, updateEnrollmentPeriod, deleteEnrollmentPeriod } = useEnrollmentPeriod();
+
+	const currentYear = new Date().getFullYear(); // Año fijo
 
 	const formik = useFormik({
-		initialValues: data || {
-			year: new Date().getFullYear(),
-			step: 1,
+		initialValues: {
+			year: currentYear,
+			step: data?.step || 1,
 		},
 		validationSchema: yup.object({
-			year: yup.number().min(new Date().getFullYear()),
-			step: yup.number().min(1),
+			step: yup.number().min(1).required("Selecciona un período"),
 		}),
-		onSubmit: async (formData: enrollmentPeriodAttributes) => {
+		onSubmit: async (formData) => {
 			if (isSubmiting) return;
 			setIsSubmiting(true);
 
@@ -63,36 +58,42 @@ const EnrollmentPeriodForm = (props: props) => {
 	};
 
 	return (
-		<>
-			<form onSubmit={formik.handleSubmit}>
-				<div className="grid grid-cols-2 gap-2">
-					<Input
-						labelTitle="Año"
-						name="year"
-						onChange={formik.handleChange}
-						value={formik.values.year}
-						error={formik.errors.year}
-					/>
+		<form onSubmit={formik.handleSubmit}>
+			<div className="grid grid-cols-2 gap-2">
+				{/* Campo de Año (Solo lectura) */}
+				<Input
+					labelTitle="Año"
+					name="year"
+					value={currentYear}
+					readOnly
+				/>
 
-					<Input
-						labelTitle="Período"
+				{/* Select para el Período */}
+				<div>
+					<label className="block text-sm font-medium text-gray-700">Período</label>
+					<select
 						name="step"
-						onChange={formik.handleChange}
 						value={formik.values.step}
-						error={formik.errors.step}
-					/>
+						onChange={formik.handleChange}
+						className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+					>
+						<option value={1}>Período 1</option>
+						<option value={2}>Período 2</option>
+						<option value={3}>Período 3</option>
+					</select>
 				</div>
-				<div className="grid grid-cols-2 gap-2">
-					<Button type="submit">Guardar</Button>
+			</div>
 
-					{data && (
-						<Button variant="error-outline" onClick={handleDeleteButton}>
-							Eliminar
-						</Button>
-					)}
-				</div>
-			</form>
-		</>
+			<div className="grid grid-cols-2 gap-2 mt-4">
+				<Button type="submit">Guardar</Button>
+
+				{data && (
+					<Button variant="error-outline" onClick={handleDeleteButton}>
+						Eliminar
+					</Button>
+				)}
+			</div>
+		</form>
 	);
 };
 

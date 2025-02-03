@@ -215,7 +215,7 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 							permissions={[UserPermissions.users]}
 						/>
 						<LeftPanelButton
-							label="LOGS"
+							label="HISTORIAL"
 							icon={<TerminalIcon />}
 							href={RouterLinks.system_log.all}
 							permissions={[UserPermissions.logs]}

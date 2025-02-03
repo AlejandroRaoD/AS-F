@@ -112,7 +112,7 @@ const CatedraForm = (props: props) => {
 				<Input
 					labelTitle="Nombre de la Cátedra"
 					name="name"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
@@ -120,7 +120,7 @@ const CatedraForm = (props: props) => {
 				<Input
 					labelTitle="Descripción"
 					name="description"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("description", e.target.value.toUpperCase())}
 					value={formik.values.description}
 					error={formik.errors.description}
 				/>

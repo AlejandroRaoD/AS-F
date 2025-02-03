@@ -87,14 +87,14 @@ const StudentForm = (props: props) => {
 			<Input
 				labelTitle="Nombre del Estudiante"
 				name="name"
-				onChange={formik.handleChange}
+				onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>
 			<Input
 				labelTitle="Apellido del Estudiante"
 				name="lastname"
-				onChange={formik.handleChange}
+				onChange={(e) => formik.setFieldValue("lastname", e.target.value.toUpperCase())}
 				value={formik.values.lastname}
 				error={formik.errors.lastname}
 			/>

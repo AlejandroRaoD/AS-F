@@ -124,7 +124,7 @@ const FurnitureForm = (props: props) => {
 				<Input
 					labelTitle="Nombre del Bien"
 					name="name"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
@@ -147,14 +147,14 @@ const FurnitureForm = (props: props) => {
 					<Input
 						labelTitle="Marca"
 						name="brand"
-						onChange={formik.handleChange}
+						onChange={(e) => formik.setFieldValue("brand", e.target.value.toUpperCase())}
 						value={formik.values.brand}
 						error={formik.errors.brand}
 					/>
 					<Input
 						labelTitle="Modelo"
 						name="model"
-						onChange={formik.handleChange}
+						onChange={(e) => formik.setFieldValue("model", e.target.value.toUpperCase())}
 						value={formik.values.model}
 						error={formik.errors.model}
 					/>

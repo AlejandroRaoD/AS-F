@@ -87,14 +87,14 @@ const RepresentativeForm = (props: props) => {
 				<Input
 					labelTitle="Nombre del representante"
 					name="name"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 					value={formik.values.name}
 					error={formik.errors.name}
 				/>
 				<Input
 					labelTitle="Apellido del representante"
 					name="lastname"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("lastname", e.target.value.toUpperCase())}
 					value={formik.values.lastname}
 					error={formik.errors.lastname}
 				/>
@@ -179,7 +179,7 @@ const RepresentativeForm = (props: props) => {
 			<Input
 				labelTitle="Trabajo"
 				name="job"
-				onChange={formik.handleChange}
+				onChange={(e) => formik.setFieldValue("job", e.target.value.toUpperCase())}
 				value={formik.values.job}
 				error={formik.errors.job}
 			/>

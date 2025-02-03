@@ -58,7 +58,7 @@ const NucleoForm = (props: props) => {
 			<Input
 				labelTitle="Nombre de Núcleo"
 				name="name"
-				onChange={formik.handleChange}
+				onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 				value={formik.values.name}
 				error={formik.errors.name}
 			/>

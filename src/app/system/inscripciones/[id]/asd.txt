@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import { useParams } from "next/navigation";
 import RouterLinks from "@/config/RouterLinks";
@@ -20,10 +20,12 @@ import Spacer from "@/app/common/components/Spacer";
 import NeedPermissions from "../../user/components/NeedPermissions";
 import { UserPermissions } from "../../user/interfaces/user.interface";
 import generatePDF from "@/app/common/utils/generatePDF";
+import PagePDF from "@/app/system/documentos/constEstudio/page";
 
 const Page = () => {
 	const { id } = useParams();
 	const studentEnrollmentId = getOneStringParams(id);
+	const pdfRef = useRef(null);
 
 	const { studentEnrollment } = useStudentEnrollment({ id: studentEnrollmentId });
 	const { enrollmentPeriod, getEnrollmentPeriod } = useEnrollmentPeriod();
@@ -43,10 +45,10 @@ const Page = () => {
 		if (student && sede && enrollmentPeriod) {
 			setPdfData({
 				studentName: `${student.name} ${student.lastname}`,
-				studentCI: `${student.nationality}-${student.CI}`,
+				idNumber: `${student.nationality}-${student.CI}`,
 				studentEmail: student.email,
 				studentPhone: student.phone_number[0],
-				sedeName: sede.name,
+				sede: sede.name,
 				enrollmentPeriod: `${enrollmentPeriod.year}-${enrollmentPeriod.step}`,
 				date: new Date().toLocaleDateString(),
 			});
@@ -54,13 +56,10 @@ const Page = () => {
 	}, [student, sede, enrollmentPeriod]);
 
 	const handleGeneratePDF = () => {
-		if (pdfData) {
-			const pdfElement = document.getElementById("pagePDF");
-			if (pdfElement) {
-				generatePDF("pagePDF", "Constancia_Estudio.pdf");
-			} else {
-				console.error("No se encontró el elemento para generar el PDF.");
-			}
+		if (pdfData && pdfRef.current) {
+			generatePDF("pagePDF", "Constancia_Estudio.pdf");
+		} else {
+			console.error("No se encontró el elemento para generar el PDF.");
 		}
 	};
 
@@ -81,33 +80,12 @@ const Page = () => {
 		>
 			{studentEnrollment && (
 				<SectionContainer>
-					<div className="grid grid-cols-2 gap-2">
-						{sede && <TextValue largeContent title="Sede" value={sede.name} />}
-						{enrollmentPeriod && (
-							<TextValue largeContent title="Periodo" value={pdfData?.enrollmentPeriod} />
-						)}
-					</div>
-					<Spacer />
-					<Title titleType="h3">Cátedras inscritas</Title>
-					{studentEnrollment.content.map((item) => (
-						<CatedraEnrollmentItem key={item.catedraId} data={item} />
-					))}
-				</SectionContainer>
-			)}
-			{student && (
-				<SectionContainer>
-					<Title titleType="h3">Estudiante</Title>
-					<div className="grid grid-cols-2 gap-2">
-						<TextValue largeContent title="Nombre" value={pdfData?.studentName} />
-						<TextValue largeContent title="Cédula" value={pdfData?.studentCI} />
-						<TextValue largeContent title="Email" value={pdfData?.studentEmail} />
-						<TextValue largeContent title="Teléfono" value={pdfData?.studentPhone} />
-					</div>
-					<div className="flex justify-end">
-						<Button href={RouterLinks.estudiantes.one(student._id)}>Detalles</Button>
+					<div ref={pdfRef} id="pagePDF">
+						<PagePDF {...pdfData} />
 					</div>
 				</SectionContainer>
 			)}
+
 			<SectionContainer>
 				<div className="flex justify-center mt-4">
 					<Button onClick={handleGeneratePDF}>Generar Constancia de Estudio</Button>

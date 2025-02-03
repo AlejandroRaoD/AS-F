@@ -17,7 +17,7 @@ const Page = () => {
 	return (
 		<PageTemplate
 			navBarProps={{
-				navTitle: "Logs",
+				navTitle: "Historial de Registros del Sistema",
 				hrefBackButton: RouterLinks.dashboard,
 				// rightButtons: (
 				// 	<NeedPermissions permissions={[UserPermissions.systemLogsEdit]}>

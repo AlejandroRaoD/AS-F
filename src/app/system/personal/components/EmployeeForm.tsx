@@ -144,7 +144,7 @@ const EmployeeForm = (props: props) => {
 					<Input
 						labelTitle="Nombre"
 						name="name"
-						onChange={formik.handleChange}
+						onChange={(e) => formik.setFieldValue("name", e.target.value.toUpperCase())}
 						value={formik.values.name}
 						error={formik.errors.name}
 					/>
@@ -152,7 +152,7 @@ const EmployeeForm = (props: props) => {
 					<Input
 						labelTitle="Apellido"
 						name="lastname"
-						onChange={formik.handleChange}
+						onChange={(e) => formik.setFieldValue("lastname", e.target.value.toUpperCase())}
 						value={formik.values.lastname}
 						error={formik.errors.lastname}
 					/>

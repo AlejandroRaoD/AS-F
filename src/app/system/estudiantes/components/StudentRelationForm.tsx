@@ -98,7 +98,7 @@ const StudentRelationForm = (props: props) => {
 				<Input
 					labelTitle="Relacion con el estudiante"
 					name="familyBond"
-					onChange={formik.handleChange}
+					onChange={(e) => formik.setFieldValue("familyBond", e.target.value.toUpperCase())}
 					value={formik.values.familyBond}
 					error={formik.errors.familyBond}
 				/>
