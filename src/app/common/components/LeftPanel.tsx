@@ -233,7 +233,8 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 
 			{isPanelCollapsed || (
 				<div className="flex items-center mt-auto  pl-2 py-2 bg-white">
-					*<Link
+					
+					<Link
 						href={RouterLinks.users.all}
 						className="w-8 h-8 rounded-full overflow-hidden  "
 					>
