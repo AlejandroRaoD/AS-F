@@ -221,13 +221,13 @@ const LeftPanel = ({ isPanelCollapsed, togglePanel }: LeftPanelProps) => {
 							permissions={[UserPermissions.logs]}
 						/>
 					</>
-					{/* <LeftPanelSpacer /> */}
-					<LeftPanelButton
+					{/* <LeftPanelSpacer /> 
+				{/* 	<LeftPanelButton
 						label="DOCUMENTOS"
 						icon="📄"
 						href={RouterLinks.documentos.all}
 						permissions={[UserPermissions.documentos]}
-					/>
+					/> */}
 				</nav>
 			)}
 
