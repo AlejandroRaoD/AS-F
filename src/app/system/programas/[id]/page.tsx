@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
@@ -17,6 +17,7 @@ import TextValue from "@/app/common/components/TextValue";
 import useNucleo from "../../nucleos/hooks/useNucleo";
 import NeedPermissions from "../../user/components/NeedPermissions";
 import { UserPermissions } from "../../user/interfaces/user.interface";
+import { jsPDF } from "jspdf"; // Importamos jsPDF
 
 const Page = () => {
 	const { id } = useParams();
@@ -34,6 +35,40 @@ const Page = () => {
 		getSede(programa.sedeId).then((item) => getNucleo(item.nucleoId));
 	}, [programa]);
 
+	// Función para generar el PDF
+	const generatePDF = () => {
+		const doc = new jsPDF();
+
+		// Agregar logo al PDF
+		const logoUrl = '/images/logo-1.png';  // Ruta del logo
+		doc.addImage(logoUrl, 'PNG', 10, 10, 40, 40);  // (URL, formato, x, y, ancho, alto)
+
+		// Información del programa
+		if (programa) {
+			doc.text(`Nombre del Programa: ${programa.name}`, 10, 60);
+			doc.text(`Descripción: ${programa.description}`, 10, 70);
+		}
+
+		// Información de la sede
+		if (sede) {
+			doc.text(`Sede: ${sede.name}`, 10, 90);
+		}
+
+		// Información del núcleo
+		if (nucleo) {
+			doc.text(`Núcleo: ${nucleo.name}`, 10, 100);
+		}
+
+		// Información del director
+		if (employee) {
+			doc.text(`Director: ${employee.name} ${employee.lastname}`, 10, 110);
+			doc.text(`Teléfono: ${employee.phone_number[0]}`, 10, 120);
+		}
+
+		// Guardar el PDF con un nombre personalizado
+		doc.save(`Detalles_programa_${programaId}.pdf`);
+	};
+
 	return (
 		<PageTemplate
 			navBarProps={{
@@ -49,6 +84,16 @@ const Page = () => {
 			}}
 			permissionsRequired={[UserPermissions.programa]}
 		>
+			{/* Botón para generar el PDF */}
+			<div className="flex justify-end mb-4">
+				<button
+					onClick={generatePDF}
+					className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+				>
+					Descargar PDF
+				</button>
+			</div>
+
 			<SectionContainer>
 				{programa && (
 					<>

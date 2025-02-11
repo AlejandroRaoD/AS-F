@@ -1,6 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
+import { jsPDF } from "jspdf"; // Importa jsPDF
+
 import PageTemplate from "@/app/common/components/PageTemplate";
 import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
@@ -18,70 +20,118 @@ import NeedPermissions from "../../user/components/NeedPermissions";
 import { UserPermissions } from "../../user/interfaces/user.interface";
 
 const Page = () => {
-	const { id } = useParams();
-	const studentId = getOneStringParams(id);
+  const { id } = useParams();
+  const studentId = getOneStringParams(id);
 
-	const { student } = useStudent({ id: studentId });
-	const { studentRelations } = useStudentRelation({ query: { studentId } });
+  const { student } = useStudent({ id: studentId });
+  const { studentRelations } = useStudentRelation({ query: { studentId } });
 
-	return (
-		<PageTemplate
-			navBarProps={{
-				navTitle: "Detalles",
-				hrefBackButton: RouterLinks.estudiantes.all,
-				rightButtons: (
-					<NeedPermissions permissions={[UserPermissions.estudiantesEdit]}>
-						<IconButton href={RouterLinks.estudiantes.edit(id)}>
-							<EditIcon />
-						</IconButton>
-					</NeedPermissions>
-				),
-			}}
-			permissionsRequired={[UserPermissions.estudiantes]}
-		>
-			<SectionContainer>
-				{student && (
-					<>
-						<div className="grid grid-cols-2">
-							<TextValue title="Nombre" value={student.name} />
-							<TextValue title="Apellido" value={student.lastname} />
-							<TextValue
-								title="Nacimiento"
-								value={new Date(student.birthday).toDateString()}
-							/>
-							<TextValue
-								title="C.I."
-								value={`${student.nationality}-${student.CI}`}
-							/>
-							<TextValue title="Direccion" value={student.address} />
-							<TextValue title="Genero" value={student.gender} />
-						</div>
+  const pageRef = useRef<HTMLDivElement>(null); // Referencia al contenido de la página
 
-						<div className="grid grid-cols-2">
-							<TextValue title="Telefono" value={student.phone_number} />
-							<TextValue title="Email" value={student.email} />
-						</div>
-					</>
-				)}
-			</SectionContainer>
+  // Función para generar el PDF con jsPDF
+  const generatePDF = () => {
+    const doc = new jsPDF(); // Crear una nueva instancia de jsPDF
+    const element = pageRef.current; // Capturar el contenido de la página
 
-			<SectionContainer>
-				<div className="flex justify-between">
-					<Title titleType="h3">Relaciones</Title>
+    if (!element) return;
 
-					<Button href={RouterLinks.estudiantes.relaciones(studentId)}>
-						Editar relaciones
-					</Button>
-				</div>
+    // Cargar el logo de fondo
+    doc.addImage("/images/logo-1.png", "PNG", 10, 10, 190, 40); // Logo de fondo (ajustar tamaño según sea necesario)
 
-				<div>
-					{studentRelations.map((a) => (
-						<StudentRelationItem key={a._id} data={a} />
-					))}
-				</div>
-			</SectionContainer>
-		</PageTemplate>
-	);
+    // Establecer las fuentes para el texto
+    doc.setFont("helvetica");
+    doc.setFontSize(12);
+
+    // Agregar el contenido del estudiante al PDF (solo texto)
+    let y = 60; // Coordenada Y para el texto (para que no se superponga al logo)
+    if (student) {
+      doc.text(`Nombre: ${student.name} ${student.lastname}`, 10, y);
+      y += 10;
+      doc.text(`Nacimiento: ${new Date(student.birthday).toDateString()}`, 10, y);
+      y += 10;
+      doc.text(`C.I.: ${student.nationality}-${student.CI}`, 10, y);
+      y += 10;
+      doc.text(`Dirección: ${student.address}`, 10, y);
+      y += 10;
+      doc.text(`Género: ${student.gender}`, 10, y);
+      y += 10;
+      doc.text(`Teléfono: ${student.phone_number}`, 10, y);
+      y += 10;
+      doc.text(`Email: ${student.email}`, 10, y);
+    }
+
+    // Guardar el PDF con el contenido del estudiante
+    doc.save(`Detalles_estudiante_${studentId}.pdf`);
+  };
+
+  return (
+    <PageTemplate
+      navBarProps={{
+        navTitle: "Detalles",
+        hrefBackButton: RouterLinks.estudiantes.all,
+        rightButtons: (
+          <NeedPermissions permissions={[UserPermissions.estudiantesEdit]}>
+            <IconButton href={RouterLinks.estudiantes.edit(id)}>
+              <EditIcon />
+            </IconButton>
+          </NeedPermissions>
+        ),
+      }}
+      permissionsRequired={[UserPermissions.estudiantes]}
+    >
+      {/* Botón para generar PDF */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={generatePDF}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+        >
+          Descargar PDF
+        </button>
+      </div>
+
+      <SectionContainer ref={pageRef}> {/* Contenedor con la referencia */}
+        {student && (
+          <>
+            <div className="grid grid-cols-2">
+              <TextValue title="Nombre" value={student.name} />
+              <TextValue title="Apellido" value={student.lastname} />
+              <TextValue
+                title="Nacimiento"
+                value={new Date(student.birthday).toDateString()}
+              />
+              <TextValue
+                title="C.I."
+                value={`${student.nationality}-${student.CI}`}
+              />
+              <TextValue title="Direccion" value={student.address} />
+              <TextValue title="Genero" value={student.gender} />
+            </div>
+
+            <div className="grid grid-cols-2">
+              <TextValue title="Telefono" value={student.phone_number} />
+              <TextValue title="Email" value={student.email} />
+            </div>
+          </>
+        )}
+      </SectionContainer>
+
+      <SectionContainer>
+        <div className="flex justify-between">
+          <Title titleType="h3">Relaciones</Title>
+
+          <Button href={RouterLinks.estudiantes.relaciones(studentId)}>
+            Editar relaciones
+          </Button>
+        </div>
+
+        <div>
+          {studentRelations.map((a) => (
+            <StudentRelationItem key={a._id} data={a} />
+          ))}
+        </div>
+      </SectionContainer>
+    </PageTemplate>
+  );
 };
 
 export default Page;

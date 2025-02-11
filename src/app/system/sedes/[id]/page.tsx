@@ -22,10 +22,10 @@ import useCatedra from "../../catedra/hook/useCatedra";
 import { CatedraItem } from "../../catedra/components/CatedraItem";
 import NeedPermissions from "../../user/components/NeedPermissions";
 import { UserPermissions } from "../../user/interfaces/user.interface";
+import { jsPDF } from "jspdf"; // Importamos jsPDF
 
 const Page = () => {
 	const { id } = useParams();
-
 	const sedeId = getOneStringParams(id);
 
 	const { nucleo, getNucleo } = useNucleo();
@@ -44,6 +44,54 @@ const Page = () => {
 			getCatedrasOfThisPrograms(programas.map((i) => i._id));
 	}, [sede, programas.length]);
 
+	// Función para generar el PDF
+	const generatePDF = () => {
+		const doc = new jsPDF();
+
+		// Agregar el logo (si lo tienes)
+		const logoUrl = '/images/logo-1.png';  // Ruta del logo
+		doc.addImage(logoUrl, 'PNG', 10, 10, 40, 40);  // (URL, formato, x, y, ancho, alto)
+
+		// Detalles de la sede
+		if (sede) {
+			doc.text(`Nombre de la Sede: ${sede.name}`, 10, 60);
+			doc.text(`Teléfono: ${sede.phone_number}`, 10, 70);
+			doc.text(`Dirección: ${sede.address}`, 10, 80);
+		}
+
+		// Detalles del Núcleo
+		if (nucleo) {
+			doc.text(`Núcleo: ${nucleo.name}`, 10, 90);
+		}
+
+		// Detalles de los empleados
+		doc.text(`Empleados: ${employees.length}`, 10, 100);
+		employees.slice(0, 5).forEach((emp, index) => {
+			doc.text(`${index + 1}. ${emp.name} ${emp.lastname}`, 10, 110 + (index * 10));
+		});
+
+		// Detalles de los bienes
+		doc.text(`Bienes: ${furnitures.reduce((a, b) => a + b.quantity, 0)}`, 10, 130);
+		furnitures.slice(0, 5).forEach((furniture, index) => {
+			doc.text(`${index + 1}. ${furniture.name} - Cantidad: ${furniture.quantity}`, 10, 140 + (index * 10));
+		});
+
+		// Detalles de los programas
+		doc.text(`Programas: ${programas.length}`, 10, 160);
+		programas.slice(0, 5).forEach((programa, index) => {
+			doc.text(`${index + 1}. ${programa.name}`, 10, 170 + (index * 10));
+		});
+
+		// Detalles de las cátedras
+		doc.text(`Cátedras: ${catedras.length}`, 10, 190);
+		catedras.slice(0, 5).forEach((catedra, index) => {
+			doc.text(`${index + 1}. ${catedra.name}`, 10, 200 + (index * 10));
+		});
+
+		// Guardar el PDF con un nombre personalizado
+		doc.save(`Detalles_Sede_${id}.pdf`);
+	};
+
 	return (
 		<PageTemplate
 			navBarProps={{
@@ -59,6 +107,16 @@ const Page = () => {
 			}}
 			permissionsRequired={[UserPermissions.sedes]}
 		>
+			{/* Botón para generar el PDF */}
+			<div className="flex justify-end mb-4">
+				<button
+					onClick={generatePDF}
+					className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+				>
+					Descargar PDF
+				</button>
+			</div>
+
 			<SectionContainer>
 				{sede ? (
 					<>
@@ -74,8 +132,6 @@ const Page = () => {
 						)}
 					</>
 				) : (
-					// <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto my-6">
-					// </div>
 					<p className="text-center text-gray-500">
 						Cargando los detalles de la sede...
 					</p>
