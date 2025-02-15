@@ -35,16 +35,18 @@ const Page = () => {
 
     if (!element) return;
 
-    // Cargar el logo de fondo
-    doc.addImage("/images/logo-1.png", "PNG", 10, 10, 190, 40); // Logo de fondo (ajustar tamaño según sea necesario)
+    // Cargar el logo de fondo con un tamaño adecuado
+    doc.addImage("/images/logo-1.png", "PNG", 10, 10, 60, 20); // Logo de fondo (ajustado a un tamaño más pequeño)
 
-    // Establecer las fuentes para el texto
+    // Título del reporte
     doc.setFont("helvetica");
-    doc.setFontSize(12);
+    doc.setFontSize(16);
+    doc.text("Reporte de Detalles del Estudiante", 10, 40); // Título en la parte superior
 
     // Agregar el contenido del estudiante al PDF (solo texto)
     let y = 60; // Coordenada Y para el texto (para que no se superponga al logo)
     if (student) {
+      doc.setFontSize(12); // Establecer el tamaño de fuente para el contenido
       doc.text(`Nombre: ${student.name} ${student.lastname}`, 10, y);
       y += 10;
       doc.text(`Nacimiento: ${new Date(student.birthday).toDateString()}`, 10, y);

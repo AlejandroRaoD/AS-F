@@ -24,6 +24,10 @@ const Page = () => {
 	const generatePDF = () => {
 		const doc = new jsPDF();
 
+		 // Título del reporte
+		 doc.setFontSize(16);  // Tamaño de fuente más grande para el título
+		 doc.text("Reporte del periodo de inscripción", 10, 50);  // Agregar título en la parte superior
+   
 		if (enrollmentPeriod) {
 			// Título del PDF
 			doc.text("Detalles del Período de Inscripción", 10, 20);

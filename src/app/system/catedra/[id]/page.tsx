@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { jsPDF } from "jspdf"; // Importa jsPDF para la generación del PDF
+import { jsPDF } from "jspdf";
 import PageTemplate from "@/app/common/components/PageTemplate";
 import Title from "@/app/common/components/Title";
 import { useParams } from "next/navigation";
@@ -27,46 +27,56 @@ const Page = () => {
   const { sede, getSede } = useSede();
   const { nucleo, getNucleo } = useNucleo();
 
-  const pageRef = useRef(null); // Ref para el contenedor de la página
+  const pageRef = useRef(null);
 
   useEffect(() => {
     if (!catedra) return;
 
     getPrograma(catedra.programaId).then(async (i) => {
       const s = await getSede(i.sedeId);
-
       getNucleo(s.nucleoId);
     });
   }, [catedra]);
 
-  // Función para generar el PDF con texto y el logo
+  // Función para generar el PDF con título y logo
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    // Agregar logo al PDF
-    const logoUrl = '/images/logo-1.png';  // Ruta del logo
-    doc.addImage(logoUrl, 'PNG', 10, 10, 40, 40);  // (URL, formato, x, y, ancho, alto)
+    // Agregar título centrado
+    doc.setFontSize(16);
+    doc.text("Reporte de la Cátedra", 105, 20, { align: "center" });
+
+    // Agregar logo
+    const logoUrl = "/images/logo-1.png";
+    doc.addImage(logoUrl, "PNG", 10, 10, 40, 40); // (URL, formato, x, y, ancho, alto)
+
+    // Agregar datos de la cátedra
+    doc.setFontSize(12);
+    let y = 60; // Posición inicial del texto
 
     if (catedra) {
-      // Detalles de la cátedra
-      doc.text(`Nombre: ${catedra.name}`, 10, 60);
-      doc.text(`Descripción: ${catedra.description}`, 10, 70);
+      doc.text(`Nombre: ${catedra.name}`, 10, y);
+      y += 10;
+      doc.text(`Descripción: ${catedra.description}`, 10, y);
+      y += 10;
     }
 
     if (programa) {
-      doc.text(`Programa: ${programa.name}`, 10, 80);
+      doc.text(`Programa: ${programa.name}`, 10, y);
+      y += 10;
     }
 
     if (sede) {
-      doc.text(`Sede: ${sede.name}`, 10, 90);
+      doc.text(`Sede: ${sede.name}`, 10, y);
+      y += 10;
     }
 
     if (nucleo) {
-      doc.text(`Núcleo: ${nucleo.name}`, 10, 100);
+      doc.text(`Núcleo: ${nucleo.name}`, 10, y);
     }
 
     // Guardar el PDF con un nombre personalizado
-    doc.save(`Detalles_catedra_${catedraId}.pdf`);
+    doc.save(`Reporte_Catedra_${catedraId}.pdf`);
   };
 
   return (
@@ -84,7 +94,6 @@ const Page = () => {
       }}
       permissionsRequired={[UserPermissions.catedra]}
     >
-      {/* Botón para generar el PDF */}
       <div className="flex justify-end mb-4">
         <button
           onClick={generatePDF}
@@ -94,15 +103,12 @@ const Page = () => {
         </button>
       </div>
 
-      {/* Contenedor de datos (para visualización, no se imprime en el PDF) */}
       <div id="pdf-content" ref={pageRef}>
         <SectionContainer>
           {catedra && (
             <>
               <TextValue largeContent title="Nombre" value={catedra.name} />
-
               <TextValue largeContent title="Descripción" value={catedra.description} />
-
               {programa && <TextValue largeContent title="Programa" value={programa.name} />}
               {sede && <TextValue largeContent title="Sede" value={sede.name} />}
               {nucleo && <TextValue largeContent title="Núcleo" value={nucleo.name} />}

@@ -44,33 +44,37 @@ const Page = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
+    // Título del reporte
+    doc.setFontSize(16); // Puedes ajustar el tamaño de la fuente
+    doc.text("Reporte del Comodato", 10, 50); // (Texto, x, y)
+
     // Agregar logo al PDF
     const logoUrl = '/images/logo-1.png';  // Ruta del logo
-    doc.addImage(logoUrl, 'PNG', 10, 10, 40, 40);  // (URL, formato, x, y, ancho, alto)
+    doc.addImage(logoUrl, 'PNG', 10, 60, 40, 40);  // (URL, formato, x, y, ancho, alto)
 
     if (comodato) {
       // Detalles del comodato
-      doc.text(`Fecha inicio: ${new Date(comodato.initDate).toLocaleDateString()}`, 10, 60);
-      doc.text(`Fecha final: ${new Date(comodato.endDate).toLocaleDateString()}`, 10, 70);
-      doc.text(`N° contrato: ${comodato.contractNumber}`, 10, 80);
+      doc.text(`Fecha inicio: ${new Date(comodato.initDate).toLocaleDateString()}`, 10, 100);
+      doc.text(`Fecha final: ${new Date(comodato.endDate).toLocaleDateString()}`, 10, 110);
+      doc.text(`N° contrato: ${comodato.contractNumber}`, 10, 120);
     }
 
     if (instrument) {
-      doc.text("Instrumento", 10, 90);
-      doc.text(`Nombre: ${instrument.name}`, 10, 100);
-      doc.text(`Modelo: ${instrument.model}`, 10, 110);
-      doc.text(`Marca: ${instrument.brand}`, 10, 120);
+      doc.text("Instrumento", 10, 130);
+      doc.text(`Nombre: ${instrument.name}`, 10, 140);
+      doc.text(`Modelo: ${instrument.model}`, 10, 150);
+      doc.text(`Marca: ${instrument.brand}`, 10, 160);
       if (sede) {
-        doc.text(`Sede: ${sede.name}`, 10, 130);
+        doc.text(`Sede: ${sede.name}`, 10, 170);
       }
     }
 
     if (student) {
-      doc.text("Estudiante", 10, 140);
-      doc.text(`Nombre: ${student.name} ${student.lastname}`, 10, 150);
-      doc.text(`Cédula: ${student.nationality}-${student.CI}`, 10, 160);
-      doc.text(`Email: ${student.email}`, 10, 170);
-      doc.text(`Teléfono: ${student.phone_number[0]}`, 10, 180);
+      doc.text("Estudiante", 10, 180);
+      doc.text(`Nombre: ${student.name} ${student.lastname}`, 10, 190);
+      doc.text(`Cédula: ${student.nationality}-${student.CI}`, 10, 200);
+      doc.text(`Email: ${student.email}`, 10, 210);
+      doc.text(`Teléfono: ${student.phone_number[0]}`, 10, 220);
     }
 
     // Guardar el PDF con un nombre personalizado

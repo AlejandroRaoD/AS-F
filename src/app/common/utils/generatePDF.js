@@ -1,6 +1,6 @@
 import html2pdf from 'html2pdf.js';
 
-const generatePDF = (elementId, filename = 'document.pdf') => {
+const generatePDF = (elementId, filename = 'documento.pdf') => {
   const element = document.getElementById(elementId);
   if (!element) {
     console.error(`No se encontró un elemento con el ID "${elementId}".`);
@@ -8,36 +8,45 @@ const generatePDF = (elementId, filename = 'document.pdf') => {
   }
 
   const options = {
-    margin: [0.1, 0.2, 0.2, 0.2], // Márgenes ajustados
+    margin: [0.5, 0.5, 0.5, 0.5], // Ajusta los márgenes si es necesario
     filename: filename,
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 3 },
+    html2canvas: {
+      scale: 3,  // Aumentar escala mejora la calidad
+      logging: true,  // Habilita el log para ver qué está pasando
+      useCORS: true,  // Permite cargar imágenes desde URLs externas
+    },
     jsPDF: {
       unit: 'in',
-      format: [22 / 2.54, 28 / 2.54], // Tamaño de hoja A4 en pulgadas
-      orientation: 'portrait',
+      format: [22 / 2.54, 28 / 2.54], // Tamaño A4 en pulgadas
+      orientation: 'portrait', // Orientación vertical
     },
   };
 
-  // Configuración para el logo pequeño en la parte superior
-  const logoUrl = '/images/logo-1.png'; // Asegúrate de que la ruta sea correcta
-  const img = new Image();
-  img.src = logoUrl;
+  // Aquí aplicamos los estilos CSS internos
+  const styleSheets = document.styleSheets;
+  const cssRules = [];
 
-  img.onload = () => {
-    const doc = new jsPDF(options.jsPDF);
+  for (let sheet of styleSheets) {
+    if (sheet.href) {
+      cssRules.push(sheet.href); // Agrega las hojas de estilo externas
+    } else if (sheet.rules) {
+      for (let rule of sheet.rules) {
+        cssRules.push(rule.cssText); // Agrega reglas internas
+      }
+    }
+  }
 
-    // Añadir el logo a la página
-    doc.addImage(img, 'JPEG', 10, 10, 50, 50); // Ajusta la posición y tamaño del logo
-
-    // Generar el contenido a partir del elemento de la página
-    doc.html(element, {
-      margin: [60, 20, 20, 20], // Deja espacio para el logo en la parte superior
-      callback: function (doc) {
-        doc.save(filename); // Guarda el PDF generado
+  // Aplica los estilos a través de html2canvas
+  html2pdf()
+    .from(element)
+    .set(options)
+    .set({
+      html2canvas: {
+        css: cssRules.join(' '), // Agrega los estilos al PDF
       },
-    });
-  };
+    })
+    .save();
 };
 
 export default generatePDF;

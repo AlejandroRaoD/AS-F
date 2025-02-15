@@ -31,6 +31,10 @@ const Page = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
+     // Título del reporte
+  doc.setFontSize(16);  // Tamaño de fuente más grande para el título
+  doc.text("Reporte del Instrumento", 10, 50);  // Agregar título en la parte superior
+
     // Agregar logo al PDF
     const logoUrl = '/images/logo-1.png';  // Ruta del logo
     doc.addImage(logoUrl, 'PNG', 10, 10, 40, 40);  // (URL, formato, x, y, ancho, alto)
