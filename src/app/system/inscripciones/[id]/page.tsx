@@ -19,7 +19,7 @@ import CatedraEnrollmentItem from "../components/CatedraEnrollmentItem";
 import Spacer from "@/app/common/components/Spacer";
 import NeedPermissions from "../../user/components/NeedPermissions";
 import { UserPermissions } from "../../user/interfaces/user.interface";
-import generatePDF from "@/app/common/utils/generatePDF";
+import { jsPDF } from "jspdf"; // Importa jsPDF
 import useNucleo from "../../nucleos/hooks/useNucleo";
 
 const Page = () => {
@@ -59,7 +59,48 @@ const Page = () => {
   }, [student, sede, enrollmentPeriod, nucleo]);
 
   const handleGeneratePDF = () => {
-    if (pdfData) generatePDF("pagePDF", "Constancia_Estudio.pdf");
+    if (pdfData) {
+      const doc = new jsPDF();
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+
+      // Agregar los logos
+      doc.addImage("/images/logo-1.png", "PNG", 10, 10, 50, 50);
+      doc.addImage("/images/logo-2.png", "PNG", 130, 10, 50, 50);
+
+      // Título centrado
+      doc.setFontSize(16);
+      doc.setTextColor(0, 0, 0);
+      doc.text("Constancia de Inscripción", 105, 80, { align: "center" });
+
+      // Párrafo 1 (modificado para manejar el texto largo)
+      doc.setFontSize(12);
+      const paragraph1 = `El Comité del Núcleo ${pdfData.nucleo}, sede ${pdfData.sedeName}, hace constar por medio de la presente que el/la estudiante ${pdfData.studentName}, portador de la cédula de identidad Nº ${pdfData.studentCI}, ha sido formalmente inscrito/a en la cátedra correspondiente durante el periodo de inscripción ${pdfData.enrollmentPeriod}.`;
+      const lines1 = doc.splitTextToSize(paragraph1, 170); // Divide el texto en varias líneas
+      let y = 100; // Establece la posición inicial
+      lines1.forEach((line) => {
+        doc.text(line, 20, y); // Imprime cada línea
+        y += 10; // Ajusta la posición para la siguiente línea
+      });
+
+      // Párrafo 2 "La presente..." (modificado para manejar el texto largo)
+      const paragraph2 = `La presente constancia se expide a petición de la parte interesada en San Juan de los Morros, a los ${pdfData.date.getDate()} días del mes ${pdfData.date.getMonth() + 1} del año ${pdfData.date.getFullYear()}.`;
+      const lines2 = doc.splitTextToSize(paragraph2, 170); // Divide el texto en varias líneas
+      lines2.forEach((line) => {
+        doc.text(line, 20, y); // Imprime cada línea
+        y += 10; // Ajusta la posición para la siguiente línea
+      });
+
+      // Firmas
+      doc.text("Atentamente,", 105, y + 10, { align: "center" });
+      doc.line(20, y + 20, 90, y + 20); // Firma 1
+      doc.text("Firma", 20, y + 25);
+      doc.line(120, y + 20, 190, y + 20); // Firma 2
+      doc.text("Firma", 120, y + 25);
+
+      // Guardar el PDF
+      doc.save("Constancia_Estudio.pdf");
+    }
   };
 
   return (
@@ -116,56 +157,6 @@ const Page = () => {
             </Button>
           </div>
         </SectionContainer>
-      )}
-
-      {student && sede && enrollmentPeriod && nucleo && pdfData && (
-        <div className="hidden">
-          <div id="pagePDF" className="relative" style={{ width: "18.5cm", height: "29.7cm", padding: "1cm", boxSizing: "border-box", marginLeft: "auto", marginRight: "auto" }}>
-            {/* Logos superiores */}
-            <div className="absolute top-0 left-0 right-0 flex justify-between">
-              <img src="/images/logo-1.png" alt="Logo Izquierdo" className="w-48" />
-              <img src="/images/logo-2.png" alt="Logo Derecho" className="w-48" />
-            </div>
-
-            {/* Título centrado */}
-            <div className="text-center" style={{ marginTop: "2cm" }}>
-              <h2 className="text-2xl font-semibold underline-bold">
-                Constancia de Inscripción
-              </h2>
-            </div>
-
-            {/* Párrafo centrado en la hoja */}
-            <div className="text-justify" style={{ marginTop: "2cm", padding: "0 2cm" }}>
-              <p>
-                El Comité del Núcleo{" "}
-                <span className="underline-bold">{pdfData.nucleo}</span>, sede{" "}
-                <span className="underline-bold">{pdfData.sedeName}</span>, hace constar por medio de la presente que el/la estudiante{" "}
-                <span className="underline-bold">{pdfData.studentName}</span>, portador de la cédula de identidad Nº{" "}
-                <span className="underline-bold">{pdfData.studentCI}</span>, ha sido formalmente inscrito/a en la cátedra correspondiente durante el periodo de inscripción{" "}
-                <span className="underline-bold">{pdfData.enrollmentPeriod}</span>.
-              </p>
-            </div>
-
-            {/* Párrafo "La presente..." centrado */}
-            <p style={{ marginTop: "2cm" }} className="text-center">
-              La presente constancia se expide a petición de la parte interesada en San Juan de los Morros, a los {pdfData.date.getDate()} días del mes de {pdfData.date.getMonth() + 1} del año {pdfData.date.getFullYear()}.
-            </p>
-
-            {/* Firmas al final */}
-            <div className="text-center" style={{ marginTop: "2cm" }}>
-              <p className="text-xl font-semibold">Atentamente,</p>
-              <div className="flex justify-center space-x-12 my-10">
-                <div className="w-1/2">
-                  <p>____________________</p>
-                </div>
-                <div className="w-1/2">
-                  <p>____________________</p>
-                </div>
-              </div>
-              <p className="font-semibold">Comité Núcleo.</p>
-            </div>
-          </div>
-        </div>
       )}
     </PageTemplate>
   );
