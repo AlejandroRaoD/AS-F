@@ -5,7 +5,7 @@ import { systemLogAttributes } from "../interfaces/systemLog.interface";
 const url = `system_log`;
 
 export const getSystemLogs_Request = async (): // query?: QuerySystemLogDto
-PromiseFormatRes<systemLogAttributes[]> =>
+Promise<PromiseFormatRes<systemLogAttributes[]>> =>
 	(
 		await abreuSystemAPI.get(
 			url

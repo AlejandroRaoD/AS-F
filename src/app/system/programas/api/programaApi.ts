@@ -9,26 +9,26 @@ const url = `programa`;
 
 export const getPrograma_Request = async (
 	id: string
-): PromiseFormatRes<programaAttributes> =>
+): Promise<PromiseFormatRes<programaAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getProgramas_Request = async (
 	query?: QueryProgramaDto
-): PromiseFormatRes<programaAttributes[]> =>
+): Promise<PromiseFormatRes<programaAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createPrograma_Request = async (
 	data: CreateProgramaDto
-): PromiseFormatRes<programaAttributes> =>
+): Promise<PromiseFormatRes<programaAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updatePrograma_Request = async (
 	id: string,
 	data: UpdateProgramaDto
-): PromiseFormatRes<programaAttributes> =>
+): Promise<PromiseFormatRes<programaAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deletePrograma_Request = async (
 	id: string
-): PromiseFormatRes<programaAttributes> =>
+): Promise<PromiseFormatRes<programaAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

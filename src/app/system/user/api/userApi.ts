@@ -8,11 +8,11 @@ const url = `user`;
 
 export const getUser_Request = async (
 	id: string
-): PromiseFormatRes<UserAttributes> =>
+): Promise<PromiseFormatRes<UserAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getUsers_Request = async (): // query?: QueryUserDto
-PromiseFormatRes<userAttributes[]> =>
+Promise<PromiseFormatRes<UserAttributes[]>> =>
 	(
 		await abreuSystemAPI.get(
 			url
@@ -22,16 +22,16 @@ PromiseFormatRes<userAttributes[]> =>
 
 export const createUser_Request = async (
 	data: CreateUserDto
-): PromiseFormatRes<userAttributes> =>
+): Promise<PromiseFormatRes<UserAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateUser_Request = async (
 	id: string,
 	data: UpdateUserDto
-): PromiseFormatRes<userAttributes> =>
+): Promise<PromiseFormatRes<UserAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteUser_Request = async (
 	id: string
-): PromiseFormatRes<userAttributes> =>
+): Promise<PromiseFormatRes<UserAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

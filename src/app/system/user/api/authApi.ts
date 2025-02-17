@@ -10,5 +10,5 @@ export const Login_Request = async (credentials: LoginDto): Promise<TokenRes> =>
 	(await abreuSystemAPI.post(`${url}/signin`, credentials)).data;
 
 export const getProfile_Request =
-	async (): PromiseFormatRes<UserLoggedAttributes> =>
+	async (): Promise<PromiseFormatRes<UserLoggedAttributes>> =>
 		(await abreuSystemAPI.get(`${url}/profile`)).data;

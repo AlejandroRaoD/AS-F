@@ -9,26 +9,26 @@ const url = `nucleo`;
 
 export const getNucleo_Request = async (
 	id: string
-): PromiseFormatRes<nucleoAttributes> =>
+): Promise<PromiseFormatRes<nucleoAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getNucleos_Request = async (
 	query?: QueryNucleoDto
-): PromiseFormatRes<nucleoAttributes[]> =>
+): Promise<PromiseFormatRes<nucleoAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createNucleo_Request = async (
 	data: CreateNucleoDto
-): PromiseFormatRes<nucleoAttributes> =>
+): Promise<PromiseFormatRes<nucleoAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateNucleo_Request = async (
 	id: string,
 	data: UpdateNucleoDto
-): PromiseFormatRes<nucleoAttributes> =>
+): Promise<PromiseFormatRes<nucleoAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteNucleo_Request = async (
 	id: string
-): PromiseFormatRes<nucleoAttributes> =>
+): Promise<PromiseFormatRes<nucleoAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;
