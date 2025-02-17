@@ -15,6 +15,7 @@ const Page = () => {
 
 	useEffect(() => {
 		getCatedras();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const onSubmitQuery = async (name: string) => getCatedras({ name });

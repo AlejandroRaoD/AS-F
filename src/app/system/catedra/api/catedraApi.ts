@@ -19,16 +19,16 @@ export const getCatedras_Request = async (
 
 export const createCatedra_Request = async (
 	data: CreateCatedraDto
-): Promise<PromiseFormatRes<catedraAttributes>> =>
+): Promise<PromiseFormatRes<catedraAttributes>>  =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateCatedra_Request = async (
 	id: string,
 	data: UpdateCatedraDto
-): Promise<PromiseFormatRes<catedraAttributes>> =>
+): Promise<PromiseFormatRes<catedraAttributes>>  =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteCatedra_Request = async (
 	id: string
-): Promise<PromiseFormatRes<catedraAttributes>> =>
+): Promise<PromiseFormatRes<catedraAttributes>>  =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

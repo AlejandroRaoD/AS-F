@@ -21,6 +21,7 @@ const PageTemplate = (props: props) => {
 	useEffect(() => {
 		if (permissionsRequired.length)
 			redirectWithoutPermission(permissionsRequired);
+		 // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Función para manejar el colapso del panel

@@ -14,21 +14,21 @@ const url = `student/relation`;
 
 export const getStudentRelations_Request = async (
 	query?: QueryStudentRelationDto
-): PromiseFormatRes<studentRelationAllDataAttributes[]> =>
+): Promise<PromiseFormatRes<studentRelationAllDataAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createStudentRelation_Request = async (
 	data: CreateStudentRelationDto
-): PromiseFormatRes<studentRelationAllDataAttributes> =>
+): Promise<PromiseFormatRes<studentRelationAllDataAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateStudentRelation_Request = async (
 	id: string,
 	data: UpdateStudentRelationDto
-): PromiseFormatRes<studentRelationAllDataAttributes> =>
+): Promise<PromiseFormatRes<studentRelationAllDataAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteStudentRelation_Request = async (
 	id: string
-): PromiseFormatRes<studentRelationAllDataAttributes> =>
+): Promise<PromiseFormatRes<studentRelationAllDataAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

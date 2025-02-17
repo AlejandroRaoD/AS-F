@@ -40,6 +40,7 @@ const ComodatoForm = (props: props) => {
 			getSedes();
 			getInstruments();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const formik = useFormik({

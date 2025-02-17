@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server'
 import PageTemplate from '../../../common/components/PageTemplate'; // Ajusta la ruta si es necesario
 import RouterLinks from '@/config/RouterLinks';
-import generateCertif from '../../../common/utils/generatePDF'; // Cambié el nombre a generateCertif
 
 const CertificadoPage = () => {
   const [form, setForm] = useState({
@@ -12,13 +12,37 @@ const CertificadoPage = () => {
     date: "",
   });
 
+  const docRef = useRef(null)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleGeneratePDF = () => {
-    generateCertif('PagePDF', 'certificado.pdf'); // Usé generateCertif en vez de generatePDF
+  const handleGeneratePDF = async () => {
+    const html2pdf = (await import("html2pdf.js/dist/html2pdf.min.js")).default
+    const element = ReactDOMServer.renderToString(docRef.current);
+
+    const options = {
+      margin: [0.1, 0.2, 0.2, 0.2], // Márgenes ajustados
+      filename: "certificado.pdf",
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 3 },
+      jsPDF: {
+        unit: 'in',
+        format: [11, 8.5], // Tamaño A4 en orientación horizontal
+        orientation: 'landscape', // Orientación horizontal
+        putOnlyUsedFonts: true, // Asegura que solo se usen las fuentes necesarias
+      },
+    };
+
+    // Usamos html2pdf para generar el PDF
+    html2pdf()
+      .set(options)
+      .from(element)
+      .save()
+      .catch((error) => {
+        console.error('Error generando el PDF: ', error);
+      });
   };
 
   const { participantName, eventName, date } = form;
@@ -35,7 +59,7 @@ const CertificadoPage = () => {
         showHelpButton: false,
       }}
     >
-      <div className="p-6 font-sans">
+      <div className="p-6 font-sans" >
         <style>
           {`
             #PagePDF {
@@ -67,7 +91,7 @@ const CertificadoPage = () => {
 
         <main>
           <form className="space-y-6 max-w-xl mx-auto">
-            <div id="PagePDF">
+            <div id="PagePDF" ref={docRef}>
               <div className="text-center mb-6" style={{ paddingTop: '1cm' }}>
                 <h2 className="text-2xl font-semibold underline-bold">Certificado de Participación</h2>
               </div>

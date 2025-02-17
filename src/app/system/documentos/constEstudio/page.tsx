@@ -19,9 +19,9 @@ const ConstEstudioPage = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleGeneratePDF = () => {
-    generatePDF('PagePDF', 'constancia-inscripcion.pdf');
-  };
+  // const handleGeneratePDF = () => {
+  //   generatePDF('PagePDF', 'constancia-inscripcion.pdf');
+  // };
 
   const { nucleus, sede, enrollmentPeriod, studentName, idNumber } = form;
   const currentDate = new Date();
@@ -199,7 +199,7 @@ const ConstEstudioPage = () => {
 
             <button
               type="button"
-              onClick={handleGeneratePDF}
+              // onClick={handleGeneratePDF}
               className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:scale-105 hover:bg-blue-600"
             >
               Generar Constancia

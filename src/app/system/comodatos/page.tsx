@@ -15,6 +15,7 @@ export default function BienesPage() {
 	// Obtener bienes con filtros
 	useEffect(() => {
 		getComodatos();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// const onSubmitQuery = async (name: string) => getComodatos({ name });

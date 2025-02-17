@@ -27,13 +27,13 @@ const HelpPage = () => {
               Para registrar un nuevo estudiante, accede al módulo de estudiantes en el menú principal y sigue los pasos indicados en el formulario de registro.
             </li>
             <li>
-              Para generar una constancia de estudio, dirígete al apartado "Documentos" y selecciona la opción correspondiente. Asegúrate de tener los datos del estudiante actualizados.
+              Para generar una constancia de estudio, dirígete al apartado {"Documentos"} y selecciona la opción correspondiente. Asegúrate de tener los datos del estudiante actualizados.
             </li>
             <li>
-              La gestión de usuarios y permisos se realiza en la sección de "Configuración". Allí puedes agregar, editar o eliminar usuarios, y asignarles roles específicos.
+              La gestión de usuarios y permisos se realiza en la sección de {"Configuración"}. Allí puedes agregar, editar o eliminar usuarios, y asignarles roles específicos.
             </li>
             <li>
-              Para configurar el sistema, como ajustes de horarios o actualizaciones de datos generales, utiliza las opciones disponibles en el apartado de "Ajustes del Sistema".
+              Para configurar el sistema, como ajustes de horarios o actualizaciones de datos generales, utiliza las opciones disponibles en el apartado de {"Ajustes del Sistema"}.
             </li>
           </ul>
         </section>

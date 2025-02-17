@@ -36,6 +36,7 @@ const useFurniture = (props?: props) => {
 		if (props.query && !furnitures.length) getFurnitures(props.query);
 
     setAlreadyQuery(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   const getFurnitures = async (query?: QueryFurnitureDto) => {

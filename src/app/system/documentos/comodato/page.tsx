@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server'
 import PageTemplate from '../../../common/components/PageTemplate'; // Ajusta la ruta si es necesario
 import RouterLinks from '@/config/RouterLinks';
-import generatePDF from '../../../common/utils/generatePDF'; // Ajusta la ruta de importación
+
 
 const ComodatoPage = () => {
   const [form, setForm] = useState({
@@ -13,6 +14,9 @@ const ComodatoPage = () => {
     date: "",
     condition: ""
   });
+
+
+  const docRef = useRef(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +34,7 @@ const ComodatoPage = () => {
 
     // Llenar el contenido del PDF
     const pdfContent = document.getElementById('PagePDF');
-    
+
     pdfContent.querySelector('.student-name').textContent = studentName || "_____________";
     pdfContent.querySelector('.id-number').textContent = idNumber || "_____________";
     pdfContent.querySelector('.item-name').textContent = itemName || "_____________";
@@ -38,11 +42,34 @@ const ComodatoPage = () => {
     pdfContent.querySelector('.date').textContent = `Este comodato se firma en San Juan de los Morros a los ${day} días del mes ${month} del año ${year}.`;
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async() => {
     // Llamar a la función para llenar el documento con los datos
     fillPDFData(form);
     // Ahora generar el PDF
-    generatePDF('PagePDF', 'comodato.pdf');
+     const html2pdf = (await import("html2pdf.js/dist/html2pdf.min.js")).default
+        const element = ReactDOMServer.renderToString(docRef.current);
+    
+        const options = {
+          margin: [0.1, 0.2, 0.2, 0.2], // Márgenes ajustados
+          filename: "certificado.pdf",
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 3 },
+          jsPDF: {
+            unit: 'in',
+            format: [11, 8.5], // Tamaño A4 en orientación horizontal
+            orientation: 'landscape', // Orientación horizontal
+            putOnlyUsedFonts: true, // Asegura que solo se usen las fuentes necesarias
+          },
+        };
+    
+        // Usamos html2pdf para generar el PDF
+        html2pdf()
+          .set(options)
+          .from(element)
+          .save()
+          .catch((error) => {
+            console.error('Error generando el PDF: ', error);
+          });
   };
 
   const { itemName, studentName, idNumber, date, condition } = form;
@@ -110,7 +137,7 @@ const ComodatoPage = () => {
 
         <main>
           <form className="space-y-6 max-w-xl mx-auto">
-            <div id="PagePDF">
+            <div id="PagePDF" ref={docRef}>
               {/* Logos superiores */}
               <div className="header-logos">
                 <img src="/images/logo-1.png" alt="Logo Izquierdo" className="header-logo-left" />
@@ -122,7 +149,7 @@ const ComodatoPage = () => {
               </div>
 
               <p style={{ marginTop: '2cm' }}>
-                El presente comodato tiene lugar entre el núcleo "Jesús María Torrealba", San Juan de los Morros, de El Sistema Nacional de Orquestas y Coros Juveniles e Infantiles de Venezuela y el/la estudiante <span className="underline-bold student-name">_____________</span>, portador de la cédula de identidad Nº <span className="underline-bold id-number">_____________</span> por el cual se le otorga el siguiente bien en comodato: <span className="underline-bold item-name">_____________</span>, con las siguientes condiciones: <span className="underline-bold condition">_____________</span>.
+                El presente comodato tiene lugar entre el núcleo {"Jesús María Torrealba"}, San Juan de los Morros, de El Sistema Nacional de Orquestas y Coros Juveniles e Infantiles de Venezuela y el/la estudiante <span className="underline-bold student-name">_____________</span>, portador de la cédula de identidad Nº <span className="underline-bold id-number">_____________</span> por el cual se le otorga el siguiente bien en comodato: <span className="underline-bold item-name">_____________</span>, con las siguientes condiciones: <span className="underline-bold condition">_____________</span>.
               </p>
 
               <p style={{ marginTop: '1.5cm' }} className="date">

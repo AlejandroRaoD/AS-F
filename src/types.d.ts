@@ -19,3 +19,11 @@ export interface sedeAttributes {
 	nucleoId: string;
 	status: string;
 }
+
+export interface UserAttributes {
+	_id: string;
+	email: string;
+	password: string;
+	permissions: UserPermissions[];
+	employeeId: string;
+}

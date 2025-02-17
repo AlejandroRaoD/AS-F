@@ -1,23 +1,12 @@
-/* "use client"; // Esta línea asegura que el código solo se ejecute en el cliente
+import html2pdf from 'html2pdf.js';
 
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-
-const generatePDF = async (elementId, filename = 'documento.pdf') => {
-  // Cargar html2pdf.js de manera dinámica
-  const html2pdf = (await import("html2pdf.js/dist/html2pdf.min.js")).default;
-
-  // Buscar el elemento con el ID que se pasa
+const generatePDF = (elementId, filename = 'documento.pdf') => {
   const element = document.getElementById(elementId);
   if (!element) {
     console.error(`No se encontró un elemento con el ID "${elementId}".`);
     return;
   }
 
-  // Obtener el HTML del elemento
-  const content = element.innerHTML;
-
-  // Configurar las opciones para html2pdf
   const options = {
     margin: [0.5, 0.5, 0.5, 0.5], // Ajusta los márgenes si es necesario
     filename: filename,
@@ -34,9 +23,30 @@ const generatePDF = async (elementId, filename = 'documento.pdf') => {
     },
   };
 
-  // Generar y guardar el PDF
-  html2pdf().set(options).from(content).save();
+  // Aquí aplicamos los estilos CSS internos
+  const styleSheets = document.styleSheets;
+  const cssRules = [];
+
+  for (let sheet of styleSheets) {
+    if (sheet.href) {
+      cssRules.push(sheet.href); // Agrega las hojas de estilo externas
+    } else if (sheet.rules) {
+      for (let rule of sheet.rules) {
+        cssRules.push(rule.cssText); // Agrega reglas internas
+      }
+    }
+  }
+
+  // Aplica los estilos a través de html2canvas
+  html2pdf()
+    .from(element)
+    .set(options)
+    .set({
+      html2canvas: {
+        css: cssRules.join(' '), // Agrega los estilos al PDF
+      },
+    })
+    .save();
 };
 
 export default generatePDF;
- */

@@ -33,6 +33,7 @@ export enum UserPermissions {
 	documentos = "documentos",
 	// documentosEdit = "Editar documentos",
 	logs = "registros de actividades",
+	estadisticas = "estadisticas",
 }
 
 export interface UserAttributes {

@@ -17,6 +17,7 @@ export default function BienesPage() {
 	// Obtener bienes con filtros
 	useEffect(() => {
 		getFurnitures();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

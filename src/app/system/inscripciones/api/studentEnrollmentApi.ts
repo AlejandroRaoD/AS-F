@@ -9,26 +9,26 @@ const url = `student_enrollment`;
 
 export const getStudentEnrollment_Request = async (
 	id: string
-): PromiseFormatRes<studentEnrollmentAttributes> =>
+): Promise<PromiseFormatRes<studentEnrollmentAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getStudentEnrollments_Request = async (
 	query?: QueryStudentEnrollmentDto
-): PromiseFormatRes<studentEnrollmentAttributes[]> =>
+): Promise<PromiseFormatRes<studentEnrollmentAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createStudentEnrollment_Request = async (
 	data: CreateStudentEnrollmentDto
-): PromiseFormatRes<studentEnrollmentAttributes> =>
+): Promise<PromiseFormatRes<studentEnrollmentAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateStudentEnrollment_Request = async (
 	id: string,
 	data: UpdateStudentEnrollmentDto
-): PromiseFormatRes<studentEnrollmentAttributes> =>
+): Promise<PromiseFormatRes<studentEnrollmentAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteStudentEnrollment_Request = async (
 	id: string
-): PromiseFormatRes<studentEnrollmentAttributes> =>
+): Promise<PromiseFormatRes<studentEnrollmentAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

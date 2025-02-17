@@ -1,26 +1,26 @@
 import clsx from "clsx";
 import React, { ReactNode, forwardRef } from "react";
 
-export interface props {
+export interface SectionContainerProps {
   children?: ReactNode;
   className?: string;
 }
+const SectionContainer = forwardRef<HTMLDivElement, SectionContainerProps>(
+  ({ children, className }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx(
+          "border mb-2 p-4 border-gray-300 bg-white rounded-lg shadow-lg",
+          className
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
-// Usamos forwardRef para que puedas pasar un ref desde el componente padre
-const SectionContainer = forwardRef<HTMLDivElement, props>((props, ref) => {
-  const { children, className } = props;
-
-  return (
-    <div
-      ref={ref} // Añadimos el ref aquí
-      className={clsx(
-        "border mb-2 p-4 border-gray-300 bg-white rounded-lg shadow-lg",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-});
+SectionContainer.displayName = "SectionContainer";
 
 export default SectionContainer;

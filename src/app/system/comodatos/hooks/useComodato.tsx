@@ -40,6 +40,7 @@ const useComodato = (props?: props) => {
 		if (props.query && !comodatos.length) getComodatos(props.query);
 
 		setAlreadyQuery(true);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props]);
 
 	const getComodatos = async (query?: QueryComodatoDto) => {

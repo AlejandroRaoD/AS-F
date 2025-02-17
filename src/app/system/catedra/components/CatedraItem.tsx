@@ -22,6 +22,7 @@ export const CatedraItem = (props: props) => {
 
 	useEffect(() => {
 		if (programa) getSede(programa.sedeId);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [programa]);
 
 	if (type == "inList")

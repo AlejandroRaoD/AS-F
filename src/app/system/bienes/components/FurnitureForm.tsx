@@ -30,6 +30,7 @@ const FurnitureForm = (props: props) => {
 	useEffect(() => {
 		getNucleos();
 		if (data) getSedes();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const formik = useFormik({

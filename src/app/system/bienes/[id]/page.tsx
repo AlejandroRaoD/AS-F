@@ -27,6 +27,7 @@ const Page = () => {
     if (!furniture) return;
 
     getSede(furniture.sedeId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [furniture]);
 
   // Función para generar el PDF con texto y el logo

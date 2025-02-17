@@ -36,6 +36,7 @@ const Page = () => {
       const s = await getSede(i.sedeId);
       getNucleo(s.nucleoId);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catedra]);
 
   // Función para generar el PDF con título y logo

@@ -30,6 +30,7 @@ const useCatedra = (props?: props) => {
 		if (!props) return;
 
 		if (typeof props.id == "string") getCatedra(props.id);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props]);
 
 	const getCatedras = async (query?: QueryCatedraDto) => {

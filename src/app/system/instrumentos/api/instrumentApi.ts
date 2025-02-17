@@ -9,26 +9,26 @@ const url = `instrument`;
 
 export const getInstrument_Request = async (
 	id: string
-): PromiseFormatRes<instrumentAttributes> =>
+): Promise<PromiseFormatRes<instrumentAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getInstruments_Request = async (
 	query?: QueryInstrumentDto
-): PromiseFormatRes<instrumentAttributes[]> =>
+): Promise<PromiseFormatRes<instrumentAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createInstrument_Request = async (
 	data: CreateInstrumentDto
-): PromiseFormatRes<instrumentAttributes> =>
+): Promise<PromiseFormatRes<instrumentAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateInstrument_Request = async (
 	id: string,
 	data: UpdateInstrumentDto
-): PromiseFormatRes<instrumentAttributes> =>
+): Promise<PromiseFormatRes<instrumentAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteInstrument_Request = async (
 	id: string
-): PromiseFormatRes<instrumentAttributes> =>
+): Promise<PromiseFormatRes<instrumentAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

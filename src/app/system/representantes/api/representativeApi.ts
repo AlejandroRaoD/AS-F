@@ -9,26 +9,26 @@ const url = `representative`;
 
 export const getRepresentative_Request = async (
 	id: string
-): PromiseFormatRes<representativeAttributes> =>
+): Promise<PromiseFormatRes<representativeAttributes>> =>
 	(await abreuSystemAPI.get(`${url}/${id}`)).data;
 
 export const getRepresentatives_Request = async (
 	query?: QueryRepresentativeDto
-): PromiseFormatRes<representativeAttributes[]> =>
+): Promise<PromiseFormatRes<representativeAttributes[]>>  =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createRepresentative_Request = async (
 	data: CreateRepresentativeDto
-): PromiseFormatRes<representativeAttributes> =>
+): Promise<PromiseFormatRes<representativeAttributes>>  =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateRepresentative_Request = async (
 	id: string,
 	data: UpdateRepresentativeDto
-): PromiseFormatRes<representativeAttributes> =>
+): Promise<PromiseFormatRes<representativeAttributes>>  =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteRepresentative_Request = async (
 	id: string
-): PromiseFormatRes<representativeAttributes> =>
+): Promise<PromiseFormatRes<representativeAttributes>>  =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;

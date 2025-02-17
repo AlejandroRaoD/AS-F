@@ -14,21 +14,21 @@ export const getSede_Request = async (
 
 export const getSedes_Request = async (
 	query?: QuerySedeDto
-): Promise<PromiseFormatRes<sedeAttributes[]>> =>
+):  Promise<PromiseFormatRes<sedeAttributes[]>> =>
 	(await abreuSystemAPI.get(url, { params: query })).data;
 
 export const createSede_Request = async (
 	data: CreateSedeDto
-): Promise<PromiseFormatRes<sedeAttributes>> =>
+):  Promise<PromiseFormatRes<sedeAttributes>> =>
 	(await abreuSystemAPI.post(url, data)).data;
 
 export const updateSede_Request = async (
 	id: string,
 	data: UpdateSedeDto
-): Promise<PromiseFormatRes<sedeAttributes>> =>
+):  Promise<PromiseFormatRes<sedeAttributes>> =>
 	(await abreuSystemAPI.put(`${url}/${id}`, data)).data;
 
 export const deleteSede_Request = async (
 	id: string
-): Promise<PromiseFormatRes<sedeAttributes>> =>
+):  Promise<PromiseFormatRes<sedeAttributes>> =>
 	(await abreuSystemAPI.delete(`${url}/${id}`)).data;
